@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 135836042}
   - component: {fileID: 135836041}
   - component: {fileID: 135836040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 135836039}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 556573694}
   - component: {fileID: 556573693}
   - component: {fileID: 556573692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +532,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 556573691}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 662422767}
   - component: {fileID: 662422766}
   - component: {fileID: 662422765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +662,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 662422764}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -952,7 +952,7 @@ GameObject:
   - component: {fileID: 751869572}
   - component: {fileID: 751869571}
   - component: {fileID: 751869570}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +968,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 751869569}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1375,7 +1375,7 @@ GameObject:
   - component: {fileID: 1198622359}
   - component: {fileID: 1198622358}
   - component: {fileID: 1198622357}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,7 +1391,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1198622356}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1508,7 +1508,7 @@ GameObject:
   - component: {fileID: 1258928791}
   - component: {fileID: 1258928795}
   - component: {fileID: 1258928796}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Roo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1528,9 +1528,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1541,7 +1541,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1258928792
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1687,7 +1687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 207c4cab4f9c9034bb07cd34ad43138c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
+  maxSpeed: 3
+  jumpHeight: 10
 --- !u!1 &1507714180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,7 +2204,7 @@ GameObject:
   - component: {fileID: 1811197303}
   - component: {fileID: 1811197302}
   - component: {fileID: 1811197301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2219,7 +2220,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1811197300}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2333,7 +2334,7 @@ GameObject:
   - component: {fileID: 1819654867}
   - component: {fileID: 1819654866}
   - component: {fileID: 1819654865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2349,7 +2350,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1819654864}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2463,7 +2464,7 @@ GameObject:
   - component: {fileID: 1870474352}
   - component: {fileID: 1870474351}
   - component: {fileID: 1870474350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TileGround2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2479,7 +2480,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1870474349}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85d7bdd5c72169c4fa063de658dbba89, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
