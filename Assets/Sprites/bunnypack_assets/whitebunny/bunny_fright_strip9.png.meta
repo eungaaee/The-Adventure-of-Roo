@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b43bd18a2d55009438f32f23354cb9e8
+guid: b6fcd0bd4b0600e4fa387ca293ea0449
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_0
+      name: bunny_fright_strip9_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96b12ac45b506b42b6493f6e42a1384
-      internalID: 140446193
+      spriteID: ce24981ee3d5dfd4ca6e98263f279a73
+      internalID: 1184865293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_1
+      name: bunny_fright_strip9_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ce03901aab14a44b460b84272e0926
-      internalID: -1317328663
+      spriteID: 9c05f13a934fa29469fbe26bc5e124a9
+      internalID: -1511143586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_2
+      name: bunny_fright_strip9_2
       rect:
         serializedVersion: 2
         x: 80
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f2062d51f969742a3c40042379919d
-      internalID: 2099038849
+      spriteID: b5cc5d297ed58aa4a95e74c00ee9ff52
+      internalID: 678776570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_3
+      name: bunny_fright_strip9_3
       rect:
         serializedVersion: 2
         x: 120
@@ -187,8 +187,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42b4b5ed35152b641b9666e46017db23
-      internalID: 247679716
+      spriteID: cdbe33bf83442cc4586d27a2132b0c3a
+      internalID: -2103488708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_fright_strip9_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6070001fccc722b488f35def8ccda8db
+      internalID: 869866786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_fright_strip9_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594593349352a1b4f923825cbcd71642
+      internalID: -1679850016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_fright_strip9_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 116a7735b62fbe241bc183a21d1aa6fb
+      internalID: -616039022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_fright_strip9_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6595aeb3d23772944b03cae27cb3a4db
+      internalID: 269131968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_fright_strip9_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7249c32b449f6cb499ef24a7d67e2809
+      internalID: 1556545103
       vertices: []
       indices: 
       edges: []
@@ -204,10 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny_wallgrab_strip4_0: 140446193
-      bunny_wallgrab_strip4_1: -1317328663
-      bunny_wallgrab_strip4_2: 2099038849
-      bunny_wallgrab_strip4_3: 247679716
+      bunny_fright_strip9_0: 1184865293
+      bunny_fright_strip9_1: -1511143586
+      bunny_fright_strip9_2: 678776570
+      bunny_fright_strip9_3: -2103488708
+      bunny_fright_strip9_4: 869866786
+      bunny_fright_strip9_5: -1679850016
+      bunny_fright_strip9_6: -616039022
+      bunny_fright_strip9_7: 269131968
+      bunny_fright_strip9_8: 1556545103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b43bd18a2d55009438f32f23354cb9e8
+guid: fbfc9eb6ca7919b43b4cfe176eb05346
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_0
+      name: bunny_dash_strip8_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96b12ac45b506b42b6493f6e42a1384
-      internalID: 140446193
+      spriteID: 6d1e99892c9f10b4b9e3b15db504b83a
+      internalID: 1885293904
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_1
+      name: bunny_dash_strip8_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ce03901aab14a44b460b84272e0926
-      internalID: -1317328663
+      spriteID: 14f9228da44fdc445b426c04925ed92b
+      internalID: -1319765953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_2
+      name: bunny_dash_strip8_2
       rect:
         serializedVersion: 2
         x: 80
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f2062d51f969742a3c40042379919d
-      internalID: 2099038849
+      spriteID: e9272d3f1fb962641a58aaffd4ec1e99
+      internalID: 1027943407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_3
+      name: bunny_dash_strip8_3
       rect:
         serializedVersion: 2
         x: 120
@@ -187,8 +187,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42b4b5ed35152b641b9666e46017db23
-      internalID: 247679716
+      spriteID: 182d664ea6e461148bd9d95f8e3a894e
+      internalID: -2146606769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_dash_strip8_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cdfd1d17e63251428fa33621d8d3766
+      internalID: -1378998325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_dash_strip8_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e34ba26f2d305604ebf204f6f5242200
+      internalID: 1099515469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_dash_strip8_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cce1795dd7bbc04a93e0461d4d608d3
+      internalID: -1880135734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_dash_strip8_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70b8e9e882e6e9f42863fedbef7712ed
+      internalID: 1243628335
       vertices: []
       indices: 
       edges: []
@@ -204,10 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny_wallgrab_strip4_0: 140446193
-      bunny_wallgrab_strip4_1: -1317328663
-      bunny_wallgrab_strip4_2: 2099038849
-      bunny_wallgrab_strip4_3: 247679716
+      bunny_dash_strip8_0: 1885293904
+      bunny_dash_strip8_1: -1319765953
+      bunny_dash_strip8_2: 1027943407
+      bunny_dash_strip8_3: -2146606769
+      bunny_dash_strip8_4: -1378998325
+      bunny_dash_strip8_5: 1099515469
+      bunny_dash_strip8_6: -1880135734
+      bunny_dash_strip8_7: 1243628335
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b7bb89ee0115c9147bea96e3cafaa3ac
+guid: 00ce7ff546cebf34f8dc76a70f3d4957
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny_liedown_strip12_0
+      name: bunny_jump_strip12_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63d81c7598a4e494caed700cc970b90a
-      internalID: -572798809
+      spriteID: c353d00ca1a904446a437c221fea97de
+      internalID: 307997097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_1
+      name: bunny_jump_strip12_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11fb6a9bac9234b49abef942a2286fbd
-      internalID: -1215375184
+      spriteID: 74154a9b99da4e840b5f0c16aef5a178
+      internalID: -63486776
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_2
+      name: bunny_jump_strip12_2
       rect:
         serializedVersion: 2
         x: 80
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a7929871bcde8141944fc71a8e8fa11
-      internalID: -1026724397
+      spriteID: 68e4beadda0313a4ab501004206d1ece
+      internalID: -767559781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_3
+      name: bunny_jump_strip12_3
       rect:
         serializedVersion: 2
         x: 120
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b244ed787e1c0e94abda1620684cb221
-      internalID: 2100478572
+      spriteID: 1cbf422bf76a048418d4953e553b0d4e
+      internalID: 152835674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_4
+      name: bunny_jump_strip12_4
       rect:
         serializedVersion: 2
         x: 160
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b16d91dfec5bb23498d3040aea639adf
-      internalID: -2145436822
+      spriteID: 01c2cbae37cb80b41980a10ffbf60426
+      internalID: -1641115935
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_5
+      name: bunny_jump_strip12_5
       rect:
         serializedVersion: 2
         x: 200
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 059c5e11b766b634298f960c29600faa
-      internalID: 1749684043
+      spriteID: 5503572d3d59f36419c3dd3083d1ce2d
+      internalID: 1748245943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_6
+      name: bunny_jump_strip12_6
       rect:
         serializedVersion: 2
         x: 240
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0f30bd4ba142a746be7dc9a218f2b83
-      internalID: -1812294059
+      spriteID: 788d3dae19b429a42a9f1ce08f502be6
+      internalID: -1170769768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_7
+      name: bunny_jump_strip12_7
       rect:
         serializedVersion: 2
         x: 280
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7f497dda364c454581592c871b1e073
-      internalID: 1499061475
+      spriteID: 133c45873810590489d8c477129c3109
+      internalID: -78365241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_8
+      name: bunny_jump_strip12_8
       rect:
         serializedVersion: 2
         x: 320
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02461723f7c84d140847966c36b7487d
-      internalID: 2060306900
+      spriteID: 43ec9387c84fa3045bd409cfa20088ab
+      internalID: 1606313523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_9
+      name: bunny_jump_strip12_9
       rect:
         serializedVersion: 2
         x: 360
@@ -313,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2c57cadf26c4264188dec2f5a760f99
-      internalID: 1390429147
+      spriteID: 286f06a9428f5d643a22d56f3bf56edc
+      internalID: -1774610062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_10
+      name: bunny_jump_strip12_10
       rect:
         serializedVersion: 2
         x: 400
@@ -334,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db21cac617031c04f8d9725fdf553b18
-      internalID: -1243431834
+      spriteID: bada85972a4a83140ba1b1c5e8c0ab3f
+      internalID: -1724347317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_liedown_strip12_11
+      name: bunny_jump_strip12_11
       rect:
         serializedVersion: 2
         x: 440
@@ -355,8 +355,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 602e7d57a6cbd264a9cc142a38169bc1
-      internalID: -135919755
+      spriteID: dda93c53d0cd8d049b315ae186fe12ab
+      internalID: -467610607
       vertices: []
       indices: 
       edges: []
@@ -372,18 +372,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny_liedown_strip12_0: -572798809
-      bunny_liedown_strip12_1: -1215375184
-      bunny_liedown_strip12_10: -1243431834
-      bunny_liedown_strip12_11: -135919755
-      bunny_liedown_strip12_2: -1026724397
-      bunny_liedown_strip12_3: 2100478572
-      bunny_liedown_strip12_4: -2145436822
-      bunny_liedown_strip12_5: 1749684043
-      bunny_liedown_strip12_6: -1812294059
-      bunny_liedown_strip12_7: 1499061475
-      bunny_liedown_strip12_8: 2060306900
-      bunny_liedown_strip12_9: 1390429147
+      bunny_jump_strip12_0: 307997097
+      bunny_jump_strip12_1: -63486776
+      bunny_jump_strip12_10: -1724347317
+      bunny_jump_strip12_11: -467610607
+      bunny_jump_strip12_2: -767559781
+      bunny_jump_strip12_3: 152835674
+      bunny_jump_strip12_4: -1641115935
+      bunny_jump_strip12_5: 1748245943
+      bunny_jump_strip12_6: -1170769768
+      bunny_jump_strip12_7: -78365241
+      bunny_jump_strip12_8: 1606313523
+      bunny_jump_strip12_9: -1774610062
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

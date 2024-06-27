@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b43bd18a2d55009438f32f23354cb9e8
+guid: 3bd15e0280545b74cbd5fb790ea58ef6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_0
+      name: bunny_run_strip6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96b12ac45b506b42b6493f6e42a1384
-      internalID: 140446193
+      spriteID: 10f4a4be9c8e5894aaa19d485241c67a
+      internalID: 1613881187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_1
+      name: bunny_run_strip6_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ce03901aab14a44b460b84272e0926
-      internalID: -1317328663
+      spriteID: 17fe7aea8f42fe44fa5ba2831f1d967f
+      internalID: 117164199
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_2
+      name: bunny_run_strip6_2
       rect:
         serializedVersion: 2
         x: 80
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f2062d51f969742a3c40042379919d
-      internalID: 2099038849
+      spriteID: 9027607fd56611c4ea3e3a4a5e8e8ad3
+      internalID: -1719542773
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_3
+      name: bunny_run_strip6_3
       rect:
         serializedVersion: 2
         x: 120
@@ -187,8 +187,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42b4b5ed35152b641b9666e46017db23
-      internalID: 247679716
+      spriteID: 29f734ea049fd41488b8e0e033159ae4
+      internalID: 1738069137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_run_strip6_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eea13a862794554c96894856a56e03b
+      internalID: -1318216687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bunny_run_strip6_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0197b228a52bf8647b397be2c6f70c33
+      internalID: -355637795
       vertices: []
       indices: 
       edges: []
@@ -204,10 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny_wallgrab_strip4_0: 140446193
-      bunny_wallgrab_strip4_1: -1317328663
-      bunny_wallgrab_strip4_2: 2099038849
-      bunny_wallgrab_strip4_3: 247679716
+      bunny_run_strip6_0: 1613881187
+      bunny_run_strip6_1: 117164199
+      bunny_run_strip6_2: -1719542773
+      bunny_run_strip6_3: 1738069137
+      bunny_run_strip6_4: -1318216687
+      bunny_run_strip6_5: -355637795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

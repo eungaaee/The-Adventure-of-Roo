@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b43bd18a2d55009438f32f23354cb9e8
+guid: 194b6a269adc55c499e3d95b828edc7b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_0
+      name: bunny_land_strip2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96b12ac45b506b42b6493f6e42a1384
-      internalID: 140446193
+      spriteID: bc109f111aab07c44b0ba5f2bb4795c7
+      internalID: 1610825473
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bunny_wallgrab_strip4_1
+      name: bunny_land_strip2_1
       rect:
         serializedVersion: 2
         x: 40
@@ -145,50 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65ce03901aab14a44b460b84272e0926
-      internalID: -1317328663
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bunny_wallgrab_strip4_2
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45f2062d51f969742a3c40042379919d
-      internalID: 2099038849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bunny_wallgrab_strip4_3
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 40
-        height: 40
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42b4b5ed35152b641b9666e46017db23
-      internalID: 247679716
+      spriteID: ae5113caea00f024cb8b1e21636c8290
+      internalID: 244512470
       vertices: []
       indices: 
       edges: []
@@ -204,10 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bunny_wallgrab_strip4_0: 140446193
-      bunny_wallgrab_strip4_1: -1317328663
-      bunny_wallgrab_strip4_2: 2099038849
-      bunny_wallgrab_strip4_3: 247679716
+      bunny_land_strip2_0: 1610825473
+      bunny_land_strip2_1: 244512470
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
