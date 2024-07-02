@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class buttonPress : MonoBehaviour
 {
-    public RectTransform topUI;  // 상단 UI
-    public RectTransform bottomUI;  // 하단 UI
     public float moveSpeed = 10000000000000f;  // 움직임 속도
     private bool move = false;
     public int changeScene = 0;
