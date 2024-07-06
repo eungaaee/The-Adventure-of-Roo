@@ -15,13 +15,13 @@ public class PlayerMove : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
     void Update() {
-        // 좌우 방향키 땠을 때 속력 *0.1
+        // 좌우 방향키 땠을 때 속도 조절
         if (Input.GetButtonUp("Horizontal"))
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.1f, rigid.velocity.y);
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
 
         // 캐릭터 방향 반전
         if (Input.GetButton("Horizontal"))
-            sprRdr.flipX = rigid.velocity.normalized.x < 0;
+            sprRdr.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
         // 좌우 이동 애니메이션
         if (Mathf.Abs(rigid.velocity.x) < 0.25)
