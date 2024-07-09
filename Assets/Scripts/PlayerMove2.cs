@@ -8,6 +8,7 @@ public class PlayerMove2 : MonoBehaviour
     public float maxSpeed;
     public int MaxJump = 2;
     public int JumpCount = 0;
+    public int Life = 3;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
