@@ -81,4 +81,24 @@ public class PlayerMove2 : MonoBehaviour
         if (pos.y > 1f) pos.y = 1f; 
         transform.position = Camera.main.ViewportToWorldPoint(pos);
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "monster" || collision.gameObject.tag == "obstacle") {
+            OnDamaged(collision.transform.position);   
+        }
+    }
+    void OnDamaged(Vector2 targetPos) {
+        gameObject.layer = 10;
+        animator.SetBool("IsDamaged", true);
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(dirc, 1) * 2, ForceMode2D.Impulse);
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        Invoke("OffDamaged", 1);
+    }
+
+    void OffDamaged() {
+        gameObject.layer = 9;
+        animator.SetBool("IsDamaged", false);
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
 }

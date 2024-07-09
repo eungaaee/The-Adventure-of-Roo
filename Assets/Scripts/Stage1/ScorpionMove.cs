@@ -6,8 +6,6 @@ using UnityEngine;
 public class ScorpionMove : MonoBehaviour
 {
     Rigidbody2D rigid;
-    Animator animator;
-    public int random;
     public int moveSpeed;
     public float directionLenght;
     public Vector2 direction;
@@ -15,7 +13,6 @@ public class ScorpionMove : MonoBehaviour
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (moveSpeed > 0) spriteRenderer.flipX = true;
     }
@@ -26,8 +23,8 @@ public class ScorpionMove : MonoBehaviour
 
         Vector2 frontvec = new Vector2(rigid.position.x + directionLenght, rigid.position.y);
         Debug.DrawRay(frontvec, direction, new Color(0, 1, 0));
-        RaycastHit2D rayhit = Physics2D.Raycast(frontvec, direction, LayerMask.GetMask("Floor"));
-        if (rayhit.collider.name == "Tilemap") {
+        RaycastHit2D rayhit = Physics2D.Raycast(frontvec, direction, 1, LayerMask.GetMask("Floor"));
+        if (rayhit.collider != null) {
             moveSpeed *= -1;
             directionLenght *= -1;
             direction = new Vector2(direction.x * -1, direction.y);
