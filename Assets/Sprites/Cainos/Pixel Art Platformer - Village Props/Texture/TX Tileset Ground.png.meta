@@ -4196,9 +4196,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 384
-        y: 480
-        width: 32
-        height: 32
+        y: 448
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -4213,86 +4213,6 @@ TextureImporter:
       bones: []
       spriteID: 5b2899af7ab7e2f4d87c0e2f84b7d433
       internalID: 511756479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Ground_161
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 480
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 990ca4755326bc04184e37f90fcfc33b
-      internalID: 1589211917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Ground_162
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 448
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: 8}
-        - {x: -6, y: -1}
-        - {x: -6, y: -6}
-        - {x: -1, y: -10}
-        - {x: 5, y: -10}
-        - {x: 11, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee0fd3ccfabb79b4bb1bea74a646e2d2
-      internalID: 1892006572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Ground_163
-      rect:
-        serializedVersion: 2
-        x: 416
-        y: 448
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: -2, y: -16}
-        - {x: 6, y: -7}
-        - {x: 8, y: -2}
-        - {x: 8, y: 8}
-        - {x: 14, y: 10}
-        - {x: 16, y: 16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 16050521cb1cb9a49a91695e672baec3
-      internalID: -1510705326
       vertices: []
       indices: 
       edges: []

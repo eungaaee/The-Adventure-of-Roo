@@ -6,6 +6,7 @@ TagManager:
   tags:
   - monster
   - obstacle
+  - updownblock
   layers:
   - Default
   - TransparentFX

@@ -45,9 +45,12 @@ public class PlayerController : MonoBehaviour {
 
         if (rigid.velocity.y <= 0) {
             Debug.DrawRay(rigid.position, Vector2.down, new Color(0, 1, 0));
-            if (Physics2D.Raycast(rigid.position, Vector2.down, 1, LayerMask.GetMask("Floor"))) {
+            RaycastHit2D hitData = Physics2D.Raycast(rigid.position, Vector2.down, 1f, LayerMask.GetMask("Floor"));
+            if (hitData.collider != null) {
                 animator.SetBool("IsJumping", false);
                 JumpCount = 0;
+                if (hitData.transform.CompareTag("updownblock"))
+                    transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 1.5f);
             }
         }
     }
