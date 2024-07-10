@@ -49,8 +49,10 @@ public class PlayerController : MonoBehaviour {
             if (hitData.collider != null) {
                 animator.SetBool("IsJumping", false);
                 JumpCount = 0;
-                if (hitData.transform.CompareTag("updownblock"))
+                if (hitData.transform.CompareTag("verticalBlock"))
                     transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 1.5f);
+                else if (hitData.transform.CompareTag("horizontalBlock"))
+                    transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 5f);
             }
         }
     }
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour {
         Life--;
         gameObject.layer = 10;
         int dirc = transform.position.x < opponentPos.x ? -1 : 1;
-        rigid.AddForce(new Vector2(dirc, 1) * 2, ForceMode2D.Impulse);
+        rigid.AddForce(new Vector2(dirc, 1) * 3, ForceMode2D.Impulse);
         animator.SetBool("IsDamaged", true);
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         GameObject.Find("Main Camera").GetComponent<MainCameraController>().StartCoroutine("Shake");

@@ -4121,7 +4121,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 32
-        width: 32
+        width: 96
         height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -4141,31 +4141,6 @@ TextureImporter:
       bones: []
       spriteID: 05c133865be237e41b35f7c9ecd38798
       internalID: -420446242
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Ground_158
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -15}
-        - {x: 16, y: -15}
-        - {x: 16, y: 16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 118963baf451daa489bafdb7c407d2c3
-      internalID: -1965696634
       vertices: []
       indices: 
       edges: []
@@ -4213,33 +4188,6 @@ TextureImporter:
       bones: []
       spriteID: 5b2899af7ab7e2f4d87c0e2f84b7d433
       internalID: 511756479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TX Tileset Ground_164
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -15}
-        - {x: 7, y: -15}
-        - {x: 16, y: -7}
-        - {x: 16, y: 13}
-        - {x: 12, y: 16}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4254d8a43c88ab7408651856a9981b1a
-      internalID: 1042860597
       vertices: []
       indices: 
       edges: []

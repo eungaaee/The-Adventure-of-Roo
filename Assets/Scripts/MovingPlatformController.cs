@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingBlockController : MonoBehaviour {
+public class MovingPlatformController : MonoBehaviour {
     public Vector3[] wayPoints;
     public int unitPerSecond;
     private int wpLen;
