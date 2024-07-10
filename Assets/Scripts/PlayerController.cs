@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
     public int JumpCount = 0;
     public int Life = 3;
     private bool knockbacking = false;
+
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour {
         rigid.AddForce(new Vector2(dirc, 1) * 2, ForceMode2D.Impulse);
         animator.SetBool("IsDamaged", true);
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+        GameObject.Find("Main Camera").GetComponent<MainCameraController>().StartCoroutine("Shake");
         Invoke("OffDamage", 1);
     }
 
