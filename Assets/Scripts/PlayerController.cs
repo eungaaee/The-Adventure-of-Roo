@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove2 : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public float maxSpeed;
     public int MaxJump = 2;
     public int JumpCount = 0;
     public int Life = 3;
+    private bool knockbacking = false;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -23,7 +24,7 @@ public class PlayerMove2 : MonoBehaviour {
 
         if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && JumpCount != MaxJump) {
+        if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !knockbacking) {
             JumpCount += 1;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
@@ -61,10 +62,11 @@ public class PlayerMove2 : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "monster" || collision.gameObject.tag == "obstacle") {
-            OnDamage(collision.transform.position);
+            if (!knockbacking) OnDamage(collision.transform.position);
         }
     }
     void OnDamage(Vector2 opponentPos) {
+        knockbacking = true;
         Life--;
         gameObject.layer = 10;
         int dirc = transform.position.x < opponentPos.x ? -1 : 1;
@@ -75,8 +77,13 @@ public class PlayerMove2 : MonoBehaviour {
     }
 
     void OffDamage() {
-        gameObject.layer = 9;
+        knockbacking = false;
         animator.SetBool("IsDamaged", false);
+        Invoke("Untransparent", 1);
+    }
+
+    void Untransparent() {
+        gameObject.layer = 9;
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 }
