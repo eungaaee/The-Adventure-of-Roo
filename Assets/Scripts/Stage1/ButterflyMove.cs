@@ -5,46 +5,29 @@ using UnityEngine;
 
 public class ButterflyMove : MonoBehaviour {
     [SerializeField]
-    private Transform target;
-    [SerializeField]
     private Transform[] wayPoints;
     [SerializeField]
     private float waitTime;
     [SerializeField]
     private float unitPerSecond = 1;
     [SerializeField]
-    private bool isPlayOnAwake = true;
-    [SerializeField]
-    private bool isLoop = true;
+    private bool isLoop;
 
     private int wayPointCount;
     private int currentIndex = 0;
 
     private void Awake() {
         wayPointCount = wayPoints.Length;
-        if (target == null) target = transform;
-        if (isPlayOnAwake == true) Play();
+        StartCoroutine(nameof(Loop));
     }
 
-    public void Play() {
-        StartCoroutine(nameof(Process));
-    }
-
-    private IEnumerator Process() {
+    private IEnumerator Loop() {
         var wait = new WaitForSeconds(waitTime);
 
         while (true) {
-            yield return StartCoroutine(MoveATOB(target.position, wayPoints[currentIndex].position));
-
-            if (currentIndex < wayPointCount - 1) {
-                currentIndex++;
-            } 
-            else 
-            {
-                if (isLoop == true) currentIndex = 0;
-                else break;
-            }
-
+            yield return StartCoroutine(MoveATOB(transform.position, wayPoints[currentIndex].position));
+            currentIndex++;
+            if (currentIndex == wayPointCount) currentIndex = 0;
             yield return wait;
         }
     }
@@ -54,9 +37,7 @@ public class ButterflyMove : MonoBehaviour {
 
         while (percent < 1) {
             percent += Time.deltaTime / moveTime;
-
-            target.position = Vector3.Lerp(start, end, percent);
-
+            transform.position = Vector3.Lerp(start, end, percent);
             yield return null;
         }
     }
