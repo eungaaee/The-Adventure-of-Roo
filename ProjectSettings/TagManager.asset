@@ -8,6 +8,8 @@ TagManager:
   - obstacle
   - verticalBlock
   - horizontalBlock
+  - updownblock
+  - Floor
   layers:
   - Default
   - TransparentFX
