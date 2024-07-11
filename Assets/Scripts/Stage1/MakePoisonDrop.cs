@@ -21,7 +21,7 @@ public class MakePoisonDrop : MonoBehaviour
         Vector2 location = new Vector2(transform.position.x + Spawnlocation[lotation], transform.position.y);
         lotation--;
         if (lotation == 0) lotation = 22;
-        Instantiate(PoisonWaterDrop, location, transform.rotation);
+        Instantiate(PoisonWaterDrop, location, transform.rotation, gameObject.transform);
         yield return new WaitForSeconds(0.1f);
         IsSpawn = false;
     }
