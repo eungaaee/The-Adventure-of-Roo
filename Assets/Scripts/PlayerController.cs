@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
     void OnDamage(Vector2 opponentPos) {
+        JumpCount = 0;
         knockbacking = true;
         Life--;
         gameObject.layer = 10;
@@ -80,13 +81,13 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("IsDamaged", true);
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         GameObject.Find("Main Camera").GetComponent<MainCameraController>().StartCoroutine("Shake");
-        Invoke("OffDamage", 1);
+        Invoke("OffDamage", 0.7f);
     }
 
     void OffDamage() {
         knockbacking = false;
         animator.SetBool("IsDamaged", false);
-        Invoke("Untransparent", 1);
+        Invoke("Untransparent", 0.7f);
     }
 
     void Untransparent() {
