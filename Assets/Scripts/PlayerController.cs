@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int Life = 3;
     private bool knockbacking = false;
 
+    public Vector2 MinPlayerBoundary, MaxPlayerBoundary;
+
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -58,12 +60,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     void LimitPlayerArea() {
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        /* Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (pos.x < 0f) pos.x = 0f;
         if (pos.x > 1f) pos.x = 1f;
         if (pos.y < 0f) pos.y = 0f;
         if (pos.y > 1f) pos.y = 1f;
-        transform.position = Camera.main.ViewportToWorldPoint(pos);
+        transform.position = Camera.main.ViewportToWorldPoint(pos); */
+        if (transform.position.x < MinPlayerBoundary.x) transform.position = new Vector3(MinPlayerBoundary.x, transform.position.y, transform.position.z);
+        else if (transform.position.x > MaxPlayerBoundary.x) transform.position = new Vector3(MaxPlayerBoundary.x, transform.position.y, transform.position.z);
+        else if (transform.position.y < MinPlayerBoundary.y) transform.position = new Vector3(transform.position.x, MinPlayerBoundary.y, transform.position.z);
+        else if (transform.position.y > MaxPlayerBoundary.y) transform.position = new Vector3(transform.position.x, MaxPlayerBoundary.y, transform.position.z);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -81,13 +87,13 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("IsDamaged", true);
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         GameObject.Find("Main Camera").GetComponent<MainCameraController>().StartCoroutine("Shake");
-        Invoke("OffDamage", 0.7f);
+        Invoke(nameof(OffDamage), 0.7f);
     }
 
     void OffDamage() {
         knockbacking = false;
         animator.SetBool("IsDamaged", false);
-        Invoke("Untransparent", 0.7f);
+        Invoke(nameof(Untransparent), 0.7f);
     }
 
     void Untransparent() {
