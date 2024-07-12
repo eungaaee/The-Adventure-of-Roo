@@ -682,7 +682,7 @@ Transform:
   m_GameObject: {fileID: 91732504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.239502, y: 2.8607867, z: 1}
+  m_LocalPosition: {x: -23.239502, y: 2.8, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -708,7 +708,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: DestroyY
-      value: 2.2
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
+      propertyPath: dropSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3460,7 +3464,7 @@ Transform:
   m_GameObject: {fileID: 569588373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44.89, y: 3.68, z: 1}
+  m_LocalPosition: {x: 44.75, y: 3.78, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4452,11 +4456,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 699820287911097772, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11900,7 +11904,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8491250175055951922, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 1505217981166086603, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11945,10 +11949,6 @@ PrefabInstance:
     - target: {fileID: 3511947529963431790, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: m_Name
       value: FallingRock3 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3677749109783724236, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13511,11 +13511,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 699820287911097772, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13759,7 +13759,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.116655
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13784,7 +13784,7 @@ Transform:
   m_GameObject: {fileID: 1330148203}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33, y: 1.4, z: -2}
+  m_LocalPosition: {x: 48.23, y: -0.34, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13803,8 +13803,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RooTransform: {fileID: 0}
+  ZoomBoundary: {fileID: 0}
   minCameraBoundary: {x: -78, y: -2}
-  maxCameraBoundary: {x: 78, y: 2.5}
+  maxCameraBoundary: {x: 78, y: 1.5}
+  FollowSpeed: 2.5
 --- !u!1001 &1331556456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14073,11 +14075,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 699820287911097772, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14395,6 +14397,109 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6444593052901455288, guid: 951d2e57d23139643b8ccca0589dde18, type: 3}
   m_PrefabInstance: {fileID: 1413675878}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1419951501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1419951502}
+  - component: {fileID: 1419951503}
+  - component: {fileID: 1419951504}
+  m_Layer: 0
+  m_Name: ZoomBoundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1419951502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419951501}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 63.8946, y: 4.4516, z: 0}
+  m_LocalScale: {x: 26.817022, y: 6.0551696, z: 2.0677946}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1419951503
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419951501}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1419951504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419951501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"ZoomAmount","value":{"$content":2.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ZoomSpeed","value":{"$content":2.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"adjustCameraBoundary","value":{"x":0.0,"y":1.3,"$type":"UnityEngine.Vector2"},"typeHandle":{"Identification":"UnityEngine.Vector2,
+      UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!4 &1441524503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6444593052901455288, guid: 951d2e57d23139643b8ccca0589dde18, type: 3}
@@ -14510,11 +14615,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: DestroyY
-      value: 2.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15161,7 +15266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8491250175055951922, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 1505217981166086603, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15206,10 +15311,6 @@ PrefabInstance:
     - target: {fileID: 3511947529963431790, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
       propertyPath: m_Name
       value: FallingRock3 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3677749109783724236, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15693,7 +15794,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 7
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.03333336, y: 0.03333336, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -22912,8 +23013,8 @@ Tilemap:
   - first: {x: 135, y: 5, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 85
-      m_TileSpriteIndex: 65
+      m_TileIndex: 76
+      m_TileSpriteIndex: 67
       m_TileMatrixIndex: 1
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -23333,8 +23434,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 5f38713cbf15d2544be2a75f15432fed, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 77e03cd1bff75c44489f6b8fa7601121, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: c5a2d0430242958449409b080b5a0a53, type: 2}
   - m_RefCount: 11
     m_Data: {fileID: 11400000, guid: 61a96784b91258e43b8f2f71e99d6f2b, type: 2}
   - m_RefCount: 3
@@ -23351,7 +23452,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 5973ac67a2129bd4b85c120255c7e78f, type: 2}
   - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 7b5380288ad79df46890d20558d38f67, type: 2}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 49d2c9fb492947941817520913c6ca8c, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 29
@@ -23484,10 +23585,12 @@ Tilemap:
     m_Data: {fileID: 21300086, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300214, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
-  - m_RefCount: 2
+  - m_RefCount: 1
     m_Data: {fileID: 21300212, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300210, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300208, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 743
     m_Data:
@@ -23704,11 +23807,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: DestroyY
-      value: 2.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25016,11 +25119,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: DestroyY
-      value: 2.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: dropSpeed
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27917,10 +28020,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FallingRock3
       objectReference: {fileID: 0}
-    - target: {fileID: 3677749109783724236, guid: d3b36b6a141c72c4981917a924f15bf8, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28066,7 +28165,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8906773184404248176, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: DestroyY
-      value: 2.2
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28184,7 +28283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1096296038511358160, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: DestroyY
-      value: 3.2
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 699820287911097772, guid: 64de7fe3cdfc1d94986aee31c87cdbf2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28615,6 +28714,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1613684250}
   - {fileID: 1330148206}
+  - {fileID: 1419951502}
   - {fileID: 569588378}
   - {fileID: 91732505}
   - {fileID: 2029752920}
