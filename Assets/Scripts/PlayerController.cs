@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour {
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    MainCameraController CameraController;
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
     }
 
     void Update() {
@@ -59,7 +61,27 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void LimitPlayerArea() {
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "monster" || collision.gameObject.tag == "obstacle") {
+            if (!knockbacking) OnDamage(collision.transform.position);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if (col.CompareTag("zoomboundary")) {
+            StartCoroutine(CameraController.Letterbox.LetterboxOn());
+            StartCoroutine(CameraController.ZoomIn(col));
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col) {
+        if (col.CompareTag("zoomboundary")) {
+            StartCoroutine(CameraController.Letterbox.LetterboxOff());
+            StartCoroutine(CameraController.ZoomOut());
+        }
+    }
+
+    private void LimitPlayerArea() {
         /* Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (pos.x < 0f) pos.x = 0f;
         if (pos.x > 1f) pos.x = 1f;
@@ -72,12 +94,7 @@ public class PlayerController : MonoBehaviour {
         else if (transform.position.y > MaxPlayerBoundary.y) transform.position = new Vector3(transform.position.x, MaxPlayerBoundary.y, transform.position.z);
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "monster" || collision.gameObject.tag == "obstacle") {
-            if (!knockbacking) OnDamage(collision.transform.position);
-        }
-    }
-    void OnDamage(Vector2 opponentPos) {
+    private void OnDamage(Vector2 opponentPos) {
         JumpCount = 0;
         knockbacking = true;
         Life--;
@@ -90,13 +107,13 @@ public class PlayerController : MonoBehaviour {
         Invoke(nameof(OffDamage), 0.7f);
     }
 
-    void OffDamage() {
+    private void OffDamage() {
         knockbacking = false;
         animator.SetBool("IsDamaged", false);
         Invoke(nameof(Untransparent), 0.7f);
     }
 
-    void Untransparent() {
+    private void Untransparent() {
         gameObject.layer = 9;
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }

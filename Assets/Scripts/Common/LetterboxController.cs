@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LetterboxController : MonoBehaviour {
-    public float duration = 1;
+    public float duration;
     private RectTransform Top, Bottom;
+
+    private IEnumerator MonoEye; // StopCoroutine
 
     void Awake() {
         Top = transform.GetChild(0).gameObject.GetComponent<RectTransform>();
@@ -12,20 +14,20 @@ public class LetterboxController : MonoBehaviour {
     }
 
     public IEnumerator LetterboxOn() {
-        StartCoroutine(EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 100)));
-        yield return null;
+        if (MonoEye != null) StopCoroutine(MonoEye);
+        MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 200));
+        yield return StartCoroutine(MonoEye);
     }
 
     public IEnumerator LetterboxOff() {
-        StartCoroutine(EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 0)));
-        yield return null;
+        if (MonoEye != null) StopCoroutine(MonoEye);
+        MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 0));
+        yield return StartCoroutine(MonoEye);
     }
 
-    public IEnumerator EyeBlinker(Vector2 size, Vector2 targetSize) {
-        float t = 0;
-        while (t <= duration) {
+    private IEnumerator EyeBlinker(Vector2 size, Vector2 targetSize) {
+        for (float t = 0; t <= duration; t += Time.deltaTime) {
             Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, t/duration);
-            t += Time.deltaTime;
             yield return null;
         }
     }

@@ -13,6 +13,8 @@ public class MainCameraController : MonoBehaviour {
     private float ZoomDuration, ZoomAmount;
     private float InitZoomSize;
 
+    private IEnumerator MonoScope;
+
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
@@ -26,59 +28,40 @@ public class MainCameraController : MonoBehaviour {
         targetPos.x = Mathf.Clamp(targetPos.x, MinCameraBoundary.x, MaxCameraBoundary.x);
         targetPos.y = Mathf.Clamp(targetPos.y, MinCameraBoundary.y, MaxCameraBoundary.y);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * FollowSpeed);
-
-        if (RooTransform.position.x < transform.position.x - Camera.main.orthographicSize*Camera.main.aspect
-            || RooTransform.position.x > transform.position.x + Camera.main.orthographicSize*Camera.main.aspect) {
-            StopCoroutine(ZoomIn());
-            StartCoroutine(ZoomOut());
-        }
     }
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.CompareTag("zoomboundary")) {
-            StartCoroutine(Letterbox.LetterboxOn());
-            StartCoroutine(ZoomIn());
-        }
+    public IEnumerator ZoomIn(Collider2D ZoomBoundary) {
+        MinCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MinZoomedCameraBoundary");
+        MaxCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MaxZoomedCameraBoundary");
+
+        ZoomAmount = (float)Variables.Object(ZoomBoundary).Get("ZoomAmount");
+        ZoomDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+
+        if (MonoScope != null) StopCoroutine(MonoScope);
+        MonoScope = Scope(InitZoomSize-ZoomAmount);
+        yield return StartCoroutine(MonoScope);
     }
 
-    void OnTriggerExit2D(Collider2D col) {
-        if (col.CompareTag("zoomboundary")) {
-            StartCoroutine(Letterbox.LetterboxOff());
-            StartCoroutine(ZoomOut());
-        }
-    }
-
-    private IEnumerator ZoomIn() {
-        MinCameraBoundary = (Vector2)Variables.Object(GameObject.Find("ZoomBoundary")).Get("MinZoomedCameraBoundary");
-        MaxCameraBoundary = (Vector2)Variables.Object(GameObject.Find("ZoomBoundary")).Get("MaxZoomedCameraBoundary");
-
-        ZoomAmount = (float)Variables.Object(GameObject.Find("ZoomBoundary")).Get("ZoomAmount");
-        ZoomDuration = (float)Variables.Object(GameObject.Find("ZoomBoundary")).Get("ZoomDuration");
-
-        float t = 0;
-        while (t <= ZoomDuration) {
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, InitZoomSize-ZoomAmount, t/ZoomDuration);
-            t += Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    private IEnumerator ZoomOut() {
+    public IEnumerator ZoomOut() {
         MinCameraBoundary = InitMinCameraBoundary;
         MaxCameraBoundary = InitMaxCameraBoundary;
 
-        float t = 0;
-        while (t <= ZoomDuration) {
-            Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, InitZoomSize, t/ZoomDuration);
-            t += Time.deltaTime;
+        if (MonoScope != null) StopCoroutine(MonoScope);
+        MonoScope = Scope(InitZoomSize);
+        yield return StartCoroutine(MonoScope);
+    }
+
+    private IEnumerator Scope(float Lens) {
+        float InitOrthoSize = Camera.main.orthographicSize;
+        for (float t = 0; t <= ZoomDuration; t += Time.deltaTime) {
+            Camera.main.orthographicSize = Mathf.Lerp(InitOrthoSize, Lens, t/ZoomDuration);
             yield return null;
         }
     }
 
     public IEnumerator Shake() {
-        float t = ShakeDuration;
         Vector3 initPos = transform.position;
-        while (t > 0) {
+        for (float t = 0; t <= ShakeDuration; t += Time.deltaTime) {
             transform.position = (Vector3)Random.insideUnitCircle * ShakeAmount + initPos;
             t -= Time.deltaTime;
             yield return null;

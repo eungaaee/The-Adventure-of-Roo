@@ -1090,10 +1090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fe26f4d5dc10144966d8b250913821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  duration: 0.5
 --- !u!1 &159593075 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2844334129921593111, guid: a6c91f77651f4464fb68af7264d2ab60, type: 3}
@@ -3533,9 +3533,9 @@ GameObject:
   m_Component:
   - component: {fileID: 569588378}
   - component: {fileID: 569588377}
-  - component: {fileID: 569588375}
   - component: {fileID: 569588374}
   - component: {fileID: 569588379}
+  - component: {fileID: 569588375}
   - component: {fileID: 569588380}
   - component: {fileID: 569588381}
   m_Layer: 9
@@ -3654,7 +3654,7 @@ Transform:
   m_GameObject: {fileID: 569588373}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.3, y: 4.4, z: 1}
+  m_LocalPosition: {x: 44.1, y: 4.33, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b632c3406c04f54685c8ba4c99b45dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 9
+  jumpForce: 8
   maxSpeed: 5.7
   MaxJump: 1
   JumpCount: 0
@@ -3686,7 +3686,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569588373}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: e629336c435664847970bbef1c5fa13e, type: 2}
   m_IncludeLayers:
@@ -13901,7 +13901,6 @@ GameObject:
   - component: {fileID: 1330148205}
   - component: {fileID: 1330148204}
   - component: {fileID: 1330148207}
-  - component: {fileID: 1330148208}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -14000,51 +13999,6 @@ MonoBehaviour:
   MinCameraBoundary: {x: -76.4, y: -2}
   MaxCameraBoundary: {x: 76.4, y: 2}
   FollowSpeed: 2.5
---- !u!61 &1330148208
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330148203}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &1331556456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14739,8 +14693,8 @@ Transform:
   m_GameObject: {fileID: 1419951501}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 63.8946, y: 4.4516, z: 0}
-  m_LocalScale: {x: 26.817022, y: 6.0551696, z: 2.0677946}
+  m_LocalPosition: {x: 64.124, y: 4.4516, z: 0}
+  m_LocalScale: {x: 26.358452, y: 6.0551696, z: 2.0677946}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -14811,7 +14765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"ZoomAmount","value":{"$content":2.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ZoomDuration","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"ZoomDuration","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"MinZoomedCameraBoundary","value":{"x":59.0,"y":4.5,"$type":"UnityEngine.Vector2"},"typeHandle":{"Identification":"UnityEngine.Vector2,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"MaxZoomedCameraBoundary","value":{"x":76.0,"y":4.5,"$type":"UnityEngine.Vector2"},"typeHandle":{"Identification":"UnityEngine.Vector2,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
