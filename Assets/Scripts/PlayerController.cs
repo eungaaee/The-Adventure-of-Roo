@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "monster" || collision.gameObject.tag == "obstacle") {
+        if (collision.gameObject.CompareTag("monster")|| collision.gameObject.CompareTag("obstacle")) {
             if (!knockbacking) OnDamage(collision.transform.position);
         }
     }

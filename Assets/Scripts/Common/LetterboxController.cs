@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LetterboxController : MonoBehaviour {
-    public float duration;
+    public float duration = 1;
     private RectTransform Top, Bottom;
 
     private IEnumerator MonoEye; // StopCoroutine
@@ -27,7 +27,7 @@ public class LetterboxController : MonoBehaviour {
 
     private IEnumerator EyeBlinker(Vector2 size, Vector2 targetSize) {
         for (float t = 0; t <= duration; t += Time.deltaTime) {
-            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, t/duration);
+            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, Mathf.Sin(0.5f*Mathf.PI * t/duration));
             yield return null;
         }
     }

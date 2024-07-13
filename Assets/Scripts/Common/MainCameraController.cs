@@ -8,7 +8,7 @@ public class MainCameraController : MonoBehaviour {
     public LetterboxController Letterbox;
     public Vector2 MinCameraBoundary, MaxCameraBoundary;
     private Vector2 InitMinCameraBoundary, InitMaxCameraBoundary;
-    public float FollowSpeed = 2.5f;
+    private float FollowSpeed = 2.5f;
     private float ShakeDuration = 0.25f, ShakeAmount = 0.25f;
     private float ZoomDuration, ZoomAmount;
     private float InitZoomSize;
@@ -54,7 +54,7 @@ public class MainCameraController : MonoBehaviour {
     private IEnumerator Scope(float Lens) {
         float InitOrthoSize = Camera.main.orthographicSize;
         for (float t = 0; t <= ZoomDuration; t += Time.deltaTime) {
-            Camera.main.orthographicSize = Mathf.Lerp(InitOrthoSize, Lens, t/ZoomDuration);
+            Camera.main.orthographicSize = Mathf.Lerp(InitOrthoSize, Lens, Mathf.Sin(0.5f*Mathf.PI * t/ZoomDuration));
             yield return null;
         }
     }
@@ -63,7 +63,6 @@ public class MainCameraController : MonoBehaviour {
         Vector3 initPos = transform.position;
         for (float t = 0; t <= ShakeDuration; t += Time.deltaTime) {
             transform.position = (Vector3)Random.insideUnitCircle * ShakeAmount + initPos;
-            t -= Time.deltaTime;
             yield return null;
         }
         transform.position = initPos;
