@@ -6,7 +6,7 @@ public class LetterboxController : MonoBehaviour {
     public float duration = 1;
     private RectTransform Top, Bottom;
 
-    private IEnumerator MonoEye; // StopCoroutine
+    private IEnumerator MonoEye;
 
     void Awake() {
         Top = transform.GetChild(0).gameObject.GetComponent<RectTransform>();

@@ -9,11 +9,12 @@ public class MainCameraController : MonoBehaviour {
     public Vector2 MinCameraBoundary, MaxCameraBoundary;
     private Vector2 InitMinCameraBoundary, InitMaxCameraBoundary;
     private float FollowSpeed = 2.5f;
-    private float ShakeDuration = 0.25f, ShakeAmount = 0.25f;
+    private const float ShakeAmount = 0.25f, ShakeDuration = 0.25f;
     private float ZoomDuration, ZoomAmount;
     private float InitZoomSize;
 
     private IEnumerator MonoScope;
+    private IEnumerator VibrateGenerator;
 
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();
@@ -23,7 +24,7 @@ public class MainCameraController : MonoBehaviour {
         InitMaxCameraBoundary = MaxCameraBoundary;
     }
 
-    void FixedUpdate() {
+    void LateUpdate() {
         Vector3 targetPos = new Vector3(RooTransform.position.x, RooTransform.position.y, transform.position.z);
         targetPos.x = Mathf.Clamp(targetPos.x, MinCameraBoundary.x, MaxCameraBoundary.x);
         targetPos.y = Mathf.Clamp(targetPos.y, MinCameraBoundary.y, MaxCameraBoundary.y);
@@ -59,12 +60,18 @@ public class MainCameraController : MonoBehaviour {
         }
     }
 
-    public IEnumerator Shake() {
-        Vector3 initPos = transform.position;
-        for (float t = 0; t <= ShakeDuration; t += Time.deltaTime) {
-            transform.position = (Vector3)Random.insideUnitCircle * ShakeAmount + initPos;
+    public IEnumerator Shake(float Amount = ShakeAmount, float Duration = ShakeDuration) {
+        if (VibrateGenerator != null) StopCoroutine(VibrateGenerator);
+        Vector3 InitPos = transform.position;
+        VibrateGenerator = Vibrate(InitPos, Amount, Duration);
+        yield return StartCoroutine(VibrateGenerator);
+        transform.position = InitPos;
+    }
+
+    private IEnumerator Vibrate(Vector3 InitPos, float Amount, float Duration) {
+        for (float t = 0; t <= Duration; t += Time.deltaTime) {
+            transform.position = InitPos + (Vector3)Random.insideUnitCircle * Amount;
             yield return null;
         }
-        transform.position = initPos;
     }
 }

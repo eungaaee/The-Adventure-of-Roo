@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
         rigid.AddForce(new Vector2(dirc, 1) * 3, ForceMode2D.Impulse);
         animator.SetBool("IsDamaged", true);
         spriteRenderer.color = new Color(1, 1, 1, 0.5f);
-        GameObject.Find("Main Camera").GetComponent<MainCameraController>().StartCoroutine("Shake");
+        StartCoroutine(CameraController.Shake());
         Invoke(nameof(OffDamage), 0.7f);
     }
 
