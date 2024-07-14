@@ -38,8 +38,10 @@ public class PotionController : MonoBehaviour {
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Player") && !PickedPotion) InBoundary = false;
-        StartCoroutine(CameraController.ClearLetterboxText());
+        if (col.gameObject.CompareTag("Player") && !PickedPotion) {
+            InBoundary = false;
+            StartCoroutine(CameraController.ClearLetterboxText());
+        }
     }
 
     private IEnumerator Launcher() {

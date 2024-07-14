@@ -18,6 +18,7 @@ public class MainCameraController : MonoBehaviour {
 
     private IEnumerator MonoScope;
     private IEnumerator VibrateGenerator;
+    private IEnumerator WriterCoroutine;
 
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();
@@ -80,28 +81,32 @@ public class MainCameraController : MonoBehaviour {
         }
     }
 
-    public IEnumerator SetLetterboxText(string Text) {
-        yield return StartCoroutine(ChangeLetterboxText(Text));
-
-        Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
-        float Duration = 0.5f;
-        for (float t = 0; t < Duration; t += Time.deltaTime) {
-            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, Vector2.zero, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
-            TextObject.alpha = Mathf.Lerp(0, 1, t/Duration);
-            yield return null;
+    public IEnumerator SetLetterboxText(string Text, float Duration = 0.5f) {
+        if (WriterCoroutine != null) StopCoroutine(WriterCoroutine);
+        if (TextObject.text != "") {
+            Duration = 0.25f;
+            WriterCoroutine = ClearLetterboxText(Duration);
+            yield return WriterCoroutine;
         }
+        WriterCoroutine = Writer(Text, Vector2.zero, false, Duration);
+        yield return StartCoroutine(WriterCoroutine);
     }
 
-    public IEnumerator ChangeLetterboxText(string Text) { yield return TextObject.text = Text; }
+    public IEnumerator ClearLetterboxText(float Duration = 0.5f) {
+        if (WriterCoroutine != null) StopCoroutine(WriterCoroutine);
+        WriterCoroutine = Writer("", new Vector2(0, -100), true, Duration);
+        yield return StartCoroutine(WriterCoroutine);
+    }
 
-    public IEnumerator ClearLetterboxText() {
+    private IEnumerator Writer(string Text, Vector2 TargetPos, bool IsErase, float Duration) {
         Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
-        float Duration = 0.5f;
+        float InitAlpha = TextObject.alpha;
+        if (!IsErase) TextObject.text = Text;
         for (float t = 0; t < Duration; t += Time.deltaTime) {
-            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, new Vector2(0, -100), Mathf.Sin(0.5f*Mathf.PI * t/Duration));
-            TextObject.alpha = Mathf.Lerp(1, 0, t/Duration);
+            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, TargetPos, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
+            TextObject.alpha = Mathf.Lerp(InitAlpha, IsErase ? 0 : 1, t/Duration);
             yield return null;
         }
-        yield return StartCoroutine(ChangeLetterboxText(""));
+        if (IsErase) TextObject.text = "";
     }
 }
