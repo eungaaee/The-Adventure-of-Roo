@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class BreakableBlockController : MonoBehaviour {
     public float DdakDdak = 0f;
@@ -11,11 +12,13 @@ public class BreakableBlockController : MonoBehaviour {
     private BoxCollider2D col;
     private SpriteRenderer sprRdr;
     private MainCameraController CameraController;
+    private ParticleSystem particle;
 
     void Awake() {
         col = GetComponent<BoxCollider2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnCollisionStay2D(Collision2D col) {
@@ -27,11 +30,15 @@ public class BreakableBlockController : MonoBehaviour {
             if (Malang >= DdakDdak) {
                 GetComponent<BoxCollider2D>().enabled = false;
                 sprRdr.color = new Color(1, 1, 1, 0);
+                particle.Play();
+                Invoke(nameof(breakstop), 0.8f);
                 Invoke(nameof(ReGenerate), ReGenerateInverval);
             }
         }
     }
-
+    private void breakstop() {
+        particle.Stop();
+    }
     private void ReGenerate() {
         GetComponent<BoxCollider2D>().enabled = true;
         sprRdr.color = new Color(1, 1, 1, 1);
