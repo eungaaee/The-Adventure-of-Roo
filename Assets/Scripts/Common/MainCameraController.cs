@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class MainCameraController : MonoBehaviour {
     public Transform RooTransform;
     public LetterboxController Letterbox;
+    private TextMeshProUGUI TextObject;
     public Vector2 MinCameraBoundary, MaxCameraBoundary;
     private Vector2 InitMinCameraBoundary, InitMaxCameraBoundary;
     private float FollowSpeed = 2.5f;
@@ -19,6 +22,8 @@ public class MainCameraController : MonoBehaviour {
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
+        TextObject = Letterbox.transform.Find("Bottom").transform.Find("Text").GetComponent<TextMeshProUGUI>();
+
         InitZoomSize = Camera.main.orthographicSize;
         InitMinCameraBoundary = MinCameraBoundary;
         InitMaxCameraBoundary = MaxCameraBoundary;
@@ -73,5 +78,30 @@ public class MainCameraController : MonoBehaviour {
             transform.position = InitPos + (Vector3)Random.insideUnitCircle * Amount;
             yield return null;
         }
+    }
+
+    public IEnumerator SetLetterboxText(string Text) {
+        yield return StartCoroutine(ChangeLetterboxText(Text));
+
+        Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
+        float Duration = 0.5f;
+        for (float t = 0; t < Duration; t += Time.deltaTime) {
+            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, Vector2.zero, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
+            TextObject.alpha = Mathf.Lerp(0, 1, t/Duration);
+            yield return null;
+        }
+    }
+
+    public IEnumerator ChangeLetterboxText(string Text) { yield return TextObject.text = Text; }
+
+    public IEnumerator ClearLetterboxText() {
+        Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
+        float Duration = 0.5f;
+        for (float t = 0; t < Duration; t += Time.deltaTime) {
+            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, new Vector2(0, -100), Mathf.Sin(0.5f*Mathf.PI * t/Duration));
+            TextObject.alpha = Mathf.Lerp(1, 0, t/Duration);
+            yield return null;
+        }
+        yield return StartCoroutine(ChangeLetterboxText(""));
     }
 }
