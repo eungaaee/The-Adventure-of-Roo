@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1886014389548648600}
   - component: {fileID: 5470797094460841660}
   m_Layer: 6
-  m_Name: UpDownBlock
+  m_Name: VerticalBlock
   m_TagString: updownblock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1809a51c114ac4796d90ec994f9db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveTime: 3
   wayPoints:
   - {x: 37, y: -4.5, z: 1}
   - {x: 37, y: 0, z: 1}
-  unitPerSecond: 2
+  IsStyx: 0

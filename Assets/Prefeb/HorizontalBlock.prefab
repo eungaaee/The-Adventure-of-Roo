@@ -171,5 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1809a51c114ac4796d90ec994f9db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MoveTime: 3
   wayPoints: []
-  unitPerSecond: 1
+  IsStyx: 0

@@ -5,40 +5,45 @@ using static UnityEngine.ParticleSystem;
 
 public class BreakableBlockController : MonoBehaviour {
     public float DdakDdak = 0f;
-    public float ReGenerateInverval = 2f;
+    public float ReGenerateInterval = 2f;
     public bool IsVibrate = false;
     private float Malang = 0;
 
     private BoxCollider2D col;
     private SpriteRenderer sprRdr;
     private MainCameraController CameraController;
-    private ParticleSystem particle;
+    private ParticleSystem[] Particles;
 
     void Awake() {
         col = GetComponent<BoxCollider2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
-        particle = GetComponentInChildren<ParticleSystem>();
+        Particles = GetComponentsInChildren<ParticleSystem>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Player")) Particles[0].Play();
     }
 
     private void OnCollisionStay2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
             Malang += Time.deltaTime;
             if (IsVibrate) {
-                StartCoroutine(CameraController.Shake(0.05f*Malang, 0.1f));
+                StartCoroutine(CameraController.Shake(Mathf.Clamp(0.05f*Malang, 0, 0.1f), 0.1f));
             }
             if (Malang >= DdakDdak) {
                 GetComponent<BoxCollider2D>().enabled = false;
                 sprRdr.color = new Color(1, 1, 1, 0);
-                particle.Play();
-                Invoke(nameof(breakstop), 0.8f);
-                Invoke(nameof(ReGenerate), ReGenerateInverval);
+                Particles[1].Play();
+                Invoke(nameof(ReGenerate), ReGenerateInterval);
             }
         }
     }
-    private void breakstop() {
-        particle.Stop();
+
+    private void OnCollisionExit2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Player")) Particles[0].Stop();
     }
+
     private void ReGenerate() {
         GetComponent<BoxCollider2D>().enabled = true;
         sprRdr.color = new Color(1, 1, 1, 1);

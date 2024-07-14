@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatformController : MonoBehaviour {
+    public float MoveTime = 3f;
     public Vector3[] wayPoints;
-    public int unitPerSecond;
+    public bool IsStyx = false;
     private int wpLen;
+
     void Awake() {
         wpLen = wayPoints.Length;
-        StartCoroutine(nameof(Loop));
+        if (IsStyx) transform.position = wayPoints[0];
+        else StartCoroutine(nameof(Loop));
+    }
+
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (IsStyx && col.gameObject.CompareTag("Player")) StartCoroutine(Move(wayPoints[0], wayPoints[1]));
     }
 
     private IEnumerator Loop() {
@@ -21,12 +28,8 @@ public class MovingPlatformController : MonoBehaviour {
     }
 
     private IEnumerator Move(Vector3 start, Vector3 end) {
-        float percent = 0;
-        float moveTime = Vector3.Distance(start, end) / unitPerSecond;
-
-        while (percent < 1) {
-            percent += Time.deltaTime / moveTime;
-            transform.position = Vector3.Lerp(start, end, percent);
+        for (float t = 0; t < MoveTime; t += Time.deltaTime) {
+            transform.position = Vector3.Lerp(start, end, t/MoveTime);
             yield return null;
         }
     }
