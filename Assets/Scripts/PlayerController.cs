@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !IsKnockbacking) {
             JumpCount += 1;
-            rigid.gravityScale = 1;
+            rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
         }
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
     private void MoveAlongPath() {
         if (currentWaypointIndex >= waypoints.Length) {
             shouldMove = false;
-            rigid.gravityScale = 1;
+            rigid.gravityScale = 1.5f;
             return;
         }
 
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
             JumpCount = 0;
-            rigid.gravityScale = 1;
+            rigid.gravityScale = 1.5f;
             StartMoving(waypoints);
         }
     }
