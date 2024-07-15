@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class FallingBlockController : MonoBehaviour {
-    public float DestroyY;
     public float DropSpeed = 5.5f;
     public bool IsLoop = false;
     Vector3 InitPos;
@@ -24,6 +23,7 @@ public class FallingBlockController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col) {
         if (IsLoop) StartCoroutine(ResetPos());
+        else Destroy(gameObject);
     }
 
     private IEnumerator ResetPos() {
@@ -37,10 +37,8 @@ public class FallingBlockController : MonoBehaviour {
 
     private IEnumerator RayCheck() {
         Debug.DrawRay(rigid.position, Vector2.down, new Color(0, 1, 0));
-        if (Physics2D.Raycast(rigid.position, Vector2.down, 4, LayerMask.GetMask("Player")))
+        if (Physics2D.Raycast(rigid.position, Vector2.down, 4, LayerMask.GetMask("Player"))) {
             rigid.velocity = new Vector2(0, -DropSpeed);
-        if (transform.position.y <= DestroyY) {
-            Destroy(gameObject);
             yield break;
         }
         yield return new WaitForFixedUpdate();

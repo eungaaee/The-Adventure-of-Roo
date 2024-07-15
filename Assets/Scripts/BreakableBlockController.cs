@@ -33,15 +33,16 @@ public class BreakableBlockController : MonoBehaviour {
         if (DetectKey && Input.GetKeyDown(KeyCode.F)) {
             InteractiveTapCount--;
             Malang += DdakDdak / InitInteractiveTapCount;
+        } else if (DetectKey && Input.GetKeyDown(KeyCode.Space)) {
+            Malang += 1.5f;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
-            if (IsInteractive) {
-                DetectKey = true;
-                if (InteractiveNoti) StartCoroutine(Letterbox.SetLetterboxText("[F] 벽 부수기"));
-            }
+            DetectKey = true;
+            if (IsInteractive && InteractiveNoti)
+                StartCoroutine(Letterbox.SetLetterboxText("[F] 벽 부수기"));
             Particles[0].Play();
         }
     }
@@ -63,10 +64,9 @@ public class BreakableBlockController : MonoBehaviour {
 
     private void OnCollisionExit2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
-            if (IsInteractive) {
-                DetectKey = false;
-                if (InteractiveNoti) StartCoroutine(Letterbox.ClearLetterboxText());
-            }
+            DetectKey = false;
+            if (IsInteractive && InteractiveNoti)
+                StartCoroutine(Letterbox.ClearLetterboxText());
             Particles[0].Stop();
         }
     }

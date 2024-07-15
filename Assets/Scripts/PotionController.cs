@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.WSA;
 
@@ -10,7 +13,8 @@ public class PotionController : MonoBehaviour {
     private Rigidbody2D PotionRigid;
     private CapsuleCollider2D PotionCollider;
     private SpriteRenderer PotionSprRdr;
-    public LetterboxController Letterbox;
+    private LetterboxController Letterbox;
+    public GameObject[] CorruptedObjects;    
 
     private void Awake() {
         Potion = transform.GetChild(0).gameObject;
@@ -27,6 +31,11 @@ public class PotionController : MonoBehaviour {
             PickedPotion = true;
             StartCoroutine(Letterbox.ClearLetterboxText());
             // 컷씬시작
+            Action SwitchCorruptedObjects = () => {
+                int Length = CorruptedObjects.Length;
+                for (int i = 0; i < Length; i++) CorruptedObjects[i].SetActive(!CorruptedObjects[i].activeSelf);
+            };
+            SwitchCorruptedObjects();
         }
         if (PotionRigid.velocity.y < 0) PotionCollider.enabled = true;
     }
