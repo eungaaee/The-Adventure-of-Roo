@@ -18,6 +18,7 @@ public class FallingBlockController : MonoBehaviour {
         else {
             InitPos = transform.position;
             rigid.velocity = new Vector2(0, -DropSpeed);
+            StartCoroutine(RayCheck());
         }
     }
 
