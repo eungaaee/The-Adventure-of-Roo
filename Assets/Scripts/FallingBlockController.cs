@@ -41,7 +41,7 @@ public class FallingBlockController : MonoBehaviour {
         if (Physics2D.Raycast(rigid.position, Vector2.down, 4, LayerMask.GetMask("Player"))) {
             rigid.velocity = new Vector2(0, -DropSpeed);
             yield break;
-        }
+        } else yield return null;
         yield return new WaitForFixedUpdate();
         yield return StartCoroutine(RayCheck());
     }

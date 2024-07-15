@@ -11,6 +11,7 @@ TagManager:
   - updownblock
   - Floor
   - zoomboundary
+  - Path
   layers:
   - Default
   - TransparentFX
