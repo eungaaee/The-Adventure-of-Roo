@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour {
         if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
             JumpCount = 0;
             rigid.gravityScale = 1;
-            // 플레이어가 경로에 다시 부딪히면 경로를 따라 이동 시작
             StartMoving(waypoints);
         }
     }
