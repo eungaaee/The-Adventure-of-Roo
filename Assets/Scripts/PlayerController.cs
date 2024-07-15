@@ -6,22 +6,29 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public float maxSpeed;
     public int MaxJump = 2;
-    public int JumpCount = 0;
+    private int JumpCount = 0;
     public int Life = 3;
-    private bool Knockbacking = false;
+    private int InitLife;
+    private bool IsKnockbacking = false;
 
     public Vector2 MinPlayerBoundary, MaxPlayerBoundary;
+    public Vector3 InitPos;
 
-    Rigidbody2D rigid;
-    SpriteRenderer spriteRenderer;
-    Animator animator;
-    MainCameraController CameraController;
+    private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private MainCameraController CameraController;
+    //private SceneController SceneController;
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
+        //SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
+
+        InitLife = Life;
+        InitPos = new Vector3(-86, -3.4f, 1);
     }
 
     void Update() {
@@ -29,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
 
-        if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !Knockbacking) {
+        if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !IsKnockbacking) {
             JumpCount += 1;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
@@ -63,17 +70,11 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("monster")|| collision.gameObject.CompareTag("obstacle")) {
-            if (!Knockbacking) OnDamage(collision.transform.position);
+            if (!IsKnockbacking) OnDamage(collision.transform.position);
         }
     }
 
     private void LimitPlayerArea() {
-        /* Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        if (pos.x < 0f) pos.x = 0f;
-        if (pos.x > 1f) pos.x = 1f;
-        if (pos.y < 0f) pos.y = 0f;
-        if (pos.y > 1f) pos.y = 1f;
-        transform.position = Camera.main.ViewportToWorldPoint(pos); */
         if (transform.position.x < MinPlayerBoundary.x) transform.position = new Vector3(MinPlayerBoundary.x, transform.position.y, transform.position.z);
         else if (transform.position.x > MaxPlayerBoundary.x) transform.position = new Vector3(MaxPlayerBoundary.x, transform.position.y, transform.position.z);
         else if (transform.position.y < MinPlayerBoundary.y) transform.position = new Vector3(transform.position.x, MinPlayerBoundary.y, transform.position.z);
@@ -81,20 +82,31 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnDamage(Vector2 opponentPos) {
-        JumpCount = 0;
-        Knockbacking = true;
-        Life--;
+        IsKnockbacking = true;
         gameObject.layer = 10;
+        JumpCount = 0;
+
         int dirc = transform.position.x < opponentPos.x ? -1 : 1;
         rigid.AddForce(new Vector2(dirc, 1) * 3, ForceMode2D.Impulse);
-        animator.SetBool("IsDamaged", true);
-        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         StartCoroutine(CameraController.Shake());
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+
+        Life--;
+        if (Life == 0) {
+            animator.SetBool("IsDead", true);
+            //StartCoroutine(SceneController.FadeOut());
+            Life = InitLife;
+            animator.SetBool("IsDead", false);
+            transform.position = InitPos;
+            //StartCoroutine(SceneController.FadeIn());
+        }
+
+        animator.SetBool("IsDamaged", true);
         Invoke(nameof(OffDamage), 0.7f);
     }
 
     private void OffDamage() {
-        Knockbacking = false;
+        IsKnockbacking = false;
         animator.SetBool("IsDamaged", false);
         Invoke(nameof(Untransparent), 0.7f);
     }
@@ -102,5 +114,16 @@ public class PlayerController : MonoBehaviour {
     private void Untransparent() {
         gameObject.layer = 9;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    public void ResetCondition() {
+        Life = InitLife;
+        IsKnockbacking = false;
+        JumpCount = 0;
+
+        animator.SetBool("IsDamaged", false);
+        animator.SetBool("IsDead", false);
+        animator.SetBool("IsJumping", false);
+        animator.SetBool("IsWalking", false);
     }
 }

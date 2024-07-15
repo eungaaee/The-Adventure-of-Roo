@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 public class buttonPress : MonoBehaviour
 {
-    public float moveSpeed = 10000000000000f;  // ¿òÁ÷ÀÓ ¼Óµµ
+    public float moveSpeed = 10000000000000f;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
     private bool move = false;
     public int changeScene = 0;
-    public TextMeshProUGUI text;  // TextMeshPro ÅØ½ºÆ® ¿ä¼Ò
-    public float fadeDuration = 1.0f;  // Èñ¹ÌÇØÁö´Â ½Ã°£
+    public TextMeshProUGUI text;  // TextMeshPro ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½
+    public float fadeDuration = 1.0f;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     public float scaleDuration = 1.0f;
-    private float minAlpha = 0.2f;  // ÃÖ¼Ò ¾ËÆÄ °ª
-    private float maxAlpha = 1.0f;  // ÃÖ´ë ¾ËÆÄ °ª
+    private float minAlpha = 0.2f;  // ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    private float maxAlpha = 1.0f;  // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     public SceneFader SceneFader;
 
     private void Start()
@@ -39,7 +39,7 @@ public class buttonPress : MonoBehaviour
         }
         if (!move)
         {
-            // Mathf.PingPongÀ» »ç¿ëÇÏ¿© ¾ËÆÄ °ª °è»ê
+            // Mathf.PingPongï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
             float alpha = Mathf.Lerp(minAlpha, maxAlpha, Mathf.PingPong(Time.time / fadeDuration, 1.0f));
             Color textColor = text.color;
             textColor.a = alpha;
@@ -51,15 +51,15 @@ public class buttonPress : MonoBehaviour
         float elapsedTime = 0f;
         Color originalColor = text.color;
         Vector3 originalScale = text.rectTransform.localScale;
-        Vector3 targetScale = originalScale * 2f; // 1.5¹è Ä¿Áöµµ·Ï ¼³Á¤
+        Vector3 targetScale = originalScale * 2f; // 1.5ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration); // ¾ËÆÄ °ª °¨¼Ò
+            float alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             text.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
 
-            float scale = Mathf.Lerp(1, 2f, elapsedTime / scaleDuration); // Å©±â Áõ°¡
+            float scale = Mathf.Lerp(1, 2f, elapsedTime / scaleDuration); // Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             text.rectTransform.localScale = new Vector3(scale, scale, scale);
 
             yield return null;

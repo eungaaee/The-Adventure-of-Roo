@@ -4,21 +4,24 @@ using UnityEngine;
 using TMPro;
 
 public class LetterboxController : MonoBehaviour {
-    public float duration = 1;
+    public float Duration = 1;
+    public bool IsLetterboxOn = false;
 
     private RectTransform Top, Bottom;
-    private TextMeshProUGUI TextObject;
+    private TextMeshProUGUI TopTextObj, BottomTextObj;
 
     private IEnumerator MonoEye;
     private IEnumerator Writer;
 
     void Awake() {
-        Top = transform.GetChild(0).gameObject.GetComponent<RectTransform>();
-        Bottom = transform.GetChild(1).gameObject.GetComponent<RectTransform>();
-        TextObject = transform.Find("Bottom").transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        Top = transform.Find("Top").gameObject.GetComponent<RectTransform>();
+        Bottom = transform.Find("Bottom").gameObject.GetComponent<RectTransform>();
+        TopTextObj = Top.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+        BottomTextObj = Bottom.transform.Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
     public IEnumerator LetterboxOn() {
+        IsLetterboxOn = true;
         if (MonoEye != null) StopCoroutine(MonoEye);
         MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 200));
         yield return StartCoroutine(MonoEye);
@@ -28,41 +31,56 @@ public class LetterboxController : MonoBehaviour {
         if (MonoEye != null) StopCoroutine(MonoEye);
         MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 0));
         yield return StartCoroutine(MonoEye);
+        IsLetterboxOn = false;
     }
 
     private IEnumerator EyeBlinker(Vector2 size, Vector2 targetSize) {
-        for (float t = 0; t <= duration; t += Time.deltaTime) {
-            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, Mathf.Sin(0.5f*Mathf.PI * t/duration));
+        for (float t = 0; t <= Duration; t += Time.deltaTime) {
+            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
             yield return null;
         }
     }
 
-    public IEnumerator SetLetterboxText(string Text, float Duration = 0.5f) {
+    public IEnumerator SetLetterboxText(string Text, int TopOrBottom = 1, float Duration = 0.5f) {
+        TextMeshProUGUI TextObj;
+        if (TopOrBottom == 0) TextObj = TopTextObj;
+        else TextObj = BottomTextObj;
+
         if (Writer != null) StopCoroutine(Writer);
-        if (TextObject.text != "") {
+        if (TextObj.text != "") {
             Duration = 0.25f;
-            Writer = ClearLetterboxText(Duration);
+            Writer = ClearLetterboxText(TopOrBottom, Duration);
             yield return Writer;
         }
-        Writer = Write(Text, Vector2.zero, false, Duration);
+        Writer = Write(TextObj, Text, Vector2.zero, false, Duration);
         yield return StartCoroutine(Writer);
     }
 
-    public IEnumerator ClearLetterboxText(float Duration = 0.5f) {
+    public IEnumerator ClearLetterboxText(int TopOrBottom = 1, float Duration = 0.5f) {
+        TextMeshProUGUI TextObj;
+        Vector2 TargetPos;
+        if (TopOrBottom == 0) {
+            TextObj = TopTextObj;
+            TargetPos = new Vector2(0, 100);
+        } else {
+            TextObj = BottomTextObj;
+            TargetPos = new Vector2(0, -100);
+        }
+
         if (Writer != null) StopCoroutine(Writer);
-        Writer = Write("", new Vector2(0, -100), true, Duration);
+        Writer = Write(TextObj, "", TargetPos, true, Duration);
         yield return StartCoroutine(Writer);
     }
 
-    private IEnumerator Write(string Text, Vector2 TargetPos, bool IsErase, float Duration) {
-        Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
-        float InitAlpha = TextObject.alpha;
-        if (!IsErase) TextObject.text = Text;
+    private IEnumerator Write(TextMeshProUGUI TextObj, string Text, Vector2 TargetPos, bool IsErase, float Duration) {
+        Vector2 InitPos = TextObj.GetComponent<RectTransform>().anchoredPosition;
+        float InitAlpha = TextObj.alpha;
+        if (!IsErase) TextObj.text = Text;
         for (float t = 0; t < Duration; t += Time.deltaTime) {
-            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, TargetPos, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
-            TextObject.alpha = Mathf.Lerp(InitAlpha, IsErase ? 0 : 1, t/Duration);
+            TextObj.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, TargetPos, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
+            TextObj.alpha = Mathf.Lerp(InitAlpha, IsErase ? 0 : 1, t/Duration);
             yield return null;
         }
-        if (IsErase) TextObject.text = "";
+        if (IsErase) TextObj.text = "";
     }
 }

@@ -42,7 +42,7 @@ public class BreakableBlockController : MonoBehaviour {
         if (col.gameObject.CompareTag("Player")) {
             DetectKey = true;
             if (IsInteractive && InteractiveNoti)
-                StartCoroutine(Letterbox.SetLetterboxText("[F] 벽 부수기"));
+                StartCoroutine(Letterbox.SetLetterboxText("[F] 벽 부수기", 1));
             Particles[0].Play();
         }
     }

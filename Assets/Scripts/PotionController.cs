@@ -11,7 +11,7 @@ public class PotionController : MonoBehaviour {
     private bool PickedPotion = false;
     public GameObject Potion;
     private Rigidbody2D PotionRigid;
-    private CapsuleCollider2D PotionCollider;
+    private PolygonCollider2D PotionCollider;
     private SpriteRenderer PotionSprRdr;
     private LetterboxController Letterbox;
     public GameObject[] CorruptedObjects;    
@@ -19,7 +19,7 @@ public class PotionController : MonoBehaviour {
     private void Awake() {
         Potion = transform.GetChild(0).gameObject;
         PotionRigid = Potion.GetComponent<Rigidbody2D>();
-        PotionCollider = Potion.GetComponent<CapsuleCollider2D>();
+        PotionCollider = Potion.GetComponent<PolygonCollider2D>();
         PotionSprRdr = Potion.GetComponent<SpriteRenderer>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
     }
@@ -43,14 +43,14 @@ public class PotionController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = true;
-            StartCoroutine(Letterbox.SetLetterboxText("[F] 물약 꺼내기"));
+            StartCoroutine(Letterbox.SetLetterboxText("[F] 물약 꺼내기", 1));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = false;
-            StartCoroutine(Letterbox.ClearLetterboxText());
+            StartCoroutine(Letterbox.ClearLetterboxText(1));
         }
     }
 
