@@ -1,15 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public float jumpForce;
     public float maxSpeed;
     public int MaxJump = 2;
-    private int JumpCount = 0;
+    public int JumpCount = 0;
     public int Life = 3;
     private int InitLife;
     private bool IsKnockbacking = false;
+    private bool canMove = true;
+
+    public Transform[] waypoints;
+    public float speed = 2f;
+    private int currentWaypointIndex = 0;
+    private bool shouldMove = false;
 
     public Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     public Vector3 InitPos;
@@ -33,14 +40,42 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         animator.SetBool("IsWalking", Mathf.Abs(rigid.velocity.x) > 0.3);
-
-        if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-
+        if (!shouldMove) {
+            if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+        }
         if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !IsKnockbacking) {
             JumpCount += 1;
+            rigid.gravityScale = 1;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
         }
+        if (shouldMove && waypoints.Length > 0) {
+            MoveAlongPath();
+        }
+    }
+
+    private void MoveAlongPath() {
+        if (currentWaypointIndex >= waypoints.Length) {
+            shouldMove = false;
+            rigid.gravityScale = 1;
+            return;
+        }
+
+        Transform targetWaypoint = waypoints[currentWaypointIndex];
+        Vector3 direction = targetWaypoint.position - transform.position;
+        transform.position += direction.normalized * speed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f) {
+            currentWaypointIndex++;
+        }
+    }
+
+    public void StartMoving(Transform[] path) {
+        waypoints = path;
+        currentWaypointIndex = 0;
+        shouldMove = true;
+        rigid.gravityScale = 0; 
+        rigid.velocity = Vector2.zero; 
     }
 
     void FixedUpdate() {
@@ -49,8 +84,7 @@ public class PlayerController : MonoBehaviour {
 
         if (h < 0) spriteRenderer.flipX = true;
         else if (h > 0) spriteRenderer.flipX = false;
-
-        rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
+        if (!shouldMove) rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
         if (rigid.velocity.x > maxSpeed) rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         else if (rigid.velocity.x < -maxSpeed) rigid.velocity = new Vector2(-maxSpeed, rigid.velocity.y);
 
@@ -72,6 +106,18 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("monster")|| collision.gameObject.CompareTag("obstacle")) {
             if (!IsKnockbacking) OnDamage(collision.transform.position);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
+            JumpCount = 0;
+            rigid.gravityScale = 1;
+            // 플레이어가 경로에 다시 부딪히면 경로를 따라 이동 시작
+            StartMoving(waypoints);
+        }
+    }
+
+    public void SetCanMove(bool value) {
+        canMove = value;
     }
 
     private void LimitPlayerArea() {
