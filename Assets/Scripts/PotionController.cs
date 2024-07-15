@@ -10,14 +10,14 @@ public class PotionController : MonoBehaviour {
     private Rigidbody2D PotionRigid;
     private CapsuleCollider2D PotionCollider;
     private SpriteRenderer PotionSprRdr;
-    public MainCameraController CameraController;
+    public LetterboxController Letterbox;
 
     private void Awake() {
         Potion = transform.GetChild(0).gameObject;
         PotionRigid = Potion.GetComponent<Rigidbody2D>();
         PotionCollider = Potion.GetComponent<CapsuleCollider2D>();
         PotionSprRdr = Potion.GetComponent<SpriteRenderer>();
-        CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
+        Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
     }
 
     private void Update() {
@@ -25,6 +25,7 @@ public class PotionController : MonoBehaviour {
             StartCoroutine(Launcher());
             InBoundary = false;
             PickedPotion = true;
+            StartCoroutine(Letterbox.ClearLetterboxText());
             // 컷씬시작
         }
         if (PotionRigid.velocity.y < 0) PotionCollider.enabled = true;
@@ -33,14 +34,14 @@ public class PotionController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = true;
-            StartCoroutine(CameraController.SetLetterboxText("[F] 물약 꺼내기"));
+            StartCoroutine(Letterbox.SetLetterboxText("[F] 물약 꺼내기"));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = false;
-            StartCoroutine(CameraController.ClearLetterboxText());
+            StartCoroutine(Letterbox.ClearLetterboxText());
         }
     }
 

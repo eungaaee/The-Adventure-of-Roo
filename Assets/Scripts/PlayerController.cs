@@ -67,20 +67,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col) {
-        if (col.CompareTag("zoomboundary")) {
-            StartCoroutine(CameraController.Letterbox.LetterboxOn());
-            StartCoroutine(CameraController.ZoomIn(col));
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col) {
-        if (col.CompareTag("zoomboundary")) {
-            StartCoroutine(CameraController.Letterbox.LetterboxOff());
-            StartCoroutine(CameraController.ZoomOut());
-        }
-    }
-
     private void LimitPlayerArea() {
         /* Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (pos.x < 0f) pos.x = 0f;

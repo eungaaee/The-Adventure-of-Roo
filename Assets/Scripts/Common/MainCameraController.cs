@@ -2,32 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class MainCameraController : MonoBehaviour {
     public Transform RooTransform;
     public LetterboxController Letterbox;
-    private TextMeshProUGUI TextObject;
     public Vector2 MinCameraBoundary, MaxCameraBoundary;
     private Vector2 InitMinCameraBoundary, InitMaxCameraBoundary;
     private float FollowSpeed = 2.5f;
     private const float ShakeAmount = 0.25f, ShakeDuration = 0.25f;
-    private float ZoomDuration, ZoomAmount;
-    private float InitZoomSize;
+    private float DefaultZoomSize;
 
     private IEnumerator MonoScope;
     private IEnumerator VibrateGenerator;
-    private IEnumerator WriterCoroutine;
+    private IEnumerator Writer;
 
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
-        TextObject = Letterbox.transform.Find("Bottom").transform.Find("Text").GetComponent<TextMeshProUGUI>();
 
-        InitZoomSize = Camera.main.orthographicSize;
         InitMinCameraBoundary = MinCameraBoundary;
         InitMaxCameraBoundary = MaxCameraBoundary;
+        DefaultZoomSize = Camera.main.orthographicSize;
     }
 
     void LateUpdate() {
@@ -37,31 +33,33 @@ public class MainCameraController : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * FollowSpeed);
     }
 
-    public IEnumerator ZoomIn(Collider2D ZoomBoundary) {
+    public IEnumerator Zoom(GameObject ZoomBoundary) {
         MinCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MinZoomedCameraBoundary");
         MaxCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MaxZoomedCameraBoundary");
 
-        ZoomAmount = (float)Variables.Object(ZoomBoundary).Get("ZoomAmount");
-        ZoomDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+        float ZoomAmount = (float)Variables.Object(ZoomBoundary).Get("ZoomAmount");
+        float ZoomDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
 
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(InitZoomSize-ZoomAmount);
+        MonoScope = Scope(DefaultZoomSize-ZoomAmount, ZoomDuration);
         yield return StartCoroutine(MonoScope);
     }
 
-    public IEnumerator ZoomOut() {
+    public IEnumerator CancelZoom(GameObject ZoomBoundary) {
         MinCameraBoundary = InitMinCameraBoundary;
         MaxCameraBoundary = InitMaxCameraBoundary;
 
+        float CancelDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(InitZoomSize);
+        MonoScope = Scope(DefaultZoomSize, CancelDuration);
         yield return StartCoroutine(MonoScope);
     }
 
-    private IEnumerator Scope(float Lens) {
+    private IEnumerator Scope(float Lens, float Duration) {
         float InitOrthoSize = Camera.main.orthographicSize;
-        for (float t = 0; t <= ZoomDuration; t += Time.deltaTime) {
-            Camera.main.orthographicSize = Mathf.Lerp(InitOrthoSize, Lens, Mathf.Sin(0.5f*Mathf.PI * t/ZoomDuration));
+        for (float t = 0; t <= Duration; t += Time.deltaTime) {
+            Camera.main.orthographicSize = Mathf.Lerp(InitOrthoSize, Lens, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
             yield return null;
         }
     }
@@ -79,34 +77,5 @@ public class MainCameraController : MonoBehaviour {
             transform.position = InitPos + (Vector3)Random.insideUnitCircle * Amount;
             yield return null;
         }
-    }
-
-    public IEnumerator SetLetterboxText(string Text, float Duration = 0.5f) {
-        if (WriterCoroutine != null) StopCoroutine(WriterCoroutine);
-        if (TextObject.text != "") {
-            Duration = 0.25f;
-            WriterCoroutine = ClearLetterboxText(Duration);
-            yield return WriterCoroutine;
-        }
-        WriterCoroutine = Writer(Text, Vector2.zero, false, Duration);
-        yield return StartCoroutine(WriterCoroutine);
-    }
-
-    public IEnumerator ClearLetterboxText(float Duration = 0.5f) {
-        if (WriterCoroutine != null) StopCoroutine(WriterCoroutine);
-        WriterCoroutine = Writer("", new Vector2(0, -100), true, Duration);
-        yield return StartCoroutine(WriterCoroutine);
-    }
-
-    private IEnumerator Writer(string Text, Vector2 TargetPos, bool IsErase, float Duration) {
-        Vector2 InitPos = TextObject.GetComponent<RectTransform>().anchoredPosition;
-        float InitAlpha = TextObject.alpha;
-        if (!IsErase) TextObject.text = Text;
-        for (float t = 0; t < Duration; t += Time.deltaTime) {
-            TextObject.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(InitPos, TargetPos, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
-            TextObject.alpha = Mathf.Lerp(InitAlpha, IsErase ? 0 : 1, t/Duration);
-            yield return null;
-        }
-        if (IsErase) TextObject.text = "";
     }
 }
