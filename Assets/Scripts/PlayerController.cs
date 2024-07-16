@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
     public int Life = 3;
     private int InitLife;
     private bool IsKnockbacking = false;
-    private bool canMove = true;
 
     public Transform[] waypoints;
     public float speed = 2f;
@@ -78,6 +77,14 @@ public class PlayerController : MonoBehaviour {
         rigid.velocity = Vector2.zero; 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
+            JumpCount = 0;
+            rigid.gravityScale = 1.5f;
+            StartMoving(waypoints);
+        }
+    }
+
     void FixedUpdate() {
         LimitPlayerArea();
         float h = Input.GetAxisRaw("Horizontal");
@@ -106,17 +113,6 @@ public class PlayerController : MonoBehaviour {
         if (collision.gameObject.CompareTag("monster")|| collision.gameObject.CompareTag("obstacle")) {
             if (!IsKnockbacking) OnDamage(collision.transform.position);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
-            JumpCount = 0;
-            rigid.gravityScale = 1.5f;
-            StartMoving(waypoints);
-        }
-    }
-
-    public void SetCanMove(bool value) {
-        canMove = value;
     }
 
     private void LimitPlayerArea() {

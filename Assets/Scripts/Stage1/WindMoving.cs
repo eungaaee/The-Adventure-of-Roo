@@ -1,15 +1,17 @@
 using UnityEngine;
+using UnityEngine.Scripting;
 
 public class MoveTrigger : MonoBehaviour {
-    public Transform[] waypoints; // 경로 포인트들
+    public Transform[] waypoints;
+    private PlayerController Player;
+
+    private void Awake() {
+        Player = GameObject.Find("Roo").GetComponent<PlayerController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
-            PlayerController playerAutoMove = other.GetComponent<PlayerController>();
-            if (playerAutoMove != null) {
-                playerAutoMove.StartMoving(waypoints);
-            }
+            Player.StartMoving(waypoints);
         }
     }
 }
-

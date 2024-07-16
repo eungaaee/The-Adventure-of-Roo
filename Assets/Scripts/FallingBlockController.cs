@@ -13,35 +13,27 @@ public class FallingBlockController : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         InitPos = transform.position;
-        rigid.velocity = new Vector2(0, -DropSpeed);
-        rigid.bodyType = RigidbodyType2D.Static;
-        if (!IsLoop) {
-            StartCoroutine(CheckAndDestroy());
-        }
+        if (IsLoop) rigid.velocity = new Vector2(0, -DropSpeed);
+        else StartCoroutine(RayCheck());
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if (IsLoop) {
-            StartCoroutine(ResetPos());
-        } else {
-            Destroy(gameObject);
-        }
+        if (IsLoop) StartCoroutine(ResetPos());
+        else Destroy(gameObject);
     }
 
     private IEnumerator ResetPos() {
         sprRdr.color = new Color(1, 1, 1, 0);
         transform.position = InitPos;
-        rigid.velocity = Vector2.zero;
         yield return new WaitForSecondsRealtime(1.5f);
-        sprRdr.color = Color.white;
+        sprRdr.color = new Color(1, 1, 1, 1);
         rigid.velocity = new Vector2(0, -DropSpeed);
     }
 
-    private IEnumerator CheckAndDestroy() {
+    private IEnumerator RayCheck() {
         while (true) {
             Debug.DrawRay(transform.position, Vector2.down * 3, Color.green);
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 3, LayerMask.GetMask("Player"));
-            if (hit.collider != null) {
+            if (Physics2D.Raycast(transform.position, Vector2.down, 3, LayerMask.GetMask("Player"))) {
                 rigid.bodyType = RigidbodyType2D.Dynamic;
                 rigid.velocity = new Vector2(0, -DropSpeed);
                 yield break;
