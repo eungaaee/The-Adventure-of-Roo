@@ -5,7 +5,7 @@ public class MoveTrigger : MonoBehaviour {
     public Transform[] waypoints;
     private PlayerController Player;
 
-    private void Awake() {
+    /* private void Awake() {
         Player = GameObject.Find("Roo").GetComponent<PlayerController>();
     }
 
@@ -13,5 +13,5 @@ public class MoveTrigger : MonoBehaviour {
         if (other.CompareTag("Player")) {
             Player.StartMoving(waypoints);
         }
-    }
+    } */
 }

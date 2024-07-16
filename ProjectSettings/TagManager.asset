@@ -20,11 +20,11 @@ TagManager:
   - Water
   - UI
   - Floor
-  - UpBlock
+  - 
   - Obstacle
   - Player
   - PlayerDamaged
-  - 
+  - Potion
   - 
   - 
   - 

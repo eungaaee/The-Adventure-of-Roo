@@ -25,7 +25,6 @@ public class WindTrigger : MonoBehaviour {
             EndOfWind.x += transform.lossyScale.x/2 * Mathf.Cos(transform.rotation.z);
             EndOfWind.y += transform.lossyScale.x/2 * Mathf.Sin(transform.rotation.z) + transform.lossyScale.y;
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D col) {

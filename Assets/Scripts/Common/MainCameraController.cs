@@ -15,7 +15,6 @@ public class MainCameraController : MonoBehaviour {
 
     private IEnumerator MonoScope;
     private IEnumerator VibrateGenerator;
-    private IEnumerator Writer;
 
     void Awake() {
         RooTransform = GameObject.Find("Roo").GetComponent<Transform>();

@@ -64,7 +64,7 @@ public class CheckPointManager : MonoBehaviour {
     private IEnumerator Save() {
         IsSaved = true;
         Player.InitPos = transform.position;
-        // Player.ResetStats();
+        Player.ResetCondition();
         
         yield return StartCoroutine(Letterbox.ClearLetterboxText(1));
         yield return StartCoroutine(Letterbox.SetLetterboxText("진행도 저장 완료", 0));

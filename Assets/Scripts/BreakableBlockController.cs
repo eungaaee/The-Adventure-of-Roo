@@ -19,6 +19,7 @@ public class BreakableBlockController : MonoBehaviour {
     private MainCameraController CameraController;
     private LetterboxController Letterbox;
     private ParticleSystem[] Particles;
+    private PlayerController Player;
 
     void Awake() {
         col = GetComponent<BoxCollider2D>();
@@ -26,16 +27,19 @@ public class BreakableBlockController : MonoBehaviour {
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
         Particles = GetComponentsInChildren<ParticleSystem>();
+        Player = GameObject.Find("Roo").GetComponent<PlayerController>();
         InitInteractiveTapCount = InteractiveTapCount;
     }
 
     void Update() {
-        if (DetectKey && Input.GetKeyDown(KeyCode.F)) {
+        if (IsInteractive && DetectKey && Input.GetKeyDown(KeyCode.F)) {
             InteractiveTapCount--;
             Malang += DdakDdak / InitInteractiveTapCount;
-        } else if (DetectKey && Input.GetKeyDown(KeyCode.Space)) {
+        } else if (!IsInteractive && DetectKey && Input.GetKeyDown(KeyCode.Space)) {
             Malang += 1.5f;
         }
+
+        if (Player.IsResetting) ReGenerate();
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
