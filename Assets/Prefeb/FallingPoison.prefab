@@ -99,7 +99,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72781e37867294d48828f594c5b50d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyY: -2.6
   DropSpeed: 5.5
   IsLoop: 1
 --- !u!50 &2209525075195090370
@@ -114,7 +113,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 0.01
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
