@@ -4,15 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class WindTrigger : MonoBehaviour {
-    private Vector3 StartOfWind, EndOfWind;
     public bool IsRightToLeft = false;
-    public float Duration = 2f;
+    private Vector3 StartOfWind, EndOfWind;
     private IEnumerator Sweeper;
     private PlayerController Player;
 
     private void Awake() {
         Player = GameObject.Find("Roo").GetComponent<PlayerController>();
-        
+
         StartOfWind = transform.position;
         EndOfWind = transform.position;        
         if (IsRightToLeft) {

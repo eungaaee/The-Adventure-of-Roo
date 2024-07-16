@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
-        //SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
+        // SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
 
         InitLife = Life;
         InitPos = new Vector3(-86, -3.4f, 1);
@@ -39,14 +39,14 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         animator.SetBool("IsWalking", Mathf.Abs(rigid.velocity.x) > 0.3);
-        if (!shouldMove) {
-            if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-        }
         if (Input.GetButtonDown("Jump") && JumpCount != MaxJump && !IsKnockbacking) {
             JumpCount += 1;
             rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
+        }
+        if (!shouldMove) {
+            if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         }
         if (shouldMove && waypoints.Length > 0) {
             MoveAlongPath();
@@ -91,7 +91,9 @@ public class PlayerController : MonoBehaviour {
 
         if (h < 0) spriteRenderer.flipX = true;
         else if (h > 0) spriteRenderer.flipX = false;
+
         if (!shouldMove) rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
+        
         if (rigid.velocity.x > maxSpeed) rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         else if (rigid.velocity.x < -maxSpeed) rigid.velocity = new Vector2(-maxSpeed, rigid.velocity.y);
 
