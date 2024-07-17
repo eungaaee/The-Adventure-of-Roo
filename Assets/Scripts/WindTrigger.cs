@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class WindTrigger : MonoBehaviour {
-    public bool IsRightToLeft = false;
+    [SerializeField] private bool IsRightToLeft = false;
     private Vector3 StartOfWind, EndOfWind;
     private IEnumerator Sweeper;
     private PlayerController Player;
@@ -43,7 +43,7 @@ public class WindTrigger : MonoBehaviour {
 
     private IEnumerator SweepPlayer() {
         while (true) {
-            Player.GetComponent<Rigidbody2D>().AddForce((EndOfWind-StartOfWind)*2.5f, ForceMode2D.Force);
+            Player.GetComponent<Rigidbody2D>().AddForce((EndOfWind-StartOfWind)*3f, ForceMode2D.Force);
             yield return null;
         }
     }

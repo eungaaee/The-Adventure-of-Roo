@@ -5,7 +5,7 @@ using System.Collections;
 using Unity.VisualScripting;
 
 public class SceneController : MonoBehaviour {
-    public Image FadeImage;
+    [SerializeField] private Image FadeImage;
     private const float FadeDuration = 0.8f;
 
     public IEnumerator FadeIn(float Duration = FadeDuration) {
@@ -25,9 +25,8 @@ public class SceneController : MonoBehaviour {
     }
     
     public IEnumerator LoadCutScene(string sceneName) {
-        yield return FadeOut();
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        yield return FadeIn();
+        yield return null;
     }
 
     public IEnumerator LoadScene(string sceneName) {

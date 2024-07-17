@@ -13,24 +13,24 @@ public class LetterboxController : MonoBehaviour {
     private IEnumerator MonoEye;
     private IEnumerator Writer;
 
-    void Awake() {
+    private void Awake() {
         Top = transform.Find("Top").gameObject.GetComponent<RectTransform>();
         Bottom = transform.Find("Bottom").gameObject.GetComponent<RectTransform>();
         TopTextObj = Top.transform.Find("Text").GetComponent<TextMeshProUGUI>();
         BottomTextObj = Bottom.transform.Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
-    public IEnumerator LetterboxOn() {
+    public void LetterboxOn() {
         IsLetterboxOn = true;
         if (MonoEye != null) StopCoroutine(MonoEye);
         MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 200));
-        yield return StartCoroutine(MonoEye);
+        StartCoroutine(MonoEye);
     }
 
-    public IEnumerator LetterboxOff() {
+    public void LetterboxOff() {
         if (MonoEye != null) StopCoroutine(MonoEye);
         MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 0));
-        yield return StartCoroutine(MonoEye);
+        StartCoroutine(MonoEye);
         IsLetterboxOn = false;
     }
 

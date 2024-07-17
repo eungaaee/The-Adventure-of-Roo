@@ -4,21 +4,17 @@ using System.Diagnostics;
 using UnityEngine;
 
 public class ButterflyMove : MonoBehaviour {
-    [SerializeField]
-    private Transform[] wayPoints;
-    [SerializeField]
-    private float waitTime;
-    [SerializeField]
-    private float unitPerSecond = 1;
-    [SerializeField]
-    private bool isLoop;
+    [SerializeField] private Transform[] wayPoints;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float unitPerSecond = 1;
+    [SerializeField] private bool isLoop;
 
     private int wayPointCount;
     private int currentIndex = 0;
 
     private void Awake() {
         wayPointCount = wayPoints.Length;
-        StartCoroutine(nameof(Loop));
+        if (wayPointCount > 0) StartCoroutine(nameof(Loop));
     }
 
     private IEnumerator Loop() {

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatformController : MonoBehaviour {
-    public float MoveTime = 3f;
-    public Vector3[] wayPoints;
-    public bool IsStyx = false;
+    [SerializeField] private float MoveTime = 3f;
+    [SerializeField] private Vector3[] wayPoints;
+    [SerializeField] private bool IsStyx = false;
     private int wpLen;
 
-    void Awake() {
+    private void Awake() {
         wpLen = wayPoints.Length;
+    }
+
+    private void Start() {
         if (IsStyx) transform.position = wayPoints[0];
         else StartCoroutine(nameof(Loop));
     }

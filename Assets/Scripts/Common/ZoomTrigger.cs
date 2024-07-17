@@ -31,8 +31,8 @@ public class ZoomTrigger : MonoBehaviour {
             }
             if (!IsZoomed && EnterCount == 1) {
                 IsZoomed = true;
-                StartCoroutine(CameraController.Letterbox.LetterboxOn());
-                StartCoroutine(CameraController.Zoom(gameObject));
+                CameraController.Letterbox.LetterboxOn();
+                CameraController.Zoom(gameObject);
             }
         } else if (!InBoundary()) {
             if (IsEnter) {
@@ -42,8 +42,8 @@ public class ZoomTrigger : MonoBehaviour {
             }
             if (!IsCancelled && EnterCount == 0) {
                 IsCancelled = true;
-                StartCoroutine(CameraController.Letterbox.LetterboxOff());
-                StartCoroutine(CameraController.CancelZoom(gameObject));
+                CameraController.Letterbox.LetterboxOff();
+                CameraController.CancelZoom(gameObject);
             }
         }
     }

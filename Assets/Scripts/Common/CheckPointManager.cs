@@ -21,7 +21,7 @@ public class CheckPointManager : MonoBehaviour {
         GlowRenderer.color = new Color(0, 0.9607843137254902f, 1, 0.2f);
     }
 
-    void Update() {
+    private void Update() {
         if (!IsSaved & InBoundary) {
             if (Input.GetKey(KeyCode.Return)) {
                 PressDuration += Time.deltaTime;
@@ -39,7 +39,7 @@ public class CheckPointManager : MonoBehaviour {
         if (!IsSaved & col.gameObject.CompareTag("Player")) {
             InBoundary = true;
             InitIsLetterboxOn = Letterbox.IsLetterboxOn;
-            if (!InitIsLetterboxOn) StartCoroutine(Letterbox.LetterboxOn());
+            if (!InitIsLetterboxOn) Letterbox.LetterboxOn();
             StartCoroutine(Letterbox.SetLetterboxText("[Enter] 길게 눌러서 저장하기", 1));
         }
     }
@@ -47,7 +47,7 @@ public class CheckPointManager : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D col) {
         if (!IsSaved & col.gameObject.CompareTag("Player")) {
             InBoundary = false;
-            if (!InitIsLetterboxOn) StartCoroutine(Letterbox.LetterboxOff());
+            if (!InitIsLetterboxOn) Letterbox.LetterboxOff();
             StartCoroutine(Letterbox.ClearLetterboxText(1));
         }
     }
@@ -64,8 +64,7 @@ public class CheckPointManager : MonoBehaviour {
     private IEnumerator Save() {
         IsSaved = true;
         Player.InitPos = transform.position;
-        Player.ResetCondition();
-        
+        StartCoroutine(Player.ResetCondition());
         yield return StartCoroutine(Letterbox.ClearLetterboxText(1));
         yield return StartCoroutine(Letterbox.SetLetterboxText("진행도 저장 완료", 0));
         yield return new WaitForSecondsRealtime(3f);

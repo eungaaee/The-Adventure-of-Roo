@@ -32,7 +32,7 @@ public class MainCameraController : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * FollowSpeed);
     }
 
-    public IEnumerator Zoom(GameObject ZoomBoundary) {
+    public void Zoom(GameObject ZoomBoundary) {
         MinCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MinZoomedCameraBoundary");
         MaxCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MaxZoomedCameraBoundary");
 
@@ -41,10 +41,10 @@ public class MainCameraController : MonoBehaviour {
 
         if (MonoScope != null) StopCoroutine(MonoScope);
         MonoScope = Scope(DefaultZoomSize-ZoomAmount, ZoomDuration);
-        yield return StartCoroutine(MonoScope);
+        StartCoroutine(MonoScope);
     }
 
-    public IEnumerator CancelZoom(GameObject ZoomBoundary) {
+    public void CancelZoom(GameObject ZoomBoundary) {
         MinCameraBoundary = InitMinCameraBoundary;
         MaxCameraBoundary = InitMaxCameraBoundary;
 
@@ -52,7 +52,7 @@ public class MainCameraController : MonoBehaviour {
 
         if (MonoScope != null) StopCoroutine(MonoScope);
         MonoScope = Scope(DefaultZoomSize, CancelDuration);
-        yield return StartCoroutine(MonoScope);
+        StartCoroutine(MonoScope);
     }
 
     private IEnumerator Scope(float Lens, float Duration) {
@@ -63,12 +63,11 @@ public class MainCameraController : MonoBehaviour {
         }
     }
 
-    public IEnumerator Shake(float Amount = ShakeAmount, float Duration = ShakeDuration) {
+    public void Shake(float Amount = ShakeAmount, float Duration = ShakeDuration) {
         if (VibrateGenerator != null) StopCoroutine(VibrateGenerator);
         Vector3 InitPos = transform.position;
         VibrateGenerator = Vibrate(InitPos, Amount, Duration);
-        yield return StartCoroutine(VibrateGenerator);
-        transform.position = InitPos;
+        StartCoroutine(VibrateGenerator);
     }
 
     private IEnumerator Vibrate(Vector3 InitPos, float Amount, float Duration) {
@@ -76,5 +75,6 @@ public class MainCameraController : MonoBehaviour {
             transform.position = InitPos + (Vector3)Random.insideUnitCircle * Amount;
             yield return null;
         }
+        transform.position = InitPos;
     }
 }

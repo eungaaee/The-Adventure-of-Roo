@@ -2,22 +2,25 @@ using System.Collections;
 using UnityEngine;
 
 public class FallingBlockController : MonoBehaviour {
-    public float DropSpeed = 5.5f;
-    public bool IsLoop = false;
-    Vector3 InitPos;
+    [SerializeField] private float DropSpeed = 5.5f;
+    [SerializeField] private bool IsLoop = false;
+    private Vector3 InitPos;
 
-    Rigidbody2D rigid;
-    SpriteRenderer sprRdr;
+    private Rigidbody2D rigid;
+    private SpriteRenderer sprRdr;
 
-    void Awake() {
+    private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         InitPos = transform.position;
+    }
+
+    private void Start() {
         if (IsLoop) rigid.velocity = new Vector2(0, -DropSpeed);
         else StartCoroutine(RayCheck());
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    private void OnCollisionEnter2D(Collision2D col) {
         if (IsLoop) StartCoroutine(ResetPos());
         else Destroy(gameObject);
     }

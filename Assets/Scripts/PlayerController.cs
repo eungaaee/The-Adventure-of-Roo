@@ -4,13 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public float jumpForce;
-    public float maxSpeed;
-    public int MaxJump = 2;
-    public int JumpCount = 0;
-    public int Life = 3;
+    [SerializeField] private float jumpForce = 8;
+    [SerializeField] private float maxSpeed = 5.7f;
+    private int MaxJump = 1, JumpCount = 0;
+    private int Life = 3;
     private int InitLife;
-    private bool IsKnockbacking = false;
+    private bool Controllable = true;
     private bool IsDamaging = false;
     public bool IsResetting = false;
 
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     private int currentWaypointIndex = 0;
     private bool shouldMove = false; */
 
-    public Vector2 MinPlayerBoundary, MaxPlayerBoundary;
+    [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     public Vector3 InitPos;
 
     private Rigidbody2D rigid;
@@ -41,12 +40,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         animator.SetBool("IsWalking", Mathf.Abs(rigid.velocity.x) > 0.3);
-        if (!IsKnockbacking && Input.GetButtonDown("Jump") && JumpCount != MaxJump) {
-            JumpCount += 1;
-            rigid.gravityScale = 1.5f;
-            rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            animator.SetBool("IsJumping", true);
-        }
+        if (Controllable) Jump();
         if (/* !shouldMove &&  */Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         /* if (shouldMove && waypoints.Length > 0) {
             MoveAlongPath();
@@ -86,10 +80,10 @@ public class PlayerController : MonoBehaviour {
     } */
 
     void FixedUpdate() {
-        LimitPlayerArea();
-        MovePlayer();
-        LimitPlayerSpeed();
+        if (Controllable) Move();
         Land();
+        LimitPlayerArea();
+        LimitPlayerSpeed();
     }
 
     void OnCollisionEnter2D(Collision2D col) {
@@ -110,14 +104,48 @@ public class PlayerController : MonoBehaviour {
         else if (rigid.velocity.x < -maxSpeed) rigid.velocity = new Vector2(-maxSpeed, rigid.velocity.y);
     }
 
-    private void MovePlayer() {
-        if (IsKnockbacking) return;
-
+    private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
         if (h < 0) spriteRenderer.flipX = true;
         else if (h > 0) spriteRenderer.flipX = false;
         /* if (!shouldMove)  */rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
+
+    private void Jump() {
+        if (JumpCount != MaxJump && Input.GetButtonDown("Jump")) {
+            JumpCount += 1;
+            // rigid.gravityScale = 1.5f;
+            rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            animator.SetBool("IsJumping", true);
+        }
+    }
+
+    public IEnumerator CutSceneMove(int d, float targetX) {
+        while (true) {
+            rigid.AddForce(Vector2.right * d, ForceMode2D.Impulse);
+            if ((d == 1 && transform.position.x >= targetX)
+            || (d == -1 && transform.position.x <= targetX)) {
+                rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+                rigid.position = new Vector3(targetX, transform.position.y, transform.position.z);
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public IEnumerator CutSceneJump(float force) {
+        rigid.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        animator.SetBool("IsJumping", true);
+        while (true) {
+            if (Physics2D.Raycast(rigid.position, Vector2.down, 0.6f, LayerMask.GetMask("Floor"))) {
+                animator.SetBool("IsJumping", false);
+                yield break;
+            }
+            yield return null;
+        }
+    }
+
+    public void SwitchControllable(bool _bool) { Controllable = _bool; }
 
     private void Land() {
         if (rigid.velocity.y <= 0) {
@@ -142,6 +170,7 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForSecondsRealtime(0.7f);
             yield return StartCoroutine(OffDamage());
             yield return new WaitForSecondsRealtime(0.7f);
+            yield return IsDamaging = false;
             yield return StartCoroutine(UnTransparent(2));
         } else {
             animator.SetBool("IsDead", true);
@@ -150,7 +179,6 @@ public class PlayerController : MonoBehaviour {
             yield return StartCoroutine(Revive());
             yield return StartCoroutine(UnTransparent(0));
         }
-        yield return IsDamaging = false;
     }
 
     private IEnumerator TakeDamage(Vector2 opponentPos) {
@@ -159,16 +187,16 @@ public class PlayerController : MonoBehaviour {
         int d = transform.position.x < opponentPos.x ? -1 : 1;
         rigid.AddForce(new Vector2(d, 1) * 3, ForceMode2D.Impulse);
 
-        IsKnockbacking = true;
+        Controllable = false;
         animator.SetBool("IsDamaged", true);
         
-        StartCoroutine(CameraController.Shake());
+        CameraController.Shake();
         
         yield return null;
     }
 
     private IEnumerator OffDamage() {
-        IsKnockbacking = false;
+        Controllable = true;
         JumpCount = 0;
         animator.SetBool("IsDamaged", false);
         yield return null;
@@ -188,8 +216,9 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator ResetCondition() {
         Life = InitLife;
-        IsKnockbacking = false;
+        Controllable = true;
         JumpCount = 0;
+        IsDamaging = false;
 
         animator.SetBool("IsDamaged", false);
         animator.SetBool("IsDead", false);

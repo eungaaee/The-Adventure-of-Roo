@@ -4,12 +4,12 @@ using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
 public class BreakableBlockController : MonoBehaviour {
-    public float DdakDdak = 0f;
-    public float ReGenerateInterval = 2f;
-    public bool IsVibrate = false;
-    public bool IsInteractive = false;
-    public int InteractiveTapCount = 10;
-    public bool InteractiveNoti = false;
+    [SerializeField] private float DdakDdak = 0f;
+    [SerializeField] private float ReGenerateInterval = 2f;
+    [SerializeField] private bool IsVibrate = false;
+    [SerializeField] private bool IsInteractive = false;
+    [SerializeField] private int InteractiveTapCount = 10;
+    [SerializeField] private bool InteractiveNoti = false;
     private int InitInteractiveTapCount;
     private float Malang = 0;
     private bool DetectKey = false;
@@ -21,7 +21,7 @@ public class BreakableBlockController : MonoBehaviour {
     private ParticleSystem[] Particles;
     private PlayerController Player;
 
-    void Awake() {
+    private void Awake() {
         col = GetComponent<BoxCollider2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
@@ -31,7 +31,7 @@ public class BreakableBlockController : MonoBehaviour {
         InitInteractiveTapCount = InteractiveTapCount;
     }
 
-    void Update() {
+    private void Update() {
         if (IsInteractive && DetectKey && Input.GetKeyDown(KeyCode.F)) {
             InteractiveTapCount--;
             Malang += DdakDdak / InitInteractiveTapCount;
@@ -55,7 +55,7 @@ public class BreakableBlockController : MonoBehaviour {
         if (col.gameObject.CompareTag("Player")) {
             if (!IsInteractive) Malang += Time.deltaTime;
 
-            if (IsVibrate) StartCoroutine(CameraController.Shake(Mathf.Clamp(0.025f*Malang, 0, 0.075f), 0.1f));
+            if (IsVibrate) CameraController.Shake(Mathf.Clamp(0.025f*Malang, 0, 0.075f), 0.1f);
             
             if (Malang >= DdakDdak || InteractiveTapCount <= 0) {
                 GetComponent<BoxCollider2D>().enabled = false;
