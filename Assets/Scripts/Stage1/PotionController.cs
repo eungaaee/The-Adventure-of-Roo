@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.WSA;
 
@@ -30,15 +31,15 @@ public class PotionController : MonoBehaviour {
 
     private void Update() {
         if (!PickedPotion && InBoundary && Input.GetKeyDown(KeyCode.F)) {
-            StartCoroutine(Launcher());
-            InBoundary = false;
+            // StartCoroutine(Launcher());
             PickedPotion = true;
+            InBoundary = false;
             StartCoroutine(Letterbox.ClearLetterboxText());
-            // 컷씬시작
-            CheckPointStone.GetComponent<BoxCollider2D>().enabled = true;
+            // CheckPointStone.GetComponent<BoxCollider2D>().enabled = true;
             StartCoroutine(SwitchCorruptedObjects());
+            StartCoroutine(SceneController.LoadCutScene("PotionCutScene"));
         }
-        if (PotionRigid.velocity.y < 0) PotionCollider.enabled = true;
+        // if (PotionRigid.velocity.y < 0) PotionCollider.enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {

@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public int Life = 3;
     private int InitLife;
     private bool IsKnockbacking = false;
+    private bool IsDamaging = false;
     public bool IsResetting = false;
 
     /* public Transform[] waypoints;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if (!IsKnockbacking && col.gameObject.CompareTag("monster")|| col.gameObject.CompareTag("obstacle")) {
+        if (!IsDamaging && (col.gameObject.CompareTag("monster") || col.gameObject.CompareTag("obstacle"))) {
             StartCoroutine(Damaged(col.transform.position));
         }
     }
@@ -120,8 +121,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Land() {
         if (rigid.velocity.y <= 0) {
-            Debug.DrawRay(rigid.position, Vector2.down, new Color(0, 1, 0));
-            RaycastHit2D hitData = Physics2D.Raycast(rigid.position, Vector2.down, 1f, LayerMask.GetMask("Floor"));
+            Debug.DrawRay(rigid.position, Vector2.down*0.6f, new Color(0, 1, 0));
+            RaycastHit2D hitData = Physics2D.Raycast(rigid.position, Vector2.down, 0.6f, LayerMask.GetMask("Floor"));
             if (hitData.collider != null) {
                 animator.SetBool("IsJumping", false);
                 JumpCount = 0;
@@ -134,18 +135,22 @@ public class PlayerController : MonoBehaviour {
     }
 
     private IEnumerator Damaged(Vector2 opponentPos) {
+        yield return IsDamaging = true;
         yield return StartCoroutine(TakeDamage(opponentPos));
         if (Life > 0) {
-            yield return StartCoroutine(Transparent());
+            yield return StartCoroutine(Transparent(2));
             yield return new WaitForSecondsRealtime(0.7f);
             yield return StartCoroutine(OffDamage());
             yield return new WaitForSecondsRealtime(0.7f);
-            yield return StartCoroutine(UnTransparent());
+            yield return StartCoroutine(UnTransparent(2));
         } else {
             animator.SetBool("IsDead", true);
+            yield return StartCoroutine(Transparent(0));
             yield return new WaitForSecondsRealtime(1.5f);
-            StartCoroutine(Revive());
+            yield return StartCoroutine(Revive());
+            yield return StartCoroutine(UnTransparent(0));
         }
+        yield return IsDamaging = false;
     }
 
     private IEnumerator TakeDamage(Vector2 opponentPos) {
@@ -169,15 +174,15 @@ public class PlayerController : MonoBehaviour {
         yield return null;
     }
 
-    private IEnumerator Transparent() {
-        gameObject.layer = 10;
-        spriteRenderer.color = new Color (1, 1, 1, 0.5f);
+    private IEnumerator Transparent(int PhysicsOrColor = 2) {
+        if (PhysicsOrColor == 0 || PhysicsOrColor == 2) gameObject.layer = 10;
+        if (PhysicsOrColor == 1 || PhysicsOrColor == 2) spriteRenderer.color = new Color (1, 1, 1, 0.5f);
         yield return null;
     }
 
-    private IEnumerator UnTransparent() {
-        gameObject.layer = 9;
-        spriteRenderer.color = new Color(1, 1, 1, 1);
+    private IEnumerator UnTransparent(int PhysicsOrColor = 2) {
+        if (PhysicsOrColor == 0 || PhysicsOrColor == 2) gameObject.layer = 9;
+        if (PhysicsOrColor == 1 || PhysicsOrColor == 2) spriteRenderer.color = new Color(1, 1, 1, 1);
         yield return null;
     }
 
