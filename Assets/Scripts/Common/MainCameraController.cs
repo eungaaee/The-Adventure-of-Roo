@@ -44,11 +44,26 @@ public class MainCameraController : MonoBehaviour {
         StartCoroutine(MonoScope);
     }
 
+    public void Zoom(float ZoomAmount, float ZoomDuration) {
+        if (MonoScope != null) StopCoroutine(MonoScope);
+        MonoScope = Scope(DefaultZoomSize-ZoomAmount, ZoomDuration);
+        StartCoroutine(MonoScope);
+    }
+
     public void CancelZoom(GameObject ZoomBoundary) {
         MinCameraBoundary = InitMinCameraBoundary;
         MaxCameraBoundary = InitMaxCameraBoundary;
 
         float CancelDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+
+        if (MonoScope != null) StopCoroutine(MonoScope);
+        MonoScope = Scope(DefaultZoomSize, CancelDuration);
+        StartCoroutine(MonoScope);
+    }
+
+    public void CancelZoom(float CancelDuration) {
+        MinCameraBoundary = InitMinCameraBoundary;
+        MaxCameraBoundary = InitMaxCameraBoundary;
 
         if (MonoScope != null) StopCoroutine(MonoScope);
         MonoScope = Scope(DefaultZoomSize, CancelDuration);

@@ -46284,6 +46284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 122049401}
   Potion: {fileID: 7816456891286302956, guid: 907fa9dd46a8cff4499164e8faf3ada0, type: 3}
+  CameraController: {fileID: 0}
 --- !u!1 &1661542377
 GameObject:
   m_ObjectHideFlags: 0

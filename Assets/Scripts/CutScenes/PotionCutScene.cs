@@ -6,11 +6,13 @@ using UnityEngine.Playables;
 public class PotionCutScene : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private GameObject Potion;
+    private MainCameraController CameraController;
     private SpriteRenderer spriteRenderer, PlayerSpriteRenderer;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerSpriteRenderer = Player.GetComponent<SpriteRenderer>();
+        CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
     }
 
     public IEnumerator StartCutScene() {
@@ -23,6 +25,9 @@ public class PotionCutScene : MonoBehaviour {
         yield return PlayerSpriteRenderer.flipX = !PlayerSpriteRenderer.flipX;
         spriteRenderer.sortingOrder = 10;
 
+        // 줌
+        CameraController.Zoom(4, 1);
+
         // 우물로 뛰어들기
         yield return new WaitForSeconds(1);
         StartCoroutine(Player.CutSceneJump(7));
@@ -34,6 +39,9 @@ public class PotionCutScene : MonoBehaviour {
         StartCoroutine(Player.CutSceneJump(7));
         yield return StartCoroutine(Player.CutSceneMove(-1*d, 117));
         Player.SwitchControllable(true);
+
+        // 줌 취소
+        CameraController.Zoom(3, 1);
 
         // 컷씬 종료
         spriteRenderer.sortingOrder = 6;
