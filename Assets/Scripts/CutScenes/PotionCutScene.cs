@@ -20,9 +20,8 @@ public class PotionCutScene : MonoBehaviour {
 
     public IEnumerator StartCutScene() {
         // 우물로 뛰어들 위치로 이동
-        int d = Player.transform.position.x < transform.position.x ? 1 : -1;
         yield return new WaitForFixedUpdate();
-        yield return StartCoroutine(Player.CutSceneMove(d, 123));
+        yield return StartCoroutine(Player.CutSceneMove(123));
 
         // 루 방향 반전, 우물 레이어 맨 위로
         yield return new WaitForSeconds(1);
@@ -35,7 +34,7 @@ public class PotionCutScene : MonoBehaviour {
         // 우물로 뛰어들기
         yield return new WaitForSeconds(1);
         StartCoroutine(Player.CutSceneJump(7));
-        yield return StartCoroutine(Player.CutSceneMove(-1*d, 120));
+        yield return StartCoroutine(Player.CutSceneMove(120));
 
         // 물약과 함께 우물에서 나오기
         yield return new WaitForSeconds(2);
@@ -45,26 +44,24 @@ public class PotionCutScene : MonoBehaviour {
         yield return new WaitForSeconds(2);
         GetComponent<PotionController>().InstantiatePotion();
         StartCoroutine(Player.CutSceneJump(7.5f));
-        yield return StartCoroutine(Player.CutSceneMove(-1*d, 118));
+        yield return StartCoroutine(Player.CutSceneMove(117));
 
         // 크게 보여주기
         yield return new WaitForSeconds(2);
-        CameraController.Zoom(2, 1, new Vector2(118, -5));
+        CameraController.Zoom(2, 1, new Vector2(117, -5));
 
         // 줌 취소 및 우물 레이어 원래대로
         yield return new WaitForSeconds(3);
         CameraController.CancelZoom(2);
+        Letterbox.LetterboxOn(100);
         spriteRenderer.sortingOrder = 6;
-
-        // 비석쪽으로 조금 이동
-        yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Player.CutSceneMove(-1*d, 117));
 
         // 비석 보여주기
         yield return new WaitForSeconds(2);
         CameraController.Zoom(2, 1, new Vector2(114, -5));
+        Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);
-        StartCoroutine(Letterbox.SetLetterboxText("[A]/[←] 비석 살펴보기", 1));
+        StartCoroutine(Letterbox.SetBottomLetterboxText("[A]/[←] 비석 살펴보기"));
 
         // 이동 제한 해제, 카메라에 가두기
         yield return new WaitForSeconds(1);
@@ -78,5 +75,7 @@ public class PotionCutScene : MonoBehaviour {
         }
         Player.UnbindToCamera();
         CameraController.CancelZoom(2);
+        yield return new WaitForSeconds(1);
+        Letterbox.LetterboxOn(200);
     }
-}
+}   

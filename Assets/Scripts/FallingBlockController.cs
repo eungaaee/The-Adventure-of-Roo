@@ -28,7 +28,7 @@ public class FallingBlockController : MonoBehaviour {
     private IEnumerator ResetPos() {
         sprRdr.color = new Color(1, 1, 1, 0);
         transform.position = InitPos;
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(1.5f);
         sprRdr.color = new Color(1, 1, 1, 1);
         rigid.velocity = new Vector2(0, -DropSpeed);
     }

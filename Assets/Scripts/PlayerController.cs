@@ -126,7 +126,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public IEnumerator CutSceneMove(int d, float targetX) {
+    public IEnumerator CutSceneMove(float targetX) {
+        int d = rigid.position.x < targetX ? 1 : -1;
         while (true) {
             rigid.AddForce(Vector2.right * d, ForceMode2D.Impulse);
             if ((d == 1 && transform.position.x >= targetX)
@@ -183,15 +184,15 @@ public class PlayerController : MonoBehaviour {
         yield return StartCoroutine(TakeDamage(opponentPos));
         if (Life > 0) {
             yield return StartCoroutine(Transparent(2));
-            yield return new WaitForSecondsRealtime(0.7f);
+            yield return new WaitForSeconds(0.7f);
             yield return StartCoroutine(OffDamage());
-            yield return new WaitForSecondsRealtime(0.7f);
+            yield return new WaitForSeconds(0.7f);
             yield return IsDamaging = false;
             yield return StartCoroutine(UnTransparent(2));
         } else {
             animator.SetBool("IsDead", true);
             yield return StartCoroutine(Transparent(0));
-            yield return new WaitForSecondsRealtime(1.5f);
+            yield return new WaitForSeconds(1.5f);
             yield return StartCoroutine(Revive());
             yield return StartCoroutine(UnTransparent(0));
         }
@@ -249,7 +250,7 @@ public class PlayerController : MonoBehaviour {
         yield return IsResetting = true;
         yield return StartCoroutine(ResetCondition());
         yield return IsResetting = false;
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
     }
 }

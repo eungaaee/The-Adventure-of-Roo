@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour {
     private bool InBoundary = false;
-    private float PressDuration = 0f;
+    private const float PressDuration = 2f;
     public bool IsSaved = false;
     private bool InitIsLetterboxOn;
+    private float PressedTime = 0, PressedProportion = 0;
 
     private SpriteRenderer GlowRenderer;
     private LetterboxController Letterbox;
@@ -24,14 +25,16 @@ public class CheckpointManager : MonoBehaviour {
     private void Update() {
         if (!IsSaved & InBoundary) {
             if (Input.GetKey(KeyCode.Return)) {
-                PressDuration += Time.deltaTime;
-                if (PressDuration > 2f) {
+                PressedTime += Time.deltaTime;
+                if (PressedTime >= PressDuration) {
                     StartCoroutine(Glow());
                     StartCoroutine(Save());
                 }
-            } else if (PressDuration > 0) {
-                PressDuration -= Time.deltaTime;
-            }
+            } else if (PressedTime > 0) PressedTime -= Time.deltaTime;
+
+            PressedProportion = Mathf.Floor(PressedTime/PressDuration*100)/100;
+            if (PressedProportion > 0) Letterbox.EditTopLetterboxText($"[ {PressedProportion*100}% ]");
+            else Letterbox.EditTopLetterboxText("");
         }
     }
 
@@ -40,7 +43,8 @@ public class CheckpointManager : MonoBehaviour {
             InBoundary = true;
             InitIsLetterboxOn = Letterbox.IsLetterboxOn;
             if (!InitIsLetterboxOn) Letterbox.LetterboxOn();
-            StartCoroutine(Letterbox.SetLetterboxText("[Enter] 길게 눌러서 저장하기", 1));
+            StartCoroutine(Letterbox.SetBottomLetterboxText("[Enter] 길게 눌러서 저장하기"));
+            StartCoroutine(Letterbox.SetTopLetterboxText(""));
         }
     }
 
@@ -48,7 +52,8 @@ public class CheckpointManager : MonoBehaviour {
         if (!IsSaved & col.gameObject.CompareTag("Player")) {
             InBoundary = false;
             if (!InitIsLetterboxOn) Letterbox.LetterboxOff();
-            StartCoroutine(Letterbox.ClearLetterboxText(1));
+            StartCoroutine(Letterbox.ClearTopLetterboxText());
+            StartCoroutine(Letterbox.ClearBottomLetterboxText());
         }
     }
 
@@ -65,9 +70,9 @@ public class CheckpointManager : MonoBehaviour {
         IsSaved = true;
         Player.InitPos = transform.position + new Vector3(0, 0.5f, 0);
         StartCoroutine(Player.ResetCondition());
-        yield return StartCoroutine(Letterbox.ClearLetterboxText(1));
-        yield return StartCoroutine(Letterbox.SetLetterboxText("진행도 저장 완료", 0));
-        yield return new WaitForSecondsRealtime(3f);
-        yield return StartCoroutine(Letterbox.ClearLetterboxText(0));
+        yield return StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        yield return StartCoroutine(Letterbox.SetTopLetterboxText("진행도 저장 완료"));
+        yield return new WaitForSeconds(3f);
+        yield return StartCoroutine(Letterbox.ClearTopLetterboxText());
     }
 }

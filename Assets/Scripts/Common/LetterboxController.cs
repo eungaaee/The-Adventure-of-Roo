@@ -11,7 +11,7 @@ public class LetterboxController : MonoBehaviour {
     private TextMeshProUGUI TopTextObj, BottomTextObj;
 
     private IEnumerator MonoEye;
-    private IEnumerator Writer;
+    private IEnumerator Writer1, Writer2;
 
     private void Awake() {
         Top = transform.Find("Top").gameObject.GetComponent<RectTransform>();
@@ -20,56 +20,68 @@ public class LetterboxController : MonoBehaviour {
         BottomTextObj = Bottom.transform.Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
-    public void LetterboxOn() {
+
+    public void LetterboxOn(int targetSize = 200) {
         IsLetterboxOn = true;
         if (MonoEye != null) StopCoroutine(MonoEye);
-        MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 200));
+        MonoEye = EyeBlinker(new Vector2(Top.sizeDelta.x, targetSize));
         StartCoroutine(MonoEye);
     }
 
     public void LetterboxOff() {
         if (MonoEye != null) StopCoroutine(MonoEye);
-        MonoEye = EyeBlinker(Top.sizeDelta, new Vector2(Top.sizeDelta.x, 0));
+        MonoEye = EyeBlinker(new Vector2(Top.sizeDelta.x, 0));
         StartCoroutine(MonoEye);
         IsLetterboxOn = false;
     }
 
-    private IEnumerator EyeBlinker(Vector2 size, Vector2 targetSize) {
+    private IEnumerator EyeBlinker(Vector2 targetSize) {
+        Vector2 initSize = Top.sizeDelta;
         for (float t = 0; t <= Duration; t += Time.deltaTime) {
-            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(size, targetSize, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
+            Top.sizeDelta = Bottom.sizeDelta = Vector2.Lerp(initSize, targetSize, Mathf.Sin(0.5f*Mathf.PI * t/Duration));
             yield return null;
         }
     }
 
-    public IEnumerator SetLetterboxText(string Text, int TopOrBottom = 1, float Duration = 0.5f) {
-        TextMeshProUGUI TextObj;
-        if (TopOrBottom == 0) TextObj = TopTextObj;
-        else TextObj = BottomTextObj;
 
-        if (Writer != null) StopCoroutine(Writer);
-        if (TextObj.text != "") {
-            Duration = 0.25f;
-            Writer = ClearLetterboxText(TopOrBottom, Duration);
-            yield return Writer;
+    public IEnumerator SetTopLetterboxText(string Text, float Duration = 0.5f) {
+        if (Writer1 != null) StopCoroutine(Writer1);
+        if (TopTextObj.text != "") {
+            Duration /= 2;
+            Writer1 = ClearTopLetterboxText(Duration);
         }
-        Writer = Write(TextObj, Text, Vector2.zero, false, Duration);
-        yield return StartCoroutine(Writer);
+        Writer1 = Write(TopTextObj, Text, Vector2.zero, false, Duration);
+        yield return StartCoroutine(Writer1);
     }
 
-    public IEnumerator ClearLetterboxText(int TopOrBottom = 1, float Duration = 0.5f) {
-        TextMeshProUGUI TextObj;
-        Vector2 TargetPos;
-        if (TopOrBottom == 0) {
-            TextObj = TopTextObj;
-            TargetPos = new Vector2(0, 100);
-        } else {
-            TextObj = BottomTextObj;
-            TargetPos = new Vector2(0, -100);
+    public IEnumerator SetBottomLetterboxText(string Text, float Duration = 0.5f) {
+        if (Writer2 != null) StopCoroutine(Writer2);
+        if (BottomTextObj.text != "") {
+            Duration /= 2;
+            Writer2 = ClearBottomLetterboxText(Duration);
         }
+        Writer2 = Write(BottomTextObj, Text, Vector2.zero, false, Duration);
+        yield return StartCoroutine(Writer2);
+    }
 
-        if (Writer != null) StopCoroutine(Writer);
-        Writer = Write(TextObj, "", TargetPos, true, Duration);
-        yield return StartCoroutine(Writer);
+    public void EditTopLetterboxText(string Text) {
+        TopTextObj.text = Text;
+    }
+
+    public void EditBottomLetterboxText(string Text) {
+        BottomTextObj.text = Text;
+    }
+
+    public IEnumerator ClearTopLetterboxText(float Duration = 0.5f) {
+        if (Writer1 != null) StopCoroutine(Writer1);
+        Writer1 = Write(TopTextObj, "", new Vector2(0, 100), true, Duration);
+        yield return StartCoroutine(Writer1);
+    }
+
+    public IEnumerator ClearBottomLetterboxText(float Duration = 0.5f) {
+        if (Writer2 != null) StopCoroutine(Writer2);
+        Writer2 = Write(BottomTextObj, "", new Vector2(0, -100), true, Duration);
+        yield return StartCoroutine(Writer2);
     }
 
     private IEnumerator Write(TextMeshProUGUI TextObj, string Text, Vector2 TargetPos, bool IsErase, float Duration) {

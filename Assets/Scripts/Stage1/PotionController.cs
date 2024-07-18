@@ -29,7 +29,7 @@ public class PotionController : MonoBehaviour {
             InBoundary = false;
             Player.SwitchControllable(false);
 
-            StartCoroutine(Letterbox.ClearLetterboxText());
+            StartCoroutine(Letterbox.ClearBottomLetterboxText());
             CheckPointStone.GetComponent<BoxCollider2D>().enabled = true;
             StartCoroutine(SwitchCorruptedObjects());
 
@@ -44,14 +44,14 @@ public class PotionController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = true;
-            StartCoroutine(Letterbox.SetLetterboxText("[F] 물약 꺼내기", 1));
+            StartCoroutine(Letterbox.SetBottomLetterboxText("[F] 물약 꺼내기"));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = false;
-            StartCoroutine(Letterbox.ClearLetterboxText(1));
+            StartCoroutine(Letterbox.ClearBottomLetterboxText());
         }
     }
 
