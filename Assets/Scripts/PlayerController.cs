@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private bool shouldMove = false; */
 
     [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
+    private Vector2 InitMinPlayerBoundary, InitMaxPlayerBoundary;
     public Vector3 InitPos;
 
     private Rigidbody2D rigid;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour {
 
         InitLife = Life;
         InitPos = new Vector3(-86, -3.4f, 1);
+        InitMinPlayerBoundary = MinPlayerBoundary;
+        InitMaxPlayerBoundary = MaxPlayerBoundary;
     }
 
     void Update() {
@@ -149,6 +152,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void SwitchControllable(bool _bool) { Controllable = _bool; }
+
+    public void BindToCamera() {
+        MinPlayerBoundary.x = CameraController.MinCameraBoundary.x - Camera.main.orthographicSize*Camera.main.aspect;
+        MaxPlayerBoundary.x = CameraController.MaxCameraBoundary.x + Camera.main.orthographicSize*Camera.main.aspect;
+    }
+
+    public void UnbindToCamera() {
+        MinPlayerBoundary = InitMinPlayerBoundary;
+        MaxPlayerBoundary = InitMaxPlayerBoundary;
+    }
 
     private void Land() {
         if (rigid.velocity.y <= 0) {

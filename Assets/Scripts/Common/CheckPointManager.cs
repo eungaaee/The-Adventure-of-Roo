@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CheckPointManager : MonoBehaviour {
+public class CheckpointManager : MonoBehaviour {
     private bool InBoundary = false;
     private float PressDuration = 0f;
-    private bool IsSaved = false;
+    public bool IsSaved = false;
     private bool InitIsLetterboxOn;
 
     private SpriteRenderer GlowRenderer;

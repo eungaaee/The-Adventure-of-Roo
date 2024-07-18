@@ -8650,6 +8650,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &377986650 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3006386871062641476, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
+  m_PrefabInstance: {fileID: 3643973971339960045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ba4ebde607e5f449b3f33985024b5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &381485244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2138073836060382520, guid: c73ca77889fb22b4b8aa022d06cb419f, type: 3}
@@ -46284,6 +46295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 122049401}
   Potion: {fileID: 7816456891286302956, guid: 907fa9dd46a8cff4499164e8faf3ada0, type: 3}
+  Checkpoint: {fileID: 377986650}
 --- !u!1 &1661542377
 GameObject:
   m_ObjectHideFlags: 0
@@ -56649,7 +56661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073176908909510298, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 114.21
+      value: 112.5
       objectReference: {fileID: 0}
     - target: {fileID: 4073176908909510298, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_LocalPosition.y

@@ -6,13 +6,16 @@ using UnityEngine.Playables;
 public class PotionCutScene : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private GameObject Potion;
+    [SerializeField] private CheckpointManager Checkpoint;
     private MainCameraController CameraController;
+    private LetterboxController Letterbox;
     private SpriteRenderer spriteRenderer, PlayerSpriteRenderer;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerSpriteRenderer = Player.GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
+        Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
     }
 
     public IEnumerator StartCutScene() {
@@ -32,7 +35,7 @@ public class PotionCutScene : MonoBehaviour {
         // 우물로 뛰어들기
         yield return new WaitForSeconds(1);
         StartCoroutine(Player.CutSceneJump(7));
-        StartCoroutine(Player.CutSceneMove(-1*d, 120));
+        yield return StartCoroutine(Player.CutSceneMove(-1*d, 120));
 
         // 물약과 함께 우물에서 나오기
         yield return new WaitForSeconds(2);
@@ -42,21 +45,38 @@ public class PotionCutScene : MonoBehaviour {
         yield return new WaitForSeconds(2);
         GetComponent<PotionController>().InstantiatePotion();
         StartCoroutine(Player.CutSceneJump(7.5f));
-        yield return StartCoroutine(Player.CutSceneMove(-1*d, 117));
+        yield return StartCoroutine(Player.CutSceneMove(-1*d, 118));
 
         // 크게 보여주기
         yield return new WaitForSeconds(2);
-        CameraController.Zoom(2, 1, new Vector2(117, -5));
+        CameraController.Zoom(2, 1, new Vector2(118, -5));
 
-        // 줌 취소
+        // 줌 취소 및 우물 레이어 원래대로
         yield return new WaitForSeconds(3);
         CameraController.CancelZoom(2);
-        // 컷씬 종료
         spriteRenderer.sortingOrder = 6;
 
-        // 이동 제한 해제
-        yield return new WaitForSeconds(3);
-        Player.SwitchControllable(true);
+        // 비석쪽으로 조금 이동
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(Player.CutSceneMove(-1*d, 117));
 
+        // 비석 보여주기
+        yield return new WaitForSeconds(2);
+        CameraController.Zoom(2, 1, new Vector2(114, -5));
+        yield return new WaitForSeconds(1);
+        StartCoroutine(Letterbox.SetLetterboxText("[A]/[←] 비석 살펴보기", 1));
+
+        // 이동 제한 해제, 카메라에 가두기
+        yield return new WaitForSeconds(1);
+        Player.SwitchControllable(true);
+        Player.BindToCamera();
+        
+        // 저장 했는지 확인하기
+        while (true) {
+            if (Checkpoint.IsSaved) break;
+            yield return null;
+        }
+        Player.UnbindToCamera();
+        CameraController.CancelZoom(2);
     }
 }
