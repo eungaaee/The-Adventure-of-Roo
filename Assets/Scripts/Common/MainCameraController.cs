@@ -9,9 +9,10 @@ public class MainCameraController : MonoBehaviour {
     public LetterboxController Letterbox;
     public Vector2 MinCameraBoundary, MaxCameraBoundary;
     private Vector2 InitMinCameraBoundary, InitMaxCameraBoundary;
+    private Vector2 CurMinCameraBoundary, CurMaxCameraBoundary;
     private float FollowSpeed = 2.5f;
     private const float ShakeAmount = 0.25f, ShakeDuration = 0.25f;
-    private float DefaultZoomSize;
+    private float DefaultZoomSize, CurZoomAmount;
 
     private IEnumerator MonoScope;
     private IEnumerator VibrateGenerator;
@@ -32,41 +33,60 @@ public class MainCameraController : MonoBehaviour {
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * FollowSpeed);
     }
 
+    // Zoom with ZoomBoundary
     public void Zoom(GameObject ZoomBoundary) {
         MinCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MinZoomedCameraBoundary");
         MaxCameraBoundary = (Vector2)Variables.Object(ZoomBoundary).Get("MaxZoomedCameraBoundary");
 
-        float ZoomAmount = (float)Variables.Object(ZoomBoundary).Get("ZoomAmount");
-        float ZoomDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+        float Amount = (float)Variables.Object(ZoomBoundary).Get("ZoomAmount");
+        float Duration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+
+        // for Cancel Instant Zoom
+        CurMinCameraBoundary = MinCameraBoundary;
+        CurMaxCameraBoundary = MaxCameraBoundary;
+        CurZoomAmount = Amount;
 
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(DefaultZoomSize-ZoomAmount, ZoomDuration);
+        MonoScope = Scope(DefaultZoomSize-Amount, Duration);
         StartCoroutine(MonoScope);
     }
 
-    public void Zoom(float ZoomAmount, float ZoomDuration) {
+    // Instant Zoom
+    public void Zoom(float Amount, float Duration) {
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(DefaultZoomSize-ZoomAmount, ZoomDuration);
+        MonoScope = Scope(DefaultZoomSize-CurZoomAmount-Amount, Duration);
         StartCoroutine(MonoScope);
     }
 
+    // Instant Zoom with CameraPosition
+    public void Zoom(float Amount, float Duration, Vector2 CameraPosition) {
+        MinCameraBoundary = CameraPosition;
+        MaxCameraBoundary = CameraPosition;
+
+        if (MonoScope != null) StopCoroutine(MonoScope);
+        MonoScope = Scope(DefaultZoomSize-CurZoomAmount-Amount, Duration);
+        StartCoroutine(MonoScope);
+    }
+
+    // Cancel Zoom with ZoomBoundary
     public void CancelZoom(GameObject ZoomBoundary) {
         MinCameraBoundary = InitMinCameraBoundary;
         MaxCameraBoundary = InitMaxCameraBoundary;
 
-        float CancelDuration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
+        float Duration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
 
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(DefaultZoomSize, CancelDuration);
+        MonoScope = Scope(DefaultZoomSize, Duration);
         StartCoroutine(MonoScope);
     }
 
-    public void CancelZoom(float CancelDuration) {
-        MinCameraBoundary = InitMinCameraBoundary;
-        MaxCameraBoundary = InitMaxCameraBoundary;
+    // Cancel Instant Zoom
+    public void CancelZoom(float Duration) {
+        MinCameraBoundary = CurMinCameraBoundary;
+        MaxCameraBoundary = CurMaxCameraBoundary;
 
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(DefaultZoomSize, CancelDuration);
+        MonoScope = Scope(DefaultZoomSize-CurZoomAmount, Duration);
         StartCoroutine(MonoScope);
     }
 

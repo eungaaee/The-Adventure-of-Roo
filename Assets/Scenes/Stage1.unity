@@ -1076,7 +1076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &91732505
 Transform:
   m_ObjectHideFlags: 0
@@ -9881,7 +9881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5022981776384411677, guid: 68896f3d54c6b2c418ad8e48f4a50f9f, type: 3}
       propertyPath: DdakDdak
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7648464178766727698, guid: 68896f3d54c6b2c418ad8e48f4a50f9f, type: 3}
       propertyPath: m_Name
@@ -46284,7 +46284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 122049401}
   Potion: {fileID: 7816456891286302956, guid: 907fa9dd46a8cff4499164e8faf3ada0, type: 3}
-  CameraController: {fileID: 0}
 --- !u!1 &1661542377
 GameObject:
   m_ObjectHideFlags: 0
@@ -56621,6 +56620,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BreakableBlock2
       objectReference: {fileID: 0}
+    - target: {fileID: 4425930008827249917, guid: 7225b9160cb402f458fb78d06ecb6cb4, type: 3}
+      propertyPath: DdakDdak
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -56650,7 +56653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073176908909510298, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.73
+      value: -5.7
       objectReference: {fileID: 0}
     - target: {fileID: 4073176908909510298, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_LocalPosition.z

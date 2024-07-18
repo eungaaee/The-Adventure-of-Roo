@@ -39,12 +39,17 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+        if (rigid.velocity.x < 0) spriteRenderer.flipX = true;
+        else if (rigid.velocity.x > 0) spriteRenderer.flipX = false;
         animator.SetBool("IsWalking", Mathf.Abs(rigid.velocity.x) > 0.3);
-        if (Controllable) Jump();
-        if (/* !shouldMove &&  */Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-        /* if (shouldMove && waypoints.Length > 0) {
-            MoveAlongPath();
-        } */
+
+        if (Controllable) {
+            Jump();
+            if (/* !shouldMove &&  */Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+            /* if (shouldMove && waypoints.Length > 0) {
+                MoveAlongPath();
+            } */
+        }
     }
 
     /* private void MoveAlongPath() {
@@ -106,8 +111,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
-        if (h < 0) spriteRenderer.flipX = true;
-        else if (h > 0) spriteRenderer.flipX = false;
         /* if (!shouldMove)  */rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
 
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour {
                 animator.SetBool("IsJumping", false);
                 yield break;
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
