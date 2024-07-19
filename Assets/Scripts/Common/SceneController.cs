@@ -24,9 +24,8 @@ public class SceneController : MonoBehaviour {
         FadeImage.color = new Color(0, 0, 0, 1);
     }
     
-    public IEnumerator LoadCutScene(string sceneName) {
+    public void LoadCutScene(string sceneName) {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        yield return null;
     }
 
     public IEnumerator LoadScene(string sceneName) {

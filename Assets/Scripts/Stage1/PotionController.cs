@@ -3,7 +3,6 @@ using System.Collections;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class PotionController : MonoBehaviour {
     private bool InBoundary = false;
@@ -27,13 +26,12 @@ public class PotionController : MonoBehaviour {
         if (!PickedPotion && InBoundary && Input.GetKeyDown(KeyCode.F)) {
             PickedPotion = true;
             InBoundary = false;
-            Player.SwitchControllable(false);
 
             StartCoroutine(Letterbox.ClearBottomLetterboxText());
             CheckPointStone.GetComponent<BoxCollider2D>().enabled = true;
             StartCoroutine(SwitchCorruptedObjects());
 
-            StartCoroutine(GetComponent<PotionCutScene>().StartCutScene());
+            StartCoroutine(GetComponent<PotionCutscene>().StartCutscene());
         }
         if (PickedPotion & isPotionEnabled) {
             if (PlayerSpriteRenderer.flipX) HierarchyPotion.transform.localPosition = new Vector3(0.25f, -0.1f, 1);

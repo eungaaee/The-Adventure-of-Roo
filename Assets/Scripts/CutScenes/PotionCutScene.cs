@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class PotionCutScene : MonoBehaviour {
+public class PotionCutscene : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private GameObject Potion;
     [SerializeField] private CheckpointManager Checkpoint;
@@ -18,9 +18,11 @@ public class PotionCutScene : MonoBehaviour {
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
     }
 
-    public IEnumerator StartCutScene() {
+    public IEnumerator StartCutscene() {
         // 우물로 뛰어들 위치로 이동
         yield return new WaitForFixedUpdate();
+        Player.SwitchControllable(false);
+        Player.SetSpeed(4);
         yield return StartCoroutine(Player.CutSceneMove(123));
 
         // 루 방향 반전, 우물 레이어 맨 위로
@@ -61,6 +63,7 @@ public class PotionCutScene : MonoBehaviour {
         CameraController.Zoom(2, 1, new Vector2(114, -5));
         Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);
+        Player.SetSpeed(2);
         StartCoroutine(Letterbox.SetBottomLetterboxText("[A]/[←] 비석 살펴보기"));
 
         // 이동 제한 해제, 카메라에 가두기
@@ -73,6 +76,7 @@ public class PotionCutScene : MonoBehaviour {
             if (Checkpoint.IsSaved) break;
             yield return null;
         }
+        Player.ResetSpeed();
         Player.UnbindToCamera();
         CameraController.CancelZoom(2);
         yield return new WaitForSeconds(1);

@@ -20,7 +20,8 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     private Vector2 InitMinPlayerBoundary, InitMaxPlayerBoundary;
-    public Vector3 InitPos;
+    private Vector3 DefaultPos;
+    private float DefaultMaxSpeed;
 
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour {
     private MainCameraController CameraController;
     private SceneController SceneController;
 
-    void Awake() {
+    private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -36,12 +37,13 @@ public class PlayerController : MonoBehaviour {
         SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
 
         InitLife = Life;
-        InitPos = new Vector3(-86, -3.4f, 1);
+        DefaultPos = new Vector3(-86, -3.4f, 1);
+        DefaultMaxSpeed = maxSpeed;
         InitMinPlayerBoundary = MinPlayerBoundary;
         InitMaxPlayerBoundary = MaxPlayerBoundary;
     }
 
-    void Update() {
+    private void Update() {
         if (rigid.velocity.x < 0) spriteRenderer.flipX = true;
         else if (rigid.velocity.x > 0) spriteRenderer.flipX = false;
         animator.SetBool("IsWalking", Mathf.Abs(rigid.velocity.x) > 0.3);
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour {
         LimitPlayerSpeed();
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnCollisionStay2D(Collision2D col) {
         if (!IsDamaging && (col.gameObject.CompareTag("monster") || col.gameObject.CompareTag("obstacle"))) {
             StartCoroutine(Damaged(col.transform.position));
         }
@@ -114,7 +116,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
-        /* if (!shouldMove)  */rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
+        /* if (!shouldMove)  */
+        rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
 
     private void Jump() {
@@ -140,6 +143,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    // overload for instantly adjust speed
+    public IEnumerator CutSceneMove(float targetX, float speed) {
+        SetSpeed(speed);
+        int d = rigid.position.x < targetX ? 1 : -1;
+        while (true) {
+            rigid.AddForce(Vector2.right * d, ForceMode2D.Impulse);
+            if ((d == 1 && transform.position.x >= targetX)
+            || (d == -1 && transform.position.x <= targetX)) {
+                rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+                rigid.position = new Vector3(targetX, transform.position.y, transform.position.z);
+                ResetSpeed();
+                yield break;
+            }
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
     public IEnumerator CutSceneJump(float force) {
         rigid.AddForce(Vector2.up * force, ForceMode2D.Impulse);
         animator.SetBool("IsJumping", true);
@@ -151,6 +171,9 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
     }
+
+    public void SetSpeed(float speed) { maxSpeed = speed; }
+    public void ResetSpeed() { maxSpeed = DefaultMaxSpeed; }
 
     public void SwitchControllable(bool _bool) { Controllable = _bool; }
 
@@ -171,10 +194,10 @@ public class PlayerController : MonoBehaviour {
             if (hitData.collider != null) {
                 animator.SetBool("IsJumping", false);
                 JumpCount = 0;
-                if (hitData.transform.CompareTag("verticalBlock"))
+                /* if (hitData.transform.CompareTag("verticalBlock"))
                     transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 1.5f);
                 else if (hitData.transform.CompareTag("horizontalBlock"))
-                    transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 5f);
+                    transform.position = Vector3.MoveTowards(transform.position, hitData.transform.position, Time.deltaTime * 5f); */
             }
         }
     }
@@ -206,9 +229,9 @@ public class PlayerController : MonoBehaviour {
 
         Controllable = false;
         animator.SetBool("IsDamaged", true);
-        
+
         CameraController.Shake();
-        
+
         yield return null;
     }
 
@@ -221,7 +244,7 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Transparent(int PhysicsOrColor = 2) {
         if (PhysicsOrColor == 0 || PhysicsOrColor == 2) gameObject.layer = 10;
-        if (PhysicsOrColor == 1 || PhysicsOrColor == 2) spriteRenderer.color = new Color (1, 1, 1, 0.5f);
+        if (PhysicsOrColor == 1 || PhysicsOrColor == 2) spriteRenderer.color = new Color(1, 1, 1, 0.5f);
         yield return null;
     }
 
@@ -246,11 +269,13 @@ public class PlayerController : MonoBehaviour {
 
     private IEnumerator Revive() {
         yield return StartCoroutine(SceneController.FadeOut());
-        yield return transform.position = InitPos;
+        yield return transform.position = DefaultPos;
         yield return IsResetting = true;
         yield return StartCoroutine(ResetCondition());
         yield return IsResetting = false;
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
     }
+
+    public void SetDefaultPos(Vector3 pos) { DefaultPos = pos; }
 }
