@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6243097553402996297}
   - component: {fileID: 3315802098365872830}
   - component: {fileID: -9177723641287595166}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: PoisonWater
   m_TagString: monster
   m_Icon: {fileID: 0}
