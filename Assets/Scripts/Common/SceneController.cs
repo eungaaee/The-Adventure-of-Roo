@@ -8,6 +8,10 @@ public class SceneController : MonoBehaviour {
     [SerializeField] private Image FadeImage;
     private const float FadeDuration = 0.8f;
 
+    private void Awake() {
+        StartCoroutine(FadeIn());
+    }
+
     public IEnumerator FadeIn(float Duration = FadeDuration) {
         for (float t = Duration; t >= 0; t -= Time.deltaTime) {
             FadeImage.color = new Color(0, 0, 0, t / Duration);
@@ -31,12 +35,10 @@ public class SceneController : MonoBehaviour {
     public IEnumerator LoadScene(string sceneName) {
         yield return StartCoroutine(FadeOut());
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-        yield return StartCoroutine(FadeIn());
     }
 
     public IEnumerator UnloadScene(string sceneName) {
         yield return StartCoroutine(FadeOut());
         SceneManager.UnloadSceneAsync(sceneName);
-        yield return StartCoroutine(FadeIn());
     }
 }
