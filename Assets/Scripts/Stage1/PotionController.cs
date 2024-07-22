@@ -42,7 +42,7 @@ public class PotionController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player") && !PickedPotion) {
             InBoundary = true;
-            StartCoroutine(Letterbox.SetBottomLetterboxText("[F] 물약 꺼내기"));
+            StartCoroutine(Letterbox.SetBottomLetterboxText("[F]로 해독제 꺼내기"));
         }
     }
 

@@ -417,22 +417,22 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620783402}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2945791, y: 1.2945791, z: 1.2945791}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2071145068}
   - {fileID: 1329224775}
   - {fileID: 1084523995}
   - {fileID: 404001376}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1922653937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 539.96454}
+  m_SizeDelta: {x: 675.5999, y: 379.99997}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &671139015
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +956,7 @@ GameObject:
   - component: {fileID: 1867105855}
   - component: {fileID: 1867105854}
   - component: {fileID: 1867105853}
+  - component: {fileID: 1867105856}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1013,6 +1014,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867105856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867105852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98d4589c6f22c2419df95e061caaf68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Scene: {fileID: 66416675}
+  fadeDuration: 2
+  blinkDuration: 1
+  targetScale: {x: 3000, y: 3000}
 --- !u!1 &1922653933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1125,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 620783406}
   - {fileID: 311538231}
   - {fileID: 1261776377}
   m_Father: {fileID: 0}
@@ -1224,5 +1242,4 @@ SceneRoots:
   - {fileID: 1867105855}
   - {fileID: 671139018}
   - {fileID: 66416676}
-  - {fileID: 620783406}
   - {fileID: 1922653937}

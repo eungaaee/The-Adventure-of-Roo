@@ -7,16 +7,16 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float jumpForce = 8;
     [SerializeField] private float maxSpeed = 5.7f;
     private int MaxJump = 1, JumpCount = 0;
-    private int Life = 3;
+    [SerializeField] private int Life = 6;
     private int InitLife;
     private bool Controllable = true;
     private bool IsDamaging = false;
     public bool IsResetting = false;
 
-    /* public Transform[] waypoints;
+    public Transform[] waypoints;
     public float speed = 2f;
     private int currentWaypointIndex = 0;
-    private bool shouldMove = false; */
+    private bool shouldMove = false;
 
     [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     private Vector2 InitMinPlayerBoundary, InitMaxPlayerBoundary;
@@ -50,14 +50,14 @@ public class PlayerController : MonoBehaviour {
 
         if (Controllable) {
             Jump();
-            if (/* !shouldMove &&  */Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-            /* if (shouldMove && waypoints.Length > 0) {
+            if (!shouldMove &&  Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+                if (shouldMove && waypoints.Length > 0) {
                 MoveAlongPath();
-            } */
+            } 
         }
     }
 
-    /* private void MoveAlongPath() {
+    private void MoveAlongPath() {
         if (currentWaypointIndex >= waypoints.Length) {
             shouldMove = false;
             rigid.gravityScale = 1.5f;
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
             rigid.gravityScale = 1.5f;
             StartMoving(waypoints);
         }
-    } */
+    }
 
     void FixedUpdate() {
         if (Controllable) Move();
@@ -116,14 +116,13 @@ public class PlayerController : MonoBehaviour {
 
     private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
-        /* if (!shouldMove)  */
-        rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
+        /* if (!shouldMove)  */rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
 
     private void Jump() {
         if (JumpCount != MaxJump && Input.GetButtonDown("Jump")) {
             JumpCount += 1;
-            // rigid.gravityScale = 1.5f;
+            rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
         }

@@ -3,8 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonPress : MonoBehaviour {
-    private Image titleImage, pabImage;
-    private RectTransform /* titleTransform, */ pabTransform;
+    private Image pabImage;
+    private RectTransform pabTransform;
     [SerializeField] SceneController Scene;
 
     [SerializeField] private float fadeDuration = 2.0f, blinkDuration = 1.0f;
@@ -14,10 +14,7 @@ public class ButtonPress : MonoBehaviour {
     private Coroutine blinkCoroutine;
 
     private void Awake() {
-        titleImage = transform.Find("Title").GetComponent<Image>();
         pabImage = transform.Find("PressAnyButton").GetComponent<Image>();
-
-        // titleTransform = titleImage.GetComponent<RectTransform>();
         pabTransform = pabImage.GetComponent<RectTransform>();
     }
 
