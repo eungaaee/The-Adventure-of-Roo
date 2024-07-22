@@ -48,6 +48,7 @@ public class ButtonPress : MonoBehaviour {
     }
 
     private IEnumerator FadeAndGrow() {
+        GetComponent<AudioSource>().Play();
         isFading = true;
         Vector2 initialScale = pabTransform.sizeDelta;
         const float initialAlpha = 1;
