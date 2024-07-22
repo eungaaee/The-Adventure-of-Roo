@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 public class PotionCutscene : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private GameObject Potion;
+    [SerializeField] private GameObject ElderBunny;
     [SerializeField] private CheckpointManager Checkpoint;
     private MainCameraController CameraController;
     private LetterboxController Letterbox;
@@ -52,7 +53,7 @@ public class PotionCutscene : MonoBehaviour {
         yield return new WaitForSeconds(2);
         CameraController.Zoom(2, 1, new Vector2(117, -5));
         StartCoroutine(Letterbox.SetTopLetterboxText("해독제를 획득했다!"));
-        
+
 
         // 줌 취소 및 우물 레이어 원래대로
         yield return new WaitForSeconds(3);
@@ -82,6 +83,7 @@ public class PotionCutscene : MonoBehaviour {
         Player.ResetSpeed();
         Player.UnbindToCamera();
         CameraController.CancelZoom(2);
+        ElderBunny.SetActive(true);
         yield return new WaitForSeconds(1);
         Letterbox.LetterboxOn(200);
     }
