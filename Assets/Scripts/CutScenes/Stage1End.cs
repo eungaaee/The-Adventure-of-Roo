@@ -10,6 +10,7 @@ public class Stage1End : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
+            GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(StartCutscene());
         }
     }
