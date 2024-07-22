@@ -32,10 +32,10 @@ public class Stage1End : MonoBehaviour {
         yield return StartCoroutine(Dialogue.SetDialogue("Roo", "네!여기있어요!"));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Dialogue.SetDialogue("ElderBunny", "말도 안 돼...하지만...너에게 숲은 정말로 위험했을텐데..."));
+        yield return StartCoroutine(Dialogue.SetDialogue("ElderBunny", "말도 안 돼..하지만..너에게 숲은 정말로 위험했을텐데.."));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Dialogue.SetDialogue("Roo", "이럴때가 아니에요! 빨리 마을로 가서 해독제로 토끼들을 치료해야해요!"));
+        yield return StartCoroutine(Dialogue.SetDialogue("Roo", "이럴때가 아니에요! 빨리 해독제로 토끼들을 치료해야해요!"));
 
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Dialogue.SetDialogue("ElderBunny", "맞는말이네...해독제를 전달해주고 오겠네!"));
