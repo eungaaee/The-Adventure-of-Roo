@@ -7,12 +7,14 @@ public class Stage1End : MonoBehaviour {
     [SerializeField] private LetterboxController Letterbox;
     [SerializeField] private SceneController Scene;
     [SerializeField] private DialogueController Dialogue;
+    private Timer timer;
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(StartCutscene());
         }
+        timer = FindFirstObjectByType<Timer>();
     }
 
     private IEnumerator StartCutscene() {
@@ -23,6 +25,8 @@ public class Stage1End : MonoBehaviour {
         StartCoroutine(Player.CutSceneJump(1));
         StartCoroutine(Player.CutSceneMove(-78.5f, 1.5f));
 
+        timer.ResetTimer();
+        timer.HideTimer();
         // 대화 시작
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Dialogue.DialogueBoxOn());
@@ -41,7 +45,9 @@ public class Stage1End : MonoBehaviour {
         yield return StartCoroutine(Dialogue.SetDialogue("ElderBunny", "맞는말이네...해독제를 전달해주고 오겠네!"));
 
         // Go to Stage 2
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(Dialogue.ClearDialogue());
+        yield return StartCoroutine(Dialogue.DialogueBoxOff());
         StartCoroutine(Scene.FadeOut(1));
         StartCoroutine(Scene.LoadScene("Stage2"));
     }

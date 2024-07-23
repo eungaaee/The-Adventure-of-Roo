@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -11,15 +12,18 @@ public class PotionCutscene : MonoBehaviour {
     private MainCameraController CameraController;
     private LetterboxController Letterbox;
     private SpriteRenderer spriteRenderer, PlayerSpriteRenderer;
+    public TextMeshProUGUI timerText;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerSpriteRenderer = Player.GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
+        timerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
     }
 
     public IEnumerator StartCutscene() {
+        Timer timer = FindObjectOfType<Timer>();
         // 우물로 뛰어들 위치로 이동
         yield return new WaitForFixedUpdate();
         Player.SwitchControllable(false);
@@ -80,11 +84,22 @@ public class PotionCutscene : MonoBehaviour {
             if (Checkpoint.IsSaved) break;
             yield return null;
         }
+
+
         Player.ResetSpeed();
         Player.UnbindToCamera();
         CameraController.CancelZoom(2);
+        Player.SwitchControllable(false);
+        yield return new WaitForSeconds(4);
+        StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
+        timerText.enabled = true;
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Letterbox.SetBottomLetterboxText("Go!"));
+        Player.SwitchControllable(true);
         ElderBunny.SetActive(true);
-        yield return new WaitForSeconds(1);
+        timer.OnPotionConsumed();
         Letterbox.LetterboxOn(200);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(Letterbox.ClearBottomLetterboxText());
     }
 }   

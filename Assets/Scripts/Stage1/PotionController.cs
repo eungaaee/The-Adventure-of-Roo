@@ -15,11 +15,15 @@ public class PotionController : MonoBehaviour {
     private GameObject CheckPointStone;
     private GameObject HierarchyPotion;
     private SpriteRenderer PlayerSpriteRenderer;
+    private PlayerController PlayerC;
+    private Timer timer;
+    private SceneController SceneController;
 
     private void Awake() {
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
         CheckPointStone = GameObject.Find("CheckPoint");
         PlayerSpriteRenderer = Player.GetComponent<SpriteRenderer>();
+        SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
     }
 
     private void Update() {
@@ -36,6 +40,9 @@ public class PotionController : MonoBehaviour {
         if (PickedPotion & isPotionEnabled) {
             if (PlayerSpriteRenderer.flipX) HierarchyPotion.transform.localPosition = new Vector3(0.25f, -0.1f, 1);
             else HierarchyPotion.transform.localPosition = new Vector3(-0.25f, -0.1f, 1);
+        }
+        if(PickedPotion & isPotionEnabled) {
+            ResetPotion();
         }
     }
 
@@ -65,5 +72,30 @@ public class PotionController : MonoBehaviour {
         HierarchyPotion = Instantiate(Potion);
         HierarchyPotion.transform.parent = Player.transform;
         isPotionEnabled = true;
+    }
+
+    public void ResetPotion() {
+        PlayerC = FindObjectOfType<PlayerController>();
+        timer = FindObjectOfType<Timer>();
+        if (PlayerC.Life == 0) {
+            timer.ResetTimer();
+        }
+        if (timer.remainingTime == 0) {
+            StartCoroutine(TimeoutReset());
+        }
+    }
+    public IEnumerator TimeoutReset() {
+        timer.HideTimer();
+        timer.ResetTimer();
+        PlayerC.rigid.velocity = Vector2.down;
+        PlayerC.SwitchControllable(false);
+        Letterbox.LetterboxOn(200);
+        yield return new WaitForSeconds(1);
+        StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 모두 떨어졌다...."));
+        yield return new WaitForSeconds(1);
+        StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        Letterbox.LetterboxOff();
+        PlayerC.Life = 1;
+        StartCoroutine(PlayerC.Damaged(PlayerC.transform.position));
     }
 }

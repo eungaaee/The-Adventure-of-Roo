@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float jumpForce = 8;
     [SerializeField] private float maxSpeed = 5.7f;
     private int MaxJump = 1, JumpCount = 0;
-    [SerializeField] private int Life = 6;
+    [SerializeField] public int Life = 6;
     private int InitLife;
     private bool Controllable = true;
     private bool IsDamaging = false;
@@ -20,14 +21,16 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     private Vector2 InitMinPlayerBoundary, InitMaxPlayerBoundary;
-    private Vector3 DefaultPos;
+    public Vector3 DefaultPos;
     private float DefaultMaxSpeed;
 
-    private Rigidbody2D rigid;
+    public Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private MainCameraController CameraController;
     private SceneController SceneController;
+    private LetterboxController Letterbox;
+    private Timer timer;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
         SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
+        Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
 
         InitLife = Life;
         DefaultPos = new Vector3(-86, -3.4f, 1);
@@ -201,7 +205,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private IEnumerator Damaged(Vector2 opponentPos) {
+    public IEnumerator Damaged(Vector2 opponentPos) {
+        timer = FindObjectOfType<Timer>();
         yield return IsDamaging = true;
         yield return StartCoroutine(TakeDamage(opponentPos));
         if (Life > 0) {
@@ -217,10 +222,24 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForSeconds(1.5f);
             yield return StartCoroutine(Revive());
             yield return StartCoroutine(UnTransparent(0));
+            if(DefaultPos.x > 100) {
+                Letterbox.LetterboxOn(200);
+                SwitchControllable(false);
+                yield return new WaitForSeconds(2);
+                StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
+                timer.ShowTimer();
+                yield return new WaitForSeconds(2);
+                StartCoroutine(Letterbox.SetBottomLetterboxText("Go!"));
+                SwitchControllable(true);
+                timer.StartTimer();
+                yield return new WaitForSeconds(2);
+                StartCoroutine(Letterbox.ClearBottomLetterboxText());
+                Letterbox.LetterboxOff();
+            }
         }
     }
 
-    private IEnumerator TakeDamage(Vector2 opponentPos) {
+    public IEnumerator TakeDamage(Vector2 opponentPos) {
         Life--;
 
         int d = transform.position.x < opponentPos.x ? -1 : 1;
@@ -266,12 +285,14 @@ public class PlayerController : MonoBehaviour {
         yield return null;
     }
 
-    private IEnumerator Revive() {
+    public IEnumerator Revive() {
         yield return StartCoroutine(SceneController.FadeOut());
         yield return transform.position = DefaultPos;
         yield return IsResetting = true;
         yield return StartCoroutine(ResetCondition());
         yield return IsResetting = false;
+        StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        Letterbox.LetterboxOff();
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
     }
