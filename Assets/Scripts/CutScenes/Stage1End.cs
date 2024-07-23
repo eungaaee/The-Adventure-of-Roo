@@ -6,7 +6,7 @@ public class Stage1End : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private LetterboxController Letterbox;
     [SerializeField] private SceneController Scene;
-    [SerializeField] private DialogueController Dialogue;
+    [SerializeField] private LogueController Dialogue;
     private Timer timer;
 
     private void OnTriggerEnter2D(Collider2D col) {

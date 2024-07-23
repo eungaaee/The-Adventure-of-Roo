@@ -9,12 +9,14 @@ public class SceneController : MonoBehaviour {
     private const float FadeDuration = 0.8f;
 
     private void Awake() {
+        FadeImage.color = new Color(0, 0, 0, 1);
         StartCoroutine(FadeIn());
     }
 
     public IEnumerator FadeIn(float Duration = FadeDuration) {
+        float initAlpha = FadeImage.color.a;
         for (float t = Duration; t >= 0; t -= Time.deltaTime) {
-            FadeImage.color = new Color(0, 0, 0, t / Duration);
+            FadeImage.color = new Color(0, 0, 0, t / Duration / initAlpha);
             yield return null;
         }
         FadeImage.color = new Color(0, 0, 0, 0);
@@ -26,6 +28,14 @@ public class SceneController : MonoBehaviour {
             yield return null;
         }
         FadeImage.color = new Color(0, 0, 0, 1);
+    }
+
+    public IEnumerator HalfFadeOut(float Duration = FadeDuration) {
+        for (float t = 0; t <= Duration; t += Time.deltaTime) {
+            FadeImage.color = new Color(0, 0, 0, t / Duration * 0.9f);
+            yield return null;
+        }
+        FadeImage.color = new Color(0, 0, 0, 0.9f);
     }
     
     public void LoadCutScene(string sceneName) {
