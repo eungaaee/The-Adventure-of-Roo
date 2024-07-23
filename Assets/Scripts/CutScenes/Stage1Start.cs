@@ -24,53 +24,53 @@ public class Stage1Start : MonoBehaviour {
         Letterbox.LetterboxOn(100, 1.5f);
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(Logue.DialogueBoxOn());
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "¿©±â°¡ ÇØµ¶Á¦°¡ ÀÖ´Â ½£ÀÎ°¡...?"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ì—¬ê¸°ê°€ í•´ë…ì œê°€ ìˆëŠ” ìˆ²ì¸ê°€...?"));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "À§ÇèÇÑ ±â¿îÀÌ ¿©±â±îÁö ´À²¸Áö³×..."));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ìœ„í—˜í•œ ê¸°ìš´ì´ ì—¬ê¸°ê¹Œì§€ ëŠê»´ì§€ë„¤..."));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "Àå·ÎÅä³¢´ÔÀÌ °¡±îÀÌ °¡Áö ¸»¶ó´Â ÀÌÀ¯¸¦ ¾Ë°Ú¾î..."));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ì¥ë¡œí† ë¼ë‹˜ì´ ê°€ê¹Œì´ ê°€ì§€ ë§ë¼ëŠ” ì´ìœ ë¥¼ ì•Œê² ì–´..."));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "ÈÄ...»ı°¢À» Á¤¸®ÇØº¸ÀÚ..."));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "í›„...ìƒê°ì„ ì •ë¦¬í•´ë³´ì..."));
         yield return StartCoroutine(Logue.ClearDialogue());
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(Logue.DialogueBoxOff());
         yield return StartCoroutine(Scene.HalfFadeOut());
 
-        yield return StartCoroutine(Logue.SetMonologue("½£ÀÇ Á¸Àç¿Í ¿À¿°¹°À» °Çµé¸é ¾ÈµÇ°ÚÁö...?"));
+        yield return StartCoroutine(Logue.SetMonologue("ìˆ²ì˜ ì¡´ì¬ì™€ ì˜¤ì—¼ë¬¼ì„ ê±´ë“¤ë©´ ì•ˆë˜ê² ì§€...?"));
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(Logue.DialogueBoxOn());
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "Àå·ÎÅä³¢´ÔÀÌ Àü°¥,³ªºñ,°¡½Ã¸¦ Á¶½ÉÇÏ¶óÇÏ¼ÌÁö"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ì¥ë¡œí† ë¼ë‹˜ì´ ì „ê°ˆ,ë‚˜ë¹„,ê°€ì‹œë¥¼ ì¡°ì‹¬í•˜ë¼í•˜ì…¨ì§€"));
         yield return new WaitForSeconds(0.85f);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "±ºµ¥±ºµ¥ µ¶±Ø¹°µµ ÀÖ´Ù°í ÇÏ¼Ì¾î"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "êµ°ë°êµ°ë° ë…ê·¹ë¬¼ë„ ìˆë‹¤ê³  í•˜ì…¨ì–´"));
         yield return new WaitForSeconds(0.85f);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "µ¹·Î µÈ ¹Ù´Úµµ Á¶½ÉÇÏ¶ó ÇÏ¼Ì´ø°Í °°Àºµ¥...?"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ëŒë¡œ ëœ ë°”ë‹¥ë„ ì¡°ì‹¬í•˜ë¼ í•˜ì…¨ë˜ê²ƒ ê°™ì€ë°...?"));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.ClearDialogue());
         yield return StartCoroutine(Logue.DialogueBoxOff());
         StartCoroutine(Logue.ClearMonologue());
 
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Logue.SetMonologue("µ¥¹ÌÁö´Â 6¹øÀÌ»ó ¹ŞÀ¸¸é...¾ÈµÉ°Å °°¾Æ..."));
+        yield return StartCoroutine(Logue.SetMonologue("ë°ë¯¸ì§€ëŠ” 6ë²ˆì´ìƒ ë°›ìœ¼ë©´...ì•ˆë ê±° ê°™ì•„..."));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.DialogueBoxOn());
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "º¸±â¸¸ ÇØµµ ¸¹ÀÌ ¾ÆÆÄº¸¿©"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ë³´ê¸°ë§Œ í•´ë„ ë§ì´ ì•„íŒŒë³´ì—¬"));
         yield return new WaitForSeconds(0.85f);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "ÃÖ´ëÇÑ Àå¾Ö¹°µéÀ» ÇÇÇÏ¸ç °¡ÀÚ"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ìµœëŒ€í•œ ì¥ì• ë¬¼ë“¤ì„ í”¼í•˜ë©° ê°€ì"));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.ClearDialogue());
         yield return StartCoroutine(Logue.DialogueBoxOff());
         StartCoroutine(Logue.ClearMonologue());
 
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Logue.SetMonologue("¿ì¹° ¾È¿¡´Â ÇØµ¶Á¦°¡ ÀÖ¾î\nÇØµ¶Á¦´Â ²¨³½ ÈÄ ½Ã°£ÀÌ Áö³ª¸é È¿°ú°¡ »ç¶óÁú°Å¾ß"));
+        yield return StartCoroutine(Logue.SetMonologue("ìš°ë¬¼ ì•ˆì—ëŠ” í•´ë…ì œê°€ ìˆì–´\ní•´ë…ì œëŠ” êº¼ë‚¸ í›„ ì‹œê°„ì´ ì§€ë‚˜ë©´ íš¨ê³¼ê°€ ì‚¬ë¼ì§ˆê±°ì•¼"));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.DialogueBoxOn());
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "Àå·ÎÅä³¢´ÔÀÌ ÇØµ¶Á¦ÀÇ È¿´ÉÀÌ\n½Ã°£ÀÌ Áö³ª¸é »ç¶óÁø´Ù ±×·Á¼Ì¾î"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ì¥ë¡œí† ë¼ë‹˜ì´ í•´ë…ì œì˜ íš¨ëŠ¥ì´\nì‹œê°„ì´ ì§€ë‚˜ë©´ ì‚¬ë¼ì§„ë‹¤ ê·¸ë ¤ì…¨ì–´"));
         yield return new WaitForSeconds(0.85f);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "ÇØµ¶Á¦¸¦ ¾ò°í ¹Ù·Î µ¹¾Æ¿À´Â°Ô ÁÁÀ» °Í °°¾Æ"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "í•´ë…ì œë¥¼ ì–»ê³  ë°”ë¡œ ëŒì•„ì˜¤ëŠ”ê²Œ ì¢‹ì„ ê²ƒ ê°™ì•„"));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.ClearDialogue());
         yield return StartCoroutine(Logue.DialogueBoxOff());
@@ -78,9 +78,9 @@ public class Stage1Start : MonoBehaviour {
 
         yield return StartCoroutine(Scene.FadeIn());
         yield return StartCoroutine(Logue.DialogueBoxOn());
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "Áö±İµµ ¸¶À»ÀÇ Åä³¢µéÀº ¿ªº´À¸·Î °íÅë¹Ş°í ÀÖÀ»°Å¾ß..."));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ì§€ê¸ˆë„ ë§ˆì„ì˜ í† ë¼ë“¤ì€ ì—­ë³‘ìœ¼ë¡œ ê³ í†µë°›ê³  ìˆì„ê±°ì•¼..."));
         yield return new WaitForSeconds(0.85f);
-        yield return StartCoroutine(Logue.SetDialogue("Roo", "»¡¸® ÇØµ¶Á¦¸¦ °¡Á®¿ÀÀÚ!"));
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "ë¹¨ë¦¬ í•´ë…ì œë¥¼ ê°€ì ¸ì˜¤ì!"));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.ClearDialogue());
 
