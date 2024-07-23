@@ -2456,6 +2456,7 @@ GameObject:
   - component: {fileID: 298928303}
   - component: {fileID: 298928302}
   - component: {fileID: 298928301}
+  - component: {fileID: 298928305}
   m_Layer: 0
   m_Name: PotionTimer
   m_TagString: Untagged
@@ -2546,6 +2547,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &298928305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298928300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a486b326d13d484c9279e28fa5c1c46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 122049401}
+  Letterbox: {fileID: 155454704}
+  TimerText: {fileID: 1797182097}
+  remainingTime: 90
 --- !u!1 &304373319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7419,7 +7436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &814895338
 Transform:
   m_ObjectHideFlags: 0
@@ -24225,7 +24242,7 @@ MonoBehaviour:
   Player: {fileID: 122049401}
   Letterbox: {fileID: 155454704}
   Scene: {fileID: 1609205173}
-  Dialogue: {fileID: 0}
+  Dialogue: {fileID: 1176762457}
 --- !u!1 &1123251801 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2844334129921593111, guid: a6c91f77651f4464fb68af7264d2ab60, type: 3}
@@ -41513,6 +41530,8 @@ MonoBehaviour:
   - {fileID: 1978358557}
   - {fileID: 736138503}
   - {fileID: 1120849737}
+  - {fileID: 1018427598}
+  timer: {fileID: 298928305}
 --- !u!61 &1661413207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -41574,7 +41593,7 @@ MonoBehaviour:
   Potion: {fileID: 7816456891286302956, guid: 907fa9dd46a8cff4499164e8faf3ada0, type: 3}
   ElderBunny: {fileID: 1018427598}
   Checkpoint: {fileID: 377986650}
-  timerText: {fileID: 0}
+  timer: {fileID: 298928305}
 --- !u!1 &1661542377
 GameObject:
   m_ObjectHideFlags: 0
@@ -42672,7 +42691,6 @@ GameObject:
   - component: {fileID: 1797182095}
   - component: {fileID: 1797182098}
   - component: {fileID: 1797182097}
-  - component: {fileID: 1797182096}
   m_Layer: 0
   m_Name: TimerText
   m_TagString: Untagged
@@ -42694,25 +42712,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 298928304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 428}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1797182096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797182094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a486b326d13d484c9279e28fa5c1c46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerText: {fileID: 1797182097}
-  remainingTime: 90
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1797182097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47108,7 +47112,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1375025872868895401, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_Name
-      value: CheckPoint
+      value: Checkpoint
       objectReference: {fileID: 0}
     - target: {fileID: 4073176908909510298, guid: f3058ca79a0659449a2c567245ccf157, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47417,9 +47421,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 975197017164558650, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
-      propertyPath: Life
-      value: 6
-      objectReference: {fileID: 0}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 298928305}
     - target: {fileID: 5431582452880484289, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_Radius
       value: 0.31139183
@@ -47438,11 +47442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -87.7
+      value: 118.8
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.9
+      value: -3.76
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47995,9 +47999,9 @@ SceneRoots:
   - {fileID: 1613684250}
   - {fileID: 1330148206}
   - {fileID: 1609205172}
-  - {fileID: 298928304}
-  - {fileID: 5594784024714524624}
   - {fileID: 2205190740907193506}
+  - {fileID: 5594784024714524624}
+  - {fileID: 298928304}
   - {fileID: 499156318}
   - {fileID: 4411446406848523183}
   - {fileID: 91732505}

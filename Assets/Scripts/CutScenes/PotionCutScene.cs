@@ -9,21 +9,20 @@ public class PotionCutscene : MonoBehaviour {
     [SerializeField] private GameObject Potion;
     [SerializeField] private GameObject ElderBunny;
     [SerializeField] private CheckpointManager Checkpoint;
+    [SerializeField] Timer timer;
+
     private MainCameraController CameraController;
     private LetterboxController Letterbox;
     private SpriteRenderer spriteRenderer, PlayerSpriteRenderer;
-    public TextMeshProUGUI timerText;
 
     private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerSpriteRenderer = Player.GetComponent<SpriteRenderer>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
-        timerText = GameObject.Find("TimerText").GetComponent<TextMeshProUGUI>();
     }
 
     public IEnumerator StartCutscene() {
-        Timer timer = FindObjectOfType<Timer>();
         // 우물로 뛰어들 위치로 이동
         yield return new WaitForFixedUpdate();
         Player.SwitchControllable(false);
@@ -72,7 +71,7 @@ public class PotionCutscene : MonoBehaviour {
         Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);
         Player.SetSpeed(2);
-        StartCoroutine(Letterbox.SetBottomLetterboxText("[A]/[←]를 통해 비석을 살펴보자"));
+        StartCoroutine(Letterbox.SetBottomLetterboxText("[A]/[←] 비석 살펴보기"));
 
         // 이동 제한 해제, 카메라에 가두기
         yield return new WaitForSeconds(1);
@@ -85,21 +84,13 @@ public class PotionCutscene : MonoBehaviour {
             yield return null;
         }
 
-
         Player.ResetSpeed();
         Player.UnbindToCamera();
-        CameraController.CancelZoom(2);
-        Player.SwitchControllable(false);
-        yield return new WaitForSeconds(4);
-        StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
-        timerText.enabled = true;
-        yield return new WaitForSeconds(2);
-        StartCoroutine(Letterbox.SetBottomLetterboxText("Go!"));
-        Player.SwitchControllable(true);
-        ElderBunny.SetActive(true);
-        timer.OnPotionConsumed();
         Letterbox.LetterboxOn(200);
-        yield return new WaitForSeconds(1);
-        StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        CameraController.CancelZoom(2);
+
+        // 타이머
+        yield return new WaitForSeconds(2);
+        StartCoroutine(timer.StartTimer());
     }
-}   
+}

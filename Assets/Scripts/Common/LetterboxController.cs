@@ -20,7 +20,6 @@ public class LetterboxController : MonoBehaviour {
         BottomTextObj = Bottom.transform.Find("Text").GetComponent<TextMeshProUGUI>();
     }
 
-
     public void LetterboxOn(int targetSize = 200, float duration = boxDuration) {
         IsLetterboxOn = true;
         if (MonoEye != null) StopCoroutine(MonoEye);
@@ -43,12 +42,11 @@ public class LetterboxController : MonoBehaviour {
         }
     }
 
-
     public IEnumerator SetTopLetterboxText(string Text, float duration = textDuration) {
         if (Writer1 != null) StopCoroutine(Writer1);
         if (TopTextObj.text != "") {
             duration /= 2;
-            Writer1 = ClearTopLetterboxText(duration);
+            yield return StartCoroutine(ClearTopLetterboxText(duration));
         }
         Writer1 = Write(TopTextObj, Text, Vector2.zero, false, duration);
         yield return StartCoroutine(Writer1);
@@ -58,7 +56,7 @@ public class LetterboxController : MonoBehaviour {
         if (Writer2 != null) StopCoroutine(Writer2);
         if (BottomTextObj.text != "") {
             duration /= 2;
-            Writer2 = ClearBottomLetterboxText(duration);
+            yield return StartCoroutine(ClearBottomLetterboxText(duration));
         }
         Writer2 = Write(BottomTextObj, Text, Vector2.zero, false, duration);
         yield return StartCoroutine(Writer2);

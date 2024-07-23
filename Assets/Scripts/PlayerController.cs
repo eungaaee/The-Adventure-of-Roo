@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     [SerializeField] private float jumpForce = 8;
     [SerializeField] private float maxSpeed = 5.7f;
-    private int MaxJump = 1, JumpCount = 0;
+    private int maxJump = 1, JumpCount = 0;
     [SerializeField] public int Life = 6;
     private int InitLife;
     private bool Controllable = true;
@@ -24,13 +24,13 @@ public class PlayerController : MonoBehaviour {
     public Vector3 DefaultPos;
     private float DefaultMaxSpeed;
 
-    public Rigidbody2D rigid;
+    private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     private MainCameraController CameraController;
     private SceneController SceneController;
     private LetterboxController Letterbox;
-    private Timer timer;
+    [SerializeField] private Timer timer;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Jump() {
-        if (JumpCount != MaxJump && Input.GetButtonDown("Jump")) {
+        if (JumpCount != maxJump && Input.GetButtonDown("Jump")) {
             JumpCount += 1;
             rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -206,9 +206,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     public IEnumerator Damaged(Vector2 opponentPos) {
-        timer = FindObjectOfType<Timer>();
         yield return IsDamaging = true;
         yield return StartCoroutine(TakeDamage(opponentPos));
+
         if (Life > 0) {
             yield return StartCoroutine(Transparent(2));
             yield return new WaitForSeconds(0.7f);
@@ -222,20 +222,6 @@ public class PlayerController : MonoBehaviour {
             yield return new WaitForSeconds(1.5f);
             yield return StartCoroutine(Revive());
             yield return StartCoroutine(UnTransparent(0));
-            if(DefaultPos.x > 100) {
-                Letterbox.LetterboxOn(200);
-                SwitchControllable(false);
-                yield return new WaitForSeconds(2);
-                StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
-                timer.ShowTimer();
-                yield return new WaitForSeconds(2);
-                StartCoroutine(Letterbox.SetBottomLetterboxText("Go!"));
-                SwitchControllable(true);
-                timer.StartTimer();
-                yield return new WaitForSeconds(2);
-                StartCoroutine(Letterbox.ClearBottomLetterboxText());
-                Letterbox.LetterboxOff();
-            }
         }
     }
 
@@ -287,12 +273,15 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator Revive() {
         yield return StartCoroutine(SceneController.FadeOut());
+
         yield return transform.position = DefaultPos;
         yield return IsResetting = true;
         yield return StartCoroutine(ResetCondition());
         yield return IsResetting = false;
-        StartCoroutine(Letterbox.ClearBottomLetterboxText());
-        Letterbox.LetterboxOff();
+
+        yield return StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        yield return StartCoroutine(Letterbox.ClearTopLetterboxText());
+
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
     }
