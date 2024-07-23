@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour {
     private MainCameraController CameraController;
     private SceneController SceneController;
     private LetterboxController Letterbox;
-    [SerializeField] private Timer timer;
 
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();

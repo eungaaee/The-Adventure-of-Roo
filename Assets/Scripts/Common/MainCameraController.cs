@@ -81,9 +81,11 @@ public class MainCameraController : MonoBehaviour {
     }
 
     // Cancel Instant Zoom
-    public void CancelZoom(float Duration) {
-        MinCameraBoundary = CurMinCameraBoundary;
-        MaxCameraBoundary = CurMaxCameraBoundary;
+    public void CancelZoom(float Duration, bool resetCameraPosition = true) {
+        if (resetCameraPosition) {
+            MinCameraBoundary = CurMinCameraBoundary;
+            MaxCameraBoundary = CurMaxCameraBoundary;
+        }
 
         if (MonoScope != null) StopCoroutine(MonoScope);
         MonoScope = Scope(DefaultZoomSize-CurZoomAmount, Duration);

@@ -6,6 +6,7 @@ public class MovingPlatformController : MonoBehaviour {
     [SerializeField] private float MoveTime = 3f;
     [SerializeField] private Vector3[] wayPoints;
     [SerializeField] private bool IsStyx = false;
+    private bool styxMoved = false;
     private int wpLen;
 
     private void Awake() {
@@ -18,7 +19,10 @@ public class MovingPlatformController : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
-        if (IsStyx && col.gameObject.CompareTag("Player")) StartCoroutine(Move(wayPoints[0], wayPoints[1]));
+        if (IsStyx && !styxMoved && col.gameObject.CompareTag("Player")) {
+            styxMoved = true;
+            StartCoroutine(Move(wayPoints[0], wayPoints[1]));
+        }
     }
 
     private IEnumerator Loop() {

@@ -11,7 +11,6 @@ public class PotionController : MonoBehaviour {
     [SerializeField] private GameObject Potion;
     [SerializeField] private PlayerController Player;
     [SerializeField] private GameObject[] CorruptedObjects;
-    [SerializeField] private Timer timer;
 
     private LetterboxController Letterbox;
     private GameObject CheckpointStone;
