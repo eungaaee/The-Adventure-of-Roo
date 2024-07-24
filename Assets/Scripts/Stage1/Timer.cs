@@ -12,6 +12,7 @@ public class Timer : MonoBehaviour {
     private float initRemainingTime;
     private bool isRunning = false;
     private bool isTimeout = false;
+    public bool triggered = false;
 
     private void Start() {
         initRemainingTime = remainingTime;
@@ -29,7 +30,7 @@ public class Timer : MonoBehaviour {
             UpdateTimerText(remainingTime);
         }
         
-        if (!isTimeout & Player.IsResetting) {
+        if (triggered & !isTimeout & Player.IsResetting) {
             isRunning = false;
             HideTimer();
             StartCoroutine(StartTimer());
