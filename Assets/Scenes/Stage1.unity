@@ -2730,6 +2730,7 @@ MonoBehaviour:
   Letterbox: {fileID: 155454704}
   TimerText: {fileID: 1797182097}
   remainingTime: 90
+  triggered: 0
 --- !u!1 &304373319
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,6 +5820,10 @@ PrefabInstance:
     - target: {fileID: 7017029811219168884, guid: b84f6fa8e7f854d4a9b6a0de140c8dde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404555023000758657, guid: b84f6fa8e7f854d4a9b6a0de140c8dde, type: 3}
+      propertyPath: MoveTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7404555023000758657, guid: b84f6fa8e7f854d4a9b6a0de140c8dde, type: 3}
       propertyPath: wayPoints.Array.data[0].x
