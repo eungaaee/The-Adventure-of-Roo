@@ -12,6 +12,10 @@ public class CaveCutscene : MonoBehaviour {
 
     [SerializeField] private GameObject CaveBorder;
 
+    private void Update() {
+        if (Player.IsResetting & CaveBorder.activeSelf) CaveBorder.SetActive(false);
+    }
+
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
             GetComponent<BoxCollider2D>().enabled = false;

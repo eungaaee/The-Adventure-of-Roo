@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MovingPlatformController : MonoBehaviour {
     [SerializeField] private float MoveTime = 3f;
-    [SerializeField] private Vector3[] wayPoints;
     [SerializeField] private bool IsStyx = false;
+    [SerializeField] private Vector3[] wayPoints;
+    [SerializeField] private PlayerController Player;
+
     private bool styxMoved = false;
     private int wpLen;
 
@@ -16,6 +18,13 @@ public class MovingPlatformController : MonoBehaviour {
     private void Start() {
         if (IsStyx) transform.position = wayPoints[0];
         else StartCoroutine(nameof(Loop));
+    }
+
+    private void Update() {
+        if (IsStyx & styxMoved & Player.IsResetting) {
+            styxMoved = false;
+            transform.position = wayPoints[0];
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
