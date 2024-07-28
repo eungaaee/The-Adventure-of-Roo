@@ -6,6 +6,7 @@ using System.Collections;
 public class Timer : MonoBehaviour {
     [SerializeField] private PlayerController Player;
     [SerializeField] private LetterboxController Letterbox;
+    [SerializeField] private LogueController Logue;
     [SerializeField] private TextMeshProUGUI TimerText;
 
     [SerializeField] private float remainingTime = 90f;
@@ -60,6 +61,15 @@ public class Timer : MonoBehaviour {
         ResetTimer();
 
         yield return new WaitForSeconds(2);
+        yield return StartCoroutine(Logue.DialogueBoxOn());
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "?! 역시 해독제가..."));
+
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "빨리 마을로 돌아가야겠어"));
+
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(Logue.ClearDialogue());
+        yield return StartCoroutine(Logue.DialogueBoxOff());
         yield return StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
         ShowTimer();
 

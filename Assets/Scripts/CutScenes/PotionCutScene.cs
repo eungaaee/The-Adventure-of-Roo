@@ -81,7 +81,10 @@ public class PotionCutscene : MonoBehaviour {
         
         // 저장 했는지 확인하기
         while (true) {
-            if (Checkpoint.IsSaved) break;
+            if (Checkpoint.IsSaved) {
+                Player.SwitchControllable(false);
+                break;
+            }
             yield return null;
         }
 
