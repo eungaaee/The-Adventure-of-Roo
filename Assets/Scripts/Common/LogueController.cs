@@ -42,7 +42,7 @@ public class LogueController : MonoBehaviour {
 
     public IEnumerator SetDialogue(string name, string text, float relativeInterval = 1) {
         if (DialogueTextObj.text != "") yield return StartCoroutine(ClearDialogue());
-        DialogueTextObj.color = new Color(0, 0, 0, 1);
+        DialogueTextObj.color = new Color(95/255f, 14/255f, 49/255f, 1);
         SetTalker(name);
         foreach (char letter in text) {
             DialogueTextObj.text += letter;
@@ -52,10 +52,10 @@ public class LogueController : MonoBehaviour {
 
     public IEnumerator ClearDialogue(float duration = 0.5f) {
         for (float t = duration; t >= 0; t -= Time.deltaTime) {
-            DialogueTextObj.color = new Color(0, 0, 0, Mathf.Sin(0.5f*Mathf.PI * t/duration));
+            DialogueTextObj.color = new Color(95/255f, 14/255f, 49/255f, Mathf.Sin(0.5f*Mathf.PI * t/duration));
             yield return null;
         }
-        DialogueTextObj.color = new Color(0, 0, 0, 0);
+        DialogueTextObj.color = new Color(95/255f, 14/255f, 49/255f, 0);
         DialogueTextObj.text = "";
     }
 
