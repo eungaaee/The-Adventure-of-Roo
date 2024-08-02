@@ -56,12 +56,12 @@ public class PotionCutscene : MonoBehaviour {
         // 크게 보여주기
         yield return new WaitForSeconds(2);
         CameraController.Zoom(2, 1, new Vector2(117, -5));
-        StartCoroutine(Letterbox.SetTopLetterboxText("해독제를 획득했다!"));
+        StartCoroutine(Letterbox.SetTopText("해독제를 획득했다!"));
 
 
         // 줌 취소 및 우물 레이어 원래대로
         yield return new WaitForSeconds(3);
-        StartCoroutine(Letterbox.ClearTopLetterboxText());
+        StartCoroutine(Letterbox.ClearTopText());
         CameraController.CancelZoom(2);
         Letterbox.LetterboxOn(100);
         spriteRenderer.sortingOrder = 6;
@@ -72,13 +72,13 @@ public class PotionCutscene : MonoBehaviour {
         Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);
         Player.SetSpeed(2);
-        StartCoroutine(Letterbox.SetBottomLetterboxText("[A]/[←] 비석 살펴보기"));
+        StartCoroutine(Letterbox.SetBottomText("[A]/[←] 비석 살펴보기"));
 
         // 이동 제한 해제, 카메라에 가두기
         yield return new WaitForSeconds(1);
         Player.SwitchControllable(true);
         Player.BindToCamera();
-        
+
         // 저장 했는지 확인하기
         while (true) {
             if (Checkpoint.IsSaved) {

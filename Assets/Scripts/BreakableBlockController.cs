@@ -46,7 +46,7 @@ public class BreakableBlockController : MonoBehaviour {
         if (col.gameObject.CompareTag("Player")) {
             DetectKey = true;
             if (IsInteractive && InteractiveNoti)
-                StartCoroutine(Letterbox.SetBottomLetterboxText("[F] 벽 부수기"));
+                StartCoroutine(Letterbox.SetBottomText("[F] 벽 부수기"));
             Particles[0].Play();
         }
     }
@@ -56,7 +56,7 @@ public class BreakableBlockController : MonoBehaviour {
             if (!IsInteractive) Malang += Time.deltaTime;
 
             if (IsVibrate) CameraController.Shake(Mathf.Clamp(0.025f*Malang, 0, 0.075f), 0.1f);
-            
+
             if (Malang >= DdakDdak || InteractiveTapCount <= 0) {
                 GetComponent<BoxCollider2D>().enabled = false;
                 sprRdr.color = new Color(1, 1, 1, 0);
@@ -70,7 +70,7 @@ public class BreakableBlockController : MonoBehaviour {
         if (col.gameObject.CompareTag("Player")) {
             DetectKey = false;
             if (IsInteractive && InteractiveNoti)
-                StartCoroutine(Letterbox.ClearBottomLetterboxText());
+                StartCoroutine(Letterbox.ClearBottomText());
             Particles[0].Stop();
         }
     }

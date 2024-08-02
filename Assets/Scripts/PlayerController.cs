@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour {
         if (Controllable) {
             Jump();
             if (!shouldMove &&  Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-                if (shouldMove && waypoints.Length > 0) {
+            if (shouldMove && waypoints.Length > 0) {
                 MoveAlongPath();
-            } 
+            }
         }
     }
 
@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour {
         waypoints = path;
         currentWaypointIndex = 0;
         shouldMove = true;
-        rigid.gravityScale = 0; 
-        rigid.velocity = Vector2.zero; 
+        rigid.gravityScale = 0;
+        rigid.velocity = Vector2.zero;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -119,7 +119,8 @@ public class PlayerController : MonoBehaviour {
 
     private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
-        /* if (!shouldMove)  */rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
+        /* if (!shouldMove)  */
+        rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
 
     private void Jump() {
@@ -278,12 +279,17 @@ public class PlayerController : MonoBehaviour {
         yield return StartCoroutine(ResetCondition());
         yield return IsResetting = false;
 
-        yield return StartCoroutine(Letterbox.ClearBottomLetterboxText());
-        yield return StartCoroutine(Letterbox.ClearTopLetterboxText());
+        yield return StartCoroutine(Letterbox.ClearBottomText());
+        yield return StartCoroutine(Letterbox.ClearTopText());
 
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
     }
 
     public void SetDefaultPos(Vector3 pos) { DefaultPos = pos; }
+
+    public void SetBoundary(Vector2 minBoundary, Vector2 maxBoundary) {
+        MinPlayerBoundary = minBoundary;
+        MaxPlayerBoundary = maxBoundary;
+    }
 }

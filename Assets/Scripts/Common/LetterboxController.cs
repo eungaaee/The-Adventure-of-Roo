@@ -42,41 +42,41 @@ public class LetterboxController : MonoBehaviour {
         }
     }
 
-    public IEnumerator SetTopLetterboxText(string Text, float duration = textDuration) {
+    public IEnumerator SetTopText(string Text, float duration = textDuration) {
         if (Writer1 != null) StopCoroutine(Writer1);
         if (TopTextObj.text != "") {
             duration /= 2;
-            yield return StartCoroutine(ClearTopLetterboxText(duration));
+            yield return StartCoroutine(ClearTopText(duration));
         }
         Writer1 = Write(TopTextObj, Text, Vector2.zero, false, duration);
         yield return StartCoroutine(Writer1);
     }
 
-    public IEnumerator SetBottomLetterboxText(string Text, float duration = textDuration) {
+    public IEnumerator SetBottomText(string Text, float duration = textDuration) {
         if (Writer2 != null) StopCoroutine(Writer2);
         if (BottomTextObj.text != "") {
             duration /= 2;
-            yield return StartCoroutine(ClearBottomLetterboxText(duration));
+            yield return StartCoroutine(ClearBottomText(duration));
         }
         Writer2 = Write(BottomTextObj, Text, Vector2.zero, false, duration);
         yield return StartCoroutine(Writer2);
     }
 
-    public void EditTopLetterboxText(string Text) {
+    public void EditTopText(string Text) {
         TopTextObj.text = Text;
     }
 
-    public void EditBottomLetterboxText(string Text) {
+    public void EditBottomText(string Text) {
         BottomTextObj.text = Text;
     }
 
-    public IEnumerator ClearTopLetterboxText(float duration = textDuration) {
+    public IEnumerator ClearTopText(float duration = textDuration) {
         if (Writer1 != null) StopCoroutine(Writer1);
         Writer1 = Write(TopTextObj, "", new Vector2(0, 100), true, duration);
         yield return StartCoroutine(Writer1);
     }
 
-    public IEnumerator ClearBottomLetterboxText(float duration = textDuration) {
+    public IEnumerator ClearBottomText(float duration = textDuration) {
         if (Writer2 != null) StopCoroutine(Writer2);
         Writer2 = Write(BottomTextObj, "", new Vector2(0, -100), true, duration);
         yield return StartCoroutine(Writer2);

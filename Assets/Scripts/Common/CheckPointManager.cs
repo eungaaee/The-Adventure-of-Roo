@@ -33,8 +33,8 @@ public class CheckpointManager : MonoBehaviour {
             } else if (PressedTime > 0) PressedTime -= Time.deltaTime;
 
             PressedProportion = Mathf.Floor(PressedTime/PressDuration*100)/100;
-            if (PressedProportion > 0) Letterbox.EditTopLetterboxText($"[ {PressedProportion*100}% ]");
-            else Letterbox.EditTopLetterboxText("");
+            if (PressedProportion > 0) Letterbox.EditTopText($"[ {PressedProportion*100}% ]");
+            else Letterbox.EditTopText("");
         }
     }
 
@@ -43,8 +43,8 @@ public class CheckpointManager : MonoBehaviour {
             InBoundary = true;
             InitIsLetterboxOn = Letterbox.IsLetterboxOn;
             if (!InitIsLetterboxOn) Letterbox.LetterboxOn();
-            StartCoroutine(Letterbox.SetBottomLetterboxText("[Enter] 길게 눌러서 저장하기"));
-            StartCoroutine(Letterbox.SetTopLetterboxText(""));
+            StartCoroutine(Letterbox.SetBottomText("[Enter] 길게 눌러서 저장하기"));
+            StartCoroutine(Letterbox.SetTopText(""));
         }
     }
 
@@ -52,8 +52,8 @@ public class CheckpointManager : MonoBehaviour {
         if (!IsSaved & col.gameObject.CompareTag("Player")) {
             InBoundary = false;
             if (!InitIsLetterboxOn) Letterbox.LetterboxOff();
-            StartCoroutine(Letterbox.ClearTopLetterboxText());
-            StartCoroutine(Letterbox.ClearBottomLetterboxText());
+            StartCoroutine(Letterbox.ClearTopText());
+            StartCoroutine(Letterbox.ClearBottomText());
         }
     }
 
@@ -70,9 +70,9 @@ public class CheckpointManager : MonoBehaviour {
         IsSaved = true;
         Player.SetDefaultPos(transform.position + new Vector3(0, 0.5f, 0));
         StartCoroutine(Player.ResetCondition());
-        yield return StartCoroutine(Letterbox.ClearBottomLetterboxText());
-        yield return StartCoroutine(Letterbox.SetTopLetterboxText("진행도 저장 완료"));
+        yield return StartCoroutine(Letterbox.ClearBottomText());
+        yield return StartCoroutine(Letterbox.SetTopText("진행도 저장 완료"));
         yield return new WaitForSeconds(3f);
-        yield return StartCoroutine(Letterbox.ClearTopLetterboxText());
+        yield return StartCoroutine(Letterbox.ClearTopText());
     }
 }

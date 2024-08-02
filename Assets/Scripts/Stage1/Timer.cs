@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour {
 
             UpdateTimerText(remainingTime);
         }
-        
+
         if (triggered & !isTimeout & Player.IsResetting) {
             isRunning = false;
             HideTimer();
@@ -70,17 +70,17 @@ public class Timer : MonoBehaviour {
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Logue.ClearDialogue());
         yield return StartCoroutine(Logue.DialogueBoxOff());
-        yield return StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 떨어지기 시작했다."));
+        yield return StartCoroutine(Letterbox.SetBottomText("해독제의 효능이 떨어지기 시작했다."));
         ShowTimer();
 
         yield return new WaitForSeconds(3);
-        yield return StartCoroutine(Letterbox.SetBottomLetterboxText("Go!"));
+        yield return StartCoroutine(Letterbox.SetBottomText("Go!"));
 
         Player.SwitchControllable(true);
         isRunning = true;
 
         yield return new WaitForSeconds(2);
-        StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        StartCoroutine(Letterbox.ClearBottomText());
     }
 
     public IEnumerator TimeoutReset() {
@@ -89,10 +89,10 @@ public class Timer : MonoBehaviour {
         if (!Letterbox.IsLetterboxOn) Letterbox.LetterboxOn(200);
 
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Letterbox.SetBottomLetterboxText("해독제의 효능이 모두 떨어졌다...."));
+        yield return StartCoroutine(Letterbox.SetBottomText("해독제의 효능이 모두 떨어졌다...."));
 
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Letterbox.ClearBottomLetterboxText());
+        yield return StartCoroutine(Letterbox.ClearBottomText());
         HideTimer();
 
         yield return new WaitForSeconds(1.5f);
