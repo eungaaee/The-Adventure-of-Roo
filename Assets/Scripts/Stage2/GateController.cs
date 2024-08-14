@@ -34,20 +34,21 @@ public class GateController : MonoBehaviour {
     }
 
     private void Update() {
-        if (GateCollider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E)) {
+        if (GateCollider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E) && PlayerCtr.pass == true) {
+            PlayerCtr.pass = false;
             StartCoroutine(EnterGate());
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject == Player) {
+        if (col.gameObject == Player && PlayerCtr.pass == true) {
             Letterbox.LetterboxOn(150);
             StartCoroutine(Letterbox.SetBottomText("[E] 들어가기"));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject == Player) {
+        if (col.gameObject == Player && PlayerCtr.pass == true) {
             StartCoroutine(Letterbox.ClearBottomText());
             Letterbox.LetterboxOff();
         }

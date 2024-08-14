@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     private bool Controllable = true;
     private bool IsDamaging = false;
     public bool IsResetting = false;
+    public bool pass = true;
 
     public Transform[] waypoints;
     public float speed = 2f;
