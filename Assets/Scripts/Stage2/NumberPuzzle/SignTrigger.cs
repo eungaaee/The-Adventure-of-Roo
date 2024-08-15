@@ -8,6 +8,7 @@ public class SignTrigger : MonoBehaviour {
     [SerializeField] private LetterboxController Letterbox;
     [SerializeField] private LogueController Logue;
     [SerializeField] private SceneController SceneCtr;
+    [SerializeField] private NumberPuzzle PuzzleScript;
 
     private bool detectKey = false;
 
@@ -43,12 +44,12 @@ public class SignTrigger : MonoBehaviour {
         yield return StartCoroutine(Logue.SetMonologue("시간 되면 그리드에 직접 보여주는 거 까지 하기"));
         yield return new WaitForSeconds(1);
 
-        yield return StartCoroutine(SceneCtr.FadeOut());
-        StartCoroutine(Logue.ClearMonologue());
+        StartCoroutine(SceneCtr.FadeOut(1));
+        yield return StartCoroutine(Logue.ClearMonologue(1));
 
-        yield return new WaitForSeconds(1);
-        yield return StartCoroutine(SceneCtr.FadeIn());
-
+        yield return new WaitForSeconds(0.5f);
         // Start Game
+        PuzzleScript.enabled = true;
+        yield return StartCoroutine(SceneCtr.FadeIn(1));
     }
 }
