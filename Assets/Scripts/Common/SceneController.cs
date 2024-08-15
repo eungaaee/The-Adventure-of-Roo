@@ -16,15 +16,16 @@ public class SceneController : MonoBehaviour {
     public IEnumerator FadeIn(float Duration = FadeDuration) {
         float initAlpha = FadeImage.color.a;
         for (float t = Duration; t >= 0; t -= Time.deltaTime) {
-            FadeImage.color = new Color(0, 0, 0, t / Duration / initAlpha);
+            FadeImage.color = new Color(0, 0, 0, t / Duration * initAlpha);
             yield return null;
         }
         FadeImage.color = new Color(0, 0, 0, 0);
     }
 
     public IEnumerator FadeOut(float Duration = FadeDuration) {
+        float initAlpha = FadeImage.color.a;
         for (float t = 0; t <= Duration; t += Time.deltaTime) {
-            FadeImage.color = new Color(0, 0, 0, t / Duration);
+            FadeImage.color = new Color(0, 0, 0, initAlpha + t / Duration * (1-initAlpha));
             yield return null;
         }
         FadeImage.color = new Color(0, 0, 0, 1);

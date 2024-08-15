@@ -60,7 +60,7 @@ public class LogueController : MonoBehaviour {
     }
 
     public IEnumerator SetMonologue(string text, float relativeInterval = 1) {
-        if (MonologueTextObj.text != "") yield return StartCoroutine(ClearDialogue());
+        if (MonologueTextObj.text != "") yield return StartCoroutine(ClearMonologue());
         Color curColor = MonologueTextObj.color;
         curColor.a = 1;
         MonologueTextObj.color = curColor;
