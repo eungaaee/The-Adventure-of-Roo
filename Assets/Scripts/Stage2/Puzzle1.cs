@@ -1,0 +1,138 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using static UnityEditor.ShaderData;
+
+public class Puzzle1 : MonoBehaviour
+{
+    [SerializeField] private SpriteRenderer[] Lights1;
+    [SerializeField] private SpriteRenderer[] Lights2;
+    [SerializeField] private SpriteRenderer[] Lights3;
+
+    [SerializeField] private GameObject Player;
+    [SerializeField] private buttonpress1 buttonpressed1;
+    [SerializeField] private buttonpress2 buttonpressed2;
+    [SerializeField] private buttonpress3 buttonpressed3;
+    [SerializeField] private LetterboxController Letterbox;
+    private PlayerController PlayerCtr;
+
+    private Color red = Color.red;
+    private Color green = Color.green;
+    private int Round = 1;
+
+    private static readonly int[,] ChangeColor = new int[3, 3] {{0,2,1}, {2,1,0},{0,1,2}};
+    void Start()
+    {
+        PlayerCtr = GameObject.Find("Roo").GetComponent<PlayerController>();
+        buttonpressed1 = GameObject.Find("button1").GetComponent<buttonpress1>();
+        buttonpressed2 = GameObject.Find("button2").GetComponent<buttonpress2>();
+        buttonpressed3 = GameObject.Find("button3").GetComponent<buttonpress3>();
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if (Round == 1) {
+            if (buttonpressed1.button1pressed == true) {
+                if (Lights1[ChangeColor[Round-1, 0]].color == green) Lights1[ChangeColor[Round-1, 0]].color = red;
+                else Lights1[ChangeColor[Round-1, 0]].color = green;
+                buttonpressed1.button1pressed = false;
+            }
+            if (buttonpressed2.button2pressed == true) {
+                if (Lights1[ChangeColor[Round-1, 1]].color == green) Lights1[ChangeColor[Round-1, 1]].color = red;
+                else Lights1[ChangeColor[Round-1, 1]].color = green;
+                buttonpressed2.button2pressed = false;
+            }
+            if (buttonpressed3.button3pressed == true) {
+                if (Lights1[ChangeColor[Round-1, 2]].color == green) Lights1[ChangeColor[Round-1, 2]].color = red;
+                else Lights1[ChangeColor[Round-1, 2]].color = green;
+                buttonpressed3.button3pressed = false;
+            }
+            if (Lights1[0].color  == green && Lights1[1].color == green && Lights1[2].color == green) {
+                StartCoroutine(Puzzl1LevelChange2());
+            }
+        }
+        if (Round == 2) {
+            if (buttonpressed1.button1pressed == true) {
+                if (Lights2[ChangeColor[Round-1, 0]].color == green) Lights2[ChangeColor[Round-1, 0]].color = red;
+                else Lights2[ChangeColor[Round-1, 0]].color = green;
+                buttonpressed1.button1pressed = false;
+            }
+            if (buttonpressed2.button2pressed == true) {
+                if (Lights2[ChangeColor[Round-1, 1]].color == green) Lights2[ChangeColor[Round-1, 1]].color = red;
+                else Lights2[ChangeColor[Round-1, 1]].color = green;
+                buttonpressed2.button2pressed = false;
+            }
+            if (buttonpressed3.button3pressed == true) {
+                if (Lights2[ChangeColor[Round-1, 2]].color == green) Lights2[ChangeColor[Round-1, 2]].color = red;
+                else Lights2[ChangeColor[Round-1, 2]].color = green;
+                buttonpressed3.button3pressed = false;
+            }
+            if (Lights2[0].color  == green && Lights2[1].color == green && Lights2[2].color == green) {
+                StartCoroutine(Puzzl1LevelChange2());
+            }
+        }
+    }
+
+    public IEnumerator Puzzl1LevelChange2() {
+        Round = 2;
+        PlayerCtr.Controllable = false;
+        StartCoroutine(PlayerCtr.CutSceneMove(-7));
+        yield return new WaitForSeconds(2);
+        Letterbox.LetterboxOn(150);
+        StartCoroutine(Letterbox.SetBottomText("모든 색을 초록색으로 바꾸었다!"));
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Letterbox.ClearBottomText());
+        StartCoroutine(Letterbox.SetBottomText("더 어려운 퍼즐이 보이기 시작한다..."));
+        for (int i = 0; i < Lights1.Length; i++) {
+            StartCoroutine(lightsFadeIn(Lights1[i], 1));
+        }
+        yield return new WaitForSeconds(2);
+        for (int i = 0; i < Lights2.Length; i++) {
+            StartCoroutine(lightsFadeOut(Lights2[i], 1));
+        }
+        StartCoroutine(Letterbox.ClearBottomText());
+        Letterbox.LetterboxOff();
+        PlayerCtr.Controllable = true;
+    }
+
+    public IEnumerator Puzzl1LevelChange3() {
+        Round = 3;
+        PlayerCtr.Controllable = false;
+        StartCoroutine(PlayerCtr.CutSceneMove(-7));
+        yield return new WaitForSeconds(2);
+        Letterbox.LetterboxOn(150);
+        StartCoroutine(Letterbox.SetBottomText("모든 색을 초록색으로 바꾸었다!"));
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Letterbox.ClearBottomText());
+        StartCoroutine(Letterbox.SetBottomText("제일 어려운 퍼즐이 보이기 시작한다..."));
+        for (int i = 0; i < Lights2.Length; i++) {
+            StartCoroutine(lightsFadeIn(Lights2[i], 1));
+        }
+        yield return new WaitForSeconds(1);
+        for (int i = 0; i < Lights3.Length; i++) {
+            StartCoroutine(lightsFadeOut(Lights3[i], 1));
+        }
+        StartCoroutine(Letterbox.ClearBottomText());
+        Letterbox.LetterboxOff();
+        PlayerCtr.Controllable = true;
+    }
+
+    public IEnumerator lightsFadeIn(SpriteRenderer lights, float Duration) {
+        float initAlpha = lights.color.a;
+        for (float t = Duration; t >= 0; t -= Time.deltaTime) {
+            lights.color = new Color(0, 1, 0, t / Duration * initAlpha);
+            yield return null;
+        }
+        lights.color = new Color(0, 1, 0, 0);
+    }
+
+    public IEnumerator lightsFadeOut(SpriteRenderer lights, float Duration) {
+        float initAlpha = lights.color.a;
+        for (float t = 0; t <= Duration; t += Time.deltaTime) {
+            lights.color = new Color(1, 0, 0, initAlpha + t / Duration * (1-initAlpha));
+            yield return null;
+        }
+        lights.color = new Color(1, 0, 0, 1);
+    }
+}
