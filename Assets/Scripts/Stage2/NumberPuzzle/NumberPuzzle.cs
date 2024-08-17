@@ -15,9 +15,10 @@ public class NumberPuzzle : MonoBehaviour {
     private TextMeshPro[,] board = new TextMeshPro[9, 9];
     private int[,] grid = new int[9, 9];
 
+    private const int INF = 0x3f3f3f3f;
     [SerializeField] private const int initRow = 8, initCol = 0;
-    private int curRow, curColumn, nxtRow, nxtColumn;
     private const float cooldown = 0.25f;
+    private int curRow, curColumn, nxtRow, nxtColumn;
     private Stack<int[]> footprint = new Stack<int[]>();
 
     private void Awake() {
@@ -42,10 +43,11 @@ public class NumberPuzzle : MonoBehaviour {
     }
 
     private void Update() {
+        if (!Input.anyKey) pressedTime = -INF;
         if (Time.time-pressedTime > cooldown) Control();
     }
 
-    private float pressedTime = -100;
+    private float pressedTime = -INF;
     private float peekingRooOffset = 0.3f;
     private void Control() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
@@ -78,9 +80,9 @@ public class NumberPuzzle : MonoBehaviour {
             }
         } else if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) {
             if (curRow == nxtRow && curColumn == nxtColumn) return;
-            pressedTime = -100;
+            pressedTime = -INF;
 
-            footprint.Push(new int[] {curRow, curColumn});
+            footprint.Push(new int[] { curRow, curColumn });
 
             MovePeekingRoo();
 
@@ -109,29 +111,10 @@ public class NumberPuzzle : MonoBehaviour {
         curRow = nxtRow = initRow;
         curColumn = nxtColumn = initCol;
 
-        footprint.Push(new int[] {curRow, curColumn});
+        footprint.Push(new int[] { curRow, curColumn });
 
         MovePeekingRoo();
         MoveGlowEffect();
-    }
-
-    private void MovePeekingRoo() {
-        if (curColumn < nxtColumn) {
-            peekingRooOffset = -0.3f;
-            PeekingRooRenderer.flipX = true;
-        } else if (curColumn > nxtColumn) {
-            peekingRooOffset = 0.3f;
-            PeekingRooRenderer.flipX = false;
-        }
-
-        PeekingRoo.transform.position = new Vector3(
-            board[nxtRow, nxtColumn].transform.position.x + peekingRooOffset,
-            board[nxtRow, nxtColumn].transform.position.y + 0.5f
-        );
-    }
-
-    private void MoveGlowEffect() {
-        SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
     }
 
 
@@ -197,17 +180,37 @@ public class NumberPuzzle : MonoBehaviour {
     }
 
 
-    private IEnumerator GlowEffect(float duration = 1) {
+    private IEnumerator GlowEffect(float duration = 0.75f) {
+        const float initAlpha = 0.25f;
         SelectGlow.SetActive(true);
         while (true) {
-            for (float t = 0; t < duration; t += Time.deltaTime) {
-                SelectGlowRenderer.color = new Color(1, 1, 1, Mathf.Sin(0.5f*Mathf.PI * 0.1f*t/duration));
+            for (float t = 0; t <= duration; t += Time.deltaTime) {
+                SelectGlowRenderer.color = new Color(1, 1, 0.5f, Mathf.Sin(0.5f*Mathf.PI * (initAlpha + t/duration * 0.25f)));
                 yield return null;
             }
             for (float t = duration; t >= 0; t -= Time.deltaTime) {
-                SelectGlowRenderer.color = new Color(1, 1, 1, Mathf.Sin(0.5f*Mathf.PI * 0.1f*t/duration));
+                SelectGlowRenderer.color = new Color(1, 1, 0.5f, Mathf.Sin(0.5f*Mathf.PI * (initAlpha + t/duration * 0.25f)));
                 yield return null;
             }
         }
+    }
+
+    private void MovePeekingRoo() {
+        if (curColumn < nxtColumn) {
+            peekingRooOffset = -0.3f;
+            PeekingRooRenderer.flipX = true;
+        } else if (curColumn > nxtColumn) {
+            peekingRooOffset = 0.3f;
+            PeekingRooRenderer.flipX = false;
+        }
+
+        PeekingRoo.transform.position = new Vector3(
+            board[nxtRow, nxtColumn].transform.position.x + peekingRooOffset,
+            board[nxtRow, nxtColumn].transform.position.y + 0.5f
+        );
+    }
+
+    private void MoveGlowEffect() {
+        SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
     }
 }
