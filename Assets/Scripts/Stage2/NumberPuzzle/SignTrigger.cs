@@ -41,8 +41,6 @@ public class SignTrigger : MonoBehaviour {
         yield return StartCoroutine(SceneCtr.HalfFadeOut());
         yield return StartCoroutine(Logue.SetMonologue("여기에 게임 대략 설명하기."));
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Logue.SetMonologue("시간 되면 그리드에 직접 보여주는 거 까지 하기"));
-        yield return new WaitForSeconds(1);
 
         StartCoroutine(SceneCtr.FadeOut(1));
         yield return StartCoroutine(Logue.ClearMonologue(1));

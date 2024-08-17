@@ -14,10 +14,11 @@ public class NumberPuzzle : MonoBehaviour {
 
     private TextMeshPro[,] board = new TextMeshPro[9, 9];
     private int[,] grid = new int[9, 9];
-    
+
     [SerializeField] private const int initRow = 8, initCol = 0;
     private int curRow, curColumn, nxtRow, nxtColumn;
-    private const float cooldown = 0.2f;
+    private const float cooldown = 0.25f;
+    private Stack<int[]> footprint = new Stack<int[]>();
 
     private void Awake() {
         for (int i = 0; i < 9; i++) {
@@ -37,71 +38,100 @@ public class NumberPuzzle : MonoBehaviour {
         Roo.SetActive(false);
         PeekingRoo.SetActive(true);
 
-        StartCoroutine(SelectGlowEffect());
+        StartCoroutine(GlowEffect());
     }
 
     private void Update() {
-        if (Time.time-lastPressedTime > cooldown) Control();
+        if (Time.time-pressedTime > cooldown) Control();
     }
 
-    private float lastPressedTime = -100;
+    private float pressedTime = -100;
     private float peekingRooOffset = 0.3f;
     private void Control() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             if (nxtRow > 0 && curRow-nxtRow < 1) {
-                lastPressedTime = Time.time;
-                
+                pressedTime = Time.time;
+
                 nxtRow--;
-                SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
+                MoveGlowEffect();
             }
         } else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             if (nxtRow < 8 && nxtRow-curRow < 1) {
-                lastPressedTime = Time.time;
+                pressedTime = Time.time;
 
                 nxtRow++;
-                SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
+                MoveGlowEffect();
             }
         } else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             if (nxtColumn > 0 && curColumn-nxtColumn < 1) {
-                lastPressedTime = Time.time;
+                pressedTime = Time.time;
 
                 nxtColumn--;
-                SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
+                MoveGlowEffect();
             }
         } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             if (nxtColumn < 8 && nxtColumn-curColumn < 1) {
-                lastPressedTime = Time.time;
+                pressedTime = Time.time;
 
                 nxtColumn++;
-                SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
+                MoveGlowEffect();
             }
         } else if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) {
-            lastPressedTime = -100;
+            if (curRow == nxtRow && curColumn == nxtColumn) return;
+            pressedTime = -100;
 
-            if (curColumn < nxtColumn) {
-                peekingRooOffset = -0.3f;
-                PeekingRooRenderer.flipX = true;
-            } else if (curColumn > nxtColumn) {
-                peekingRooOffset = 0.3f;
-                PeekingRooRenderer.flipX = false;
-            }
-            PeekingRoo.transform.position = new Vector3(
-                board[nxtRow, nxtColumn].transform.position.x + peekingRooOffset,
-                board[nxtRow, nxtColumn].transform.position.y + 0.5f
-            );
-            
+            footprint.Push(new int[] {curRow, curColumn});
+
+            MovePeekingRoo();
+
             curRow = nxtRow;
             curColumn = nxtColumn;
+        } else if (Input.GetKey(KeyCode.Z)) {
+            pressedTime = Time.time;
+            Undo();
         } else if (Input.GetKey(KeyCode.R)) {
-            // 초기화
-            curRow = nxtRow = initRow;
-            curColumn = nxtColumn = initCol;
-            PeekingRoo.transform.position = new Vector3(
-                board[curRow, curColumn].transform.position.x - 0.3f,
-                board[curRow, curColumn].transform.position.y
-            );
-            SelectGlow.transform.position = board[curRow, curColumn].transform.position;
+            pressedTime = Time.time;
+            Reset();
         }
+    }
+
+    private void Undo() {
+        if (footprint.Count == 0) return;
+
+        curRow = nxtRow = footprint.Peek()[0];
+        curColumn = nxtColumn = footprint.Pop()[1];
+
+        MovePeekingRoo();
+        MoveGlowEffect();
+    }
+
+    private void Reset() {
+        curRow = nxtRow = initRow;
+        curColumn = nxtColumn = initCol;
+
+        footprint.Push(new int[] {curRow, curColumn});
+
+        MovePeekingRoo();
+        MoveGlowEffect();
+    }
+
+    private void MovePeekingRoo() {
+        if (curColumn < nxtColumn) {
+            peekingRooOffset = -0.3f;
+            PeekingRooRenderer.flipX = true;
+        } else if (curColumn > nxtColumn) {
+            peekingRooOffset = 0.3f;
+            PeekingRooRenderer.flipX = false;
+        }
+
+        PeekingRoo.transform.position = new Vector3(
+            board[nxtRow, nxtColumn].transform.position.x + peekingRooOffset,
+            board[nxtRow, nxtColumn].transform.position.y + 0.5f
+        );
+    }
+
+    private void MoveGlowEffect() {
+        SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
     }
 
 
@@ -128,10 +158,10 @@ public class NumberPuzzle : MonoBehaviour {
     }
 
     private void GridDFS(int row, int col) {
-        int[] up = {-1, 0}, down = {1, 0},
-            left = {0, -1}, right = {0, 1},
-            upleft = {-1, -1}, upright = {-1, 1},
-            downleft = {1, -1}, downright = {1, 1};
+        int[] up = { -1, 0 }, down = { 1, 0 },
+            left = { 0, -1 }, right = { 0, 1 },
+            upleft = { -1, -1 }, upright = { -1, 1 },
+            downleft = { 1, -1 }, downright = { 1, 1 };
         List<int[]> d = new List<int[]> {
             up, down, left, right, upleft, upright, downleft, downright
         };
@@ -167,7 +197,7 @@ public class NumberPuzzle : MonoBehaviour {
     }
 
 
-    private IEnumerator SelectGlowEffect(float duration = 1) {
+    private IEnumerator GlowEffect(float duration = 1) {
         SelectGlow.SetActive(true);
         while (true) {
             for (float t = 0; t < duration; t += Time.deltaTime) {
