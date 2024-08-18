@@ -45,7 +45,7 @@ public class GateController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject == Player && pass == true) {
-            Letterbox.LetterboxOn(150);
+            Letterbox.LetterboxOn(100);
             StartCoroutine(Letterbox.SetBottomText("[E] 들어가기"));
         }
     }
