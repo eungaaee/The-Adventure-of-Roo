@@ -15,8 +15,11 @@ public class SignTrigger : MonoBehaviour {
     private void Update() {
         if (detectKey && Input.GetKeyDown(KeyCode.E)) {
             detectKey = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
             StartCoroutine(Letterbox.ClearBottomText());
             Letterbox.LetterboxOff();
+
             StartCoroutine(ShowDescription());
         }
     }
@@ -39,7 +42,7 @@ public class SignTrigger : MonoBehaviour {
 
     private IEnumerator ShowDescription() {
         yield return StartCoroutine(SceneCtr.HalfFadeOut());
-        yield return StartCoroutine(Logue.SetMonologue("여기에 게임 대략 설명하기."));
+        yield return StartCoroutine(Logue.SetMonologue("여기다가 게임 설명하기"));
         yield return new WaitForSeconds(1);
 
         StartCoroutine(SceneCtr.FadeOut(1));

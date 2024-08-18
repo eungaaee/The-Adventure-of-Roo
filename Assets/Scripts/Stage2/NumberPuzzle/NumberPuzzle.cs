@@ -4,20 +4,29 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Analytics;
 using System.Data;
+using Unity.VisualScripting.FullSerializer;
+using UnityEngine.AI;
+using UnityEditor.ProjectWindowCallback;
 
 public class NumberPuzzle : MonoBehaviour {
     [SerializeField] private GameObject Roo;
     [SerializeField] private GameObject PeekingRoo;
     [SerializeField] private GameObject SelectGlow;
+    [SerializeField] private LineRenderer Line;
+    [SerializeField] private SceneController SceneCtr;
+
     private SpriteRenderer PeekingRooRenderer;
     private SpriteRenderer SelectGlowRenderer;
 
-    private TextMeshPro[,] board = new TextMeshPro[9, 9];
     private int[,] grid = new int[9, 9];
+    private int[,] coveredGrid = new int[9, 9];
+    private bool[] isCovered = new bool[82];
+    private TextMeshPro[,] board = new TextMeshPro[9, 9];
 
     private const int INF = 0x3f3f3f3f;
     [SerializeField] private const int initRow = 8, initCol = 0;
     private const float cooldown = 0.25f;
+    private int cellNumber;
     private int curRow, curColumn, nxtRow, nxtColumn;
     private Stack<int[]> footprint = new Stack<int[]>();
 
@@ -30,10 +39,14 @@ public class NumberPuzzle : MonoBehaviour {
 
         PeekingRooRenderer = PeekingRoo.GetComponent<SpriteRenderer>();
         SelectGlowRenderer = SelectGlow.GetComponent<SpriteRenderer>();
+
+        Line.startWidth = Line.endWidth = 0.1f;
+        Line.SetPosition(0, board[initRow, initCol].transform.parent.transform.localPosition);
     }
 
     private void Start() { // 스크립트 인스턴스 활성화 이후 첫 프레임을 업데이트하기 전에 실행됨
         GenerateGrid();
+        CoverGrid();
         DrawBoard();
 
         Roo.SetActive(false);
@@ -48,7 +61,8 @@ public class NumberPuzzle : MonoBehaviour {
     }
 
     private float pressedTime = -INF;
-    private float peekingRooOffset = 0.3f;
+    private float peekingRooOffset = -0.3f;
+    private int curNum = 1;
     private void Control() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
             if (nxtRow > 0 && curRow-nxtRow < 1) {
@@ -79,15 +93,8 @@ public class NumberPuzzle : MonoBehaviour {
                 MoveGlowEffect();
             }
         } else if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) {
-            if (curRow == nxtRow && curColumn == nxtColumn) return;
             pressedTime = -INF;
-
-            footprint.Push(new int[] { curRow, curColumn });
-
-            MovePeekingRoo();
-
-            curRow = nxtRow;
-            curColumn = nxtColumn;
+            Choose();
         } else if (Input.GetKey(KeyCode.Z)) {
             pressedTime = Time.time;
             Undo();
@@ -97,36 +104,66 @@ public class NumberPuzzle : MonoBehaviour {
         }
     }
 
+    private void Choose() {
+        if (curRow == nxtRow && curColumn == nxtColumn) return;
+        else if (!isCovered[curNum+1] && curNum+1 != coveredGrid[nxtRow, nxtColumn]) return;
+        else if (isCovered[curNum+1] && coveredGrid[nxtRow, nxtColumn] != 0) return;
+
+        footprint.Push(new int[] {curRow, curColumn});
+
+        curNum++;
+
+        MovePeekingRoo();
+        ConnectLine();
+
+        curRow = nxtRow;
+        curColumn = nxtColumn;
+
+        if (coveredGrid[curRow, curColumn] == 0) board[curRow, curColumn].text = curNum.ToString();
+
+        if (curNum == cellNumber) {
+            pressedTime = INF;
+            StartCoroutine(Finish());
+        }
+    }
+
     private void Undo() {
         if (footprint.Count == 0) return;
+
+        curNum--;
+
+        if (coveredGrid[curRow, curColumn] == 0) board[curRow, curColumn].text = "";
 
         curRow = nxtRow = footprint.Peek()[0];
         curColumn = nxtColumn = footprint.Pop()[1];
 
         MovePeekingRoo();
         MoveGlowEffect();
+        Line.positionCount--;
     }
 
     private void Reset() {
+        footprint.Push(new int[] {curRow, curColumn});
+        curNum = 1;
         curRow = nxtRow = initRow;
         curColumn = nxtColumn = initCol;
 
-        footprint.Push(new int[] { curRow, curColumn });
-
         MovePeekingRoo();
         MoveGlowEffect();
+        Line.positionCount = 1;
+
+        DrawBoard();
     }
 
 
     // DFS 비슷하게
-    private int cellNumber;
     private bool[,] visited = new bool[9, 9];
 
     private void GenerateGrid() {
         curRow = nxtRow = initRow;
         curColumn = nxtColumn = initCol;
 
-        cellNumber = 1;
+        cellNumber = 0;
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -149,7 +186,7 @@ public class NumberPuzzle : MonoBehaviour {
             up, down, left, right, upleft, upright, downleft, downright
         };
 
-        grid[row, col] = cellNumber++;    // board[row, col].text = cellNumber.ToString();
+        grid[row, col] = ++cellNumber;
         visited[row, col] = true;
 
         for (int i = d.Count-1; i >= 0; i--) {
@@ -169,14 +206,29 @@ public class NumberPuzzle : MonoBehaviour {
         GridDFS(row+nxt[0], col+nxt[1]);
     }
 
-    private void DrawBoard() {
+    private void CoverGrid() {
         const int visibleRatio = 5;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (grid[i, j] > 0 && Random.Range(0, 10) < visibleRatio) board[i, j].text = grid[i, j].ToString();
+                if (grid[i, j] == 0) continue;
+                if (Random.Range(0, 10) < visibleRatio) coveredGrid[i, j] = grid[i, j];
+                else isCovered[grid[i, j]] = true;
             }
         }
-        board[initRow, initCol].text = grid[initRow, initCol].ToString();
+        coveredGrid[initRow, initCol] = grid[initRow, initCol];
+
+        DrawBoard();
+    }
+
+    private void DrawBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (coveredGrid[i, j] == 0) {
+                    board[i, j].text = "";
+                    board[i, j].color = new Color(1, 0.4f, 0);
+                } else board[i, j].text = coveredGrid[i, j].ToString();
+            }
+        }
     }
 
 
@@ -212,5 +264,73 @@ public class NumberPuzzle : MonoBehaviour {
 
     private void MoveGlowEffect() {
         SelectGlow.transform.position = board[nxtRow, nxtColumn].transform.position;
+    }
+
+    private void ConnectLine() {
+        Line.positionCount++;
+        Line.SetPosition(Line.positionCount-1, board[nxtRow, nxtColumn].transform.parent.transform.localPosition);
+    }
+
+    private IEnumerator Finish() {
+        StartCoroutine(VeryAwesomeEpicRainbowEffect());
+
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(SceneCtr.FadeOut(2));
+
+        PeekingRoo.SetActive(false);
+        Roo.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(SceneCtr.FadeIn());
+
+    }
+
+    private IEnumerator VeryAwesomeEpicRainbowEffect() {
+        Color[] colors = {
+            new Color(0.9098039215686274f, 0.0784313725490196f, 0.08627450980392157f),
+            new Color(1, 0.6470588235294118f, 0),
+            new Color(0.9803921568627451f, 0.9215686274509803f, 0.21176470588235294f),
+            new Color(0.4745098039215686f, 0.7647058823529411f, 0.0784313725490196f),
+            new Color(0.2823529411764706f, 0.49019607843137253f, 0.9058823529411765f),
+            new Color(0.29411764705882354f, 0.21176470588235294f, 0.615686274509804f),
+            new Color(0.4392156862745098f, 0.21176470588235294f, 0.615686274509804f)
+        };
+        SpriteRenderer LastCell = board[curRow, curColumn].transform.parent.GetComponent<SpriteRenderer>();
+
+        SelectGlow.SetActive(false);
+
+        const float gap = 0.5f;
+        LastCell.color = colors[0];
+        yield return new WaitForSeconds(0.5f);
+        while (true) {
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[0], colors[1], t/gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[1], colors[2], t/gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[2], colors[3], t/gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[3], colors[4], t/gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[4], colors[5], t/gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[5], colors[6], t / gap);
+                yield return null;
+            }
+            for (float t = 0; t <= gap; t += Time.deltaTime) {
+                LastCell.color = Color.Lerp(colors[6], colors[0], t / gap);
+                yield return null;
+            }
+        }
     }
 }
