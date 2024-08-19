@@ -108,7 +108,7 @@ public class NumberPuzzle : MonoBehaviour {
     private void Choose() {
         if (curRow == nxtRow && curColumn == nxtColumn) return;
         else if (!isCovered[curNum+1] && curNum+1 != coveredGrid[nxtRow, nxtColumn]) return;
-        else if (isCovered[curNum+1] && coveredGrid[nxtRow, nxtColumn] != 0) return;
+        else if (isCovered[curNum+1] && board[nxtRow, nxtColumn].text != "") return;
 
         footprint.Push(new int[] {curRow, curColumn});
 
@@ -172,6 +172,7 @@ public class NumberPuzzle : MonoBehaviour {
                 coveredGrid[i, j] = 0;
                 visited[i, j] = false;
                 board[i, j].text = "";
+                isCovered[i*9+j] = true;
             }
         }
 
@@ -217,12 +218,16 @@ public class NumberPuzzle : MonoBehaviour {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (grid[i, j] == 0) continue;
-                if (Random.Range(0, 10) < visibleRatio) coveredGrid[i, j] = grid[i, j];
-                else isCovered[grid[i, j]] = true;
+                if (Random.Range(0, 10) < visibleRatio) {
+                    coveredGrid[i, j] = grid[i, j];
+                    isCovered[grid[i, j]] = false;
+                }
             }
         }
         coveredGrid[initRow, initCol] = grid[initRow, initCol];
         coveredGrid[endRow, endCol] = grid[endRow, endCol];
+        isCovered[grid[initRow, initCol]] = false;
+        isCovered[grid[endRow, endCol]] = false;
 
         DrawBoard();
     }
