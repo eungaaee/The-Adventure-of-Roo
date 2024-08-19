@@ -19,7 +19,7 @@ public class GateController : MonoBehaviour {
     [SerializeField] private GameObject Player;
     [SerializeField] private Camera CameraObject;
     [SerializeField] private SceneController SceneCtr;
-    [SerializeField] private BoxCollider2D GateCollider;
+    private BoxCollider2D GateCollider;
     private Rigidbody2D PlayerRigid;
     private PlayerController PlayerCtr;
 
@@ -32,6 +32,8 @@ public class GateController : MonoBehaviour {
     private void Awake() {
         PlayerRigid = Player.GetComponent<Rigidbody2D>();
         PlayerCtr = Player.GetComponent<PlayerController>();
+
+        GateCollider = GetComponent<BoxCollider2D>();
     }
     private void Start() {
         if(targetMap == 0) {

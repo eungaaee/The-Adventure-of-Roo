@@ -25,6 +25,7 @@ public class NumberPuzzle : MonoBehaviour {
 
     private const int INF = 0x3f3f3f3f;
     [SerializeField] private const int initRow = 8, initCol = 0;
+    private int endRow, endCol;
     private const float cooldown = 0.25f;
     private int cellNumber;
     private int curRow, curColumn, nxtRow, nxtColumn;
@@ -168,6 +169,7 @@ public class NumberPuzzle : MonoBehaviour {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 grid[i, j] = 0;
+                coveredGrid[i, j] = 0;
                 visited[i, j] = false;
                 board[i, j].text = "";
             }
@@ -200,7 +202,11 @@ public class NumberPuzzle : MonoBehaviour {
         }
 
         // nowhere to go
-        if (d.Count == 0) return;
+        if (d.Count == 0) {
+            endRow = row;
+            endCol = col;
+            return;
+        }
 
         int[] nxt = d[Random.Range(0, d.Count)];
         GridDFS(row+nxt[0], col+nxt[1]);
@@ -216,6 +222,7 @@ public class NumberPuzzle : MonoBehaviour {
             }
         }
         coveredGrid[initRow, initCol] = grid[initRow, initCol];
+        coveredGrid[endRow, endCol] = grid[endRow, endCol];
 
         DrawBoard();
     }

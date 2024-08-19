@@ -1629,11 +1629,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.32
+      value: 18.6
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.49
+      value: -23.1
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4125,7 +4125,6 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  GateCollider: {fileID: 188979433}
   targetMap: 2
   targetGate: {fileID: 599605443}
   useCoordinate: 0
@@ -10679,7 +10678,6 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  GateCollider: {fileID: 599605447}
   targetMap: 0
   targetGate: {fileID: 0}
   useCoordinate: 0
@@ -16791,7 +16789,6 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  GateCollider: {fileID: 812156370}
   targetMap: 0
   targetGate: {fileID: 1269079497}
   useCoordinate: 0
@@ -18168,7 +18165,7 @@ PrefabInstance:
     - target: {fileID: 374386391597604167, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1716611881}
     - target: {fileID: 2608558819975515636, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: ElderBunny
       value: 
@@ -18220,7 +18217,7 @@ PrefabInstance:
     - target: {fileID: 8236541951951746231, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1716611881}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22305,7 +22302,6 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  GateCollider: {fileID: 1269079502}
   targetMap: 1
   targetGate: {fileID: 188979429}
   useCoordinate: 0
@@ -39762,7 +39758,7 @@ Transform:
   m_GameObject: {fileID: 1716611879}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: 1.9, z: -10}
+  m_LocalPosition: {x: 24.34, y: -20.03, z: -10}
   m_LocalScale: {x: 12, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42629,11 +42625,11 @@ MonoBehaviour:
   buttonpressed1: {fileID: 1052112085}
   buttonpressed2: {fileID: 696227272}
   buttonpressed3: {fileID: 1251601875}
-  buttonpressed4: {fileID: 89960490}
+  buttonpressed4: {fileID: 0}
   Letterbox: {fileID: 1262289164}
-  Rightdoor: {fileID: 1852020333}
-  Leftdoor: {fileID: 1337366043}
-  MainCamera: {fileID: 1716611883}
+  Rightdoor: {fileID: 0}
+  Leftdoor: {fileID: 0}
+  MainCamera: {fileID: 0}
   Round: 1
 --- !u!1 &1906831618
 GameObject:
