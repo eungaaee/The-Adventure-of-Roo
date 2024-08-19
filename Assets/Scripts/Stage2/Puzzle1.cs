@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.ShaderData;
+using DG.Tweening;
 
 public class Puzzle1 : MonoBehaviour
 {
@@ -16,8 +16,12 @@ public class Puzzle1 : MonoBehaviour
     [SerializeField] private buttonpress3 buttonpressed3;
     [SerializeField] private buttonpress4 buttonpressed4;
     [SerializeField] private LetterboxController Letterbox;
+    [SerializeField] private Transform Rightdoor;
+    [SerializeField] private Transform Leftdoor;
+    [SerializeField] private MainCameraController MainCamera;
     private PlayerController PlayerCtr;
-
+    private GateController GateControl;
+    private Sequence mySequence;
     private Color red = Color.red;
     private Color green = Color.green;
     public int Round = 1;
@@ -45,6 +49,7 @@ public class Puzzle1 : MonoBehaviour
         buttonpressed2 = GameObject.Find("button2").GetComponent<buttonpress2>();
         buttonpressed3 = GameObject.Find("button3").GetComponent<buttonpress3>();
         buttonpressed4 = GameObject.Find("button4").GetComponent<buttonpress4>();
+        GateControl = GameObject.Find("FirstFloorGate").GetComponent<GateController>();
     }
 
     // Update is called once per frame
@@ -196,6 +201,15 @@ public class Puzzle1 : MonoBehaviour
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
         StartCoroutine(Letterbox.SetBottomText("다음 퍼즐로 향하는 문이 열린다!"));
+        yield return new WaitForSeconds(2);
+        StartCoroutine(Letterbox.ClearBottomText());
+        mySequence = DOTween.Sequence()
+        .Append(Rightdoor.DOMoveX(3.4f, 2).SetEase(Ease.InQuart))
+        .Join(Leftdoor.DOMoveX(-3.08f, 2).SetEase(Ease.InQuart));
+        yield return new WaitForSeconds(1);
+        Letterbox.LetterboxOff();
+        GateControl.pass = true;
+        PlayerCtr.Controllable = true;
     }
 
     public IEnumerator lightsFadeIn(SpriteRenderer lights, float Duration) {
