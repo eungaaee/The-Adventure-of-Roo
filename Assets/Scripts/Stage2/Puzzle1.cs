@@ -28,12 +28,12 @@ public class Puzzle1 : MonoBehaviour
         {1,2,4},
         {2,3,4}
     };
-    private static readonly int[,] ChangeColor3 = new int[3, 3]             // 7°³
+    private static readonly int[,] ChangeColor3 = new int[3, 4]             // 7°³
     {
         {0,2,3,5},
-        {1,4,5},
-        {1,6,7}
-    };
+        {1,2,4,5},
+        {0,3,4,6}
+    };// 0 1 2 3 4 5 6 
 
     void Start()
     {
@@ -93,25 +93,27 @@ public class Puzzle1 : MonoBehaviour
         }
         if (Round == 3) {
             if (buttonpressed1.button1pressed == true) {
-                for (int i = 0; i < 3; i++) {
-                    if (Lights2[ChangeColor2[2, i]].color == green) Lights2[ChangeColor2[2, i]].color = red;
-                    else Lights2[ChangeColor2[2, i]].color = green;
+                for (int i = 0; i < 4; i++) {
+                    if (Lights3[ChangeColor2[0, i]].color == green) Lights3[ChangeColor2[0, i]].color = red;
+                    else Lights3[ChangeColor2[0, i]].color = green;
                     buttonpressed3.button3pressed = false;
                 }
             }
             if (buttonpressed2.button2pressed == true) {
-                if (Lights3[ChangeColor2[Round-1, 1]].color == green) Lights3[ChangeColor2[Round-1, 1]].color = red;
-                else Lights3[ChangeColor2[Round-1, 1]].color = green;
-                buttonpressed2.button2pressed = false;
-            }
-            if (buttonpressed3.button3pressed == true) {
-                for (int i = 0; i < 3; i++) {
-                    if (Lights3[ChangeColor2[Round-1, 2]].color == green) Lights3[ChangeColor2[Round-1, 2]].color = red;
-                    else Lights3[ChangeColor2[Round-1, 2]].color = green;
+                for (int i = 0; i < 4; i++) {
+                    if (Lights3[ChangeColor2[1, i]].color == green) Lights3[ChangeColor2[1, i]].color = red;
+                    else Lights3[ChangeColor2[1, i]].color = green;
                     buttonpressed3.button3pressed = false;
                 }
             }
-            if (Lights2[0].color  == green && Lights2[1].color == green && Lights2[2].color == green && Lights2[3].color == green && Lights2[4].color == green) {
+            if (buttonpressed3.button3pressed == true) {
+                for (int i = 0; i < 4; i++) {
+                    if (Lights3[ChangeColor2[2, i]].color == green) Lights3[ChangeColor2[2, i]].color = red;
+                    else Lights3[ChangeColor2[2, i]].color = green;
+                    buttonpressed3.button3pressed = false;
+                }
+            }
+            if (Lights3[0].color  == green && Lights3[1].color == green && Lights3[2].color == green && Lights3[3].color == green && Lights3[4].color == green&& Lights3[5].color == green && Lights3[6].color == green) {
                 StartCoroutine(Puzzl1Clear());
             }
         }
