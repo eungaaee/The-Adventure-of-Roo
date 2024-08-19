@@ -25,8 +25,8 @@ public class buttonpress2 : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject == Player&& puzzle.Round != 0) {
-            Letterbox.LetterboxOn(150);
-            StartCoroutine(Letterbox.SetBottomText("¹öÆ° ´©¸£±â[E]"));
+            Letterbox.LetterboxOn(100);
+            StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[E]"));
         }
     }
     public void OnTriggerExit2D(Collider2D collision) {
