@@ -14,25 +14,28 @@ public class Puzzle1 : MonoBehaviour
     [SerializeField] private buttonpress1 buttonpressed1;
     [SerializeField] private buttonpress2 buttonpressed2;
     [SerializeField] private buttonpress3 buttonpressed3;
+    [SerializeField] private buttonpress4 buttonpressed4;
     [SerializeField] private LetterboxController Letterbox;
     private PlayerController PlayerCtr;
 
     private Color red = Color.red;
     private Color green = Color.green;
-    private int Round = 1;
+    public int Round = 1;
 
     private static readonly int[] ChangeColor1 = new int[3] { 0, 2, 1 };    // 3개
-    private static readonly int[,] ChangeColor2 = new int[3, 3]             // 5개
+    private static readonly int[,] ChangeColor2 = new int[4, 3]             // 5개
     {
-        {0,1,2},
+        {0,2,3},
         {1,2,4},
-        {2,3,4}
-    };
-    private static readonly int[,] ChangeColor3 = new int[3, 4]             // 7개
+        {0,3,4},
+        {0,1,3}
+    };// 0 1 2 3 4
+    private static readonly int[,] ChangeColor3 = new int[4, 3]             // 7개
     {
-        {0,2,3,5},
-        {1,2,4,5},
-        {0,3,4,6}
+        {0,2,5},
+        {0,1,2},
+        {2,3,4},
+        {2,5,6}
     };// 0 1 2 3 4 5 6 
 
     void Start()
@@ -41,6 +44,7 @@ public class Puzzle1 : MonoBehaviour
         buttonpressed1 = GameObject.Find("button1").GetComponent<buttonpress1>();
         buttonpressed2 = GameObject.Find("button2").GetComponent<buttonpress2>();
         buttonpressed3 = GameObject.Find("button3").GetComponent<buttonpress3>();
+        buttonpressed4 = GameObject.Find("button4").GetComponent<buttonpress4>();
     }
 
     // Update is called once per frame
@@ -60,6 +64,11 @@ public class Puzzle1 : MonoBehaviour
                 if (Lights1[ChangeColor1[2]].color == green) Lights1[ChangeColor1[2]].color = red;
                 else Lights1[ChangeColor1[2]].color = green;
                 buttonpressed3.button3pressed = false;
+            }
+            if (buttonpressed4.button4pressed == true) {
+                if (Lights1[ChangeColor1[0]].color == green) Lights1[ChangeColor1[2]].color = red;
+                else Lights1[ChangeColor1[0]].color = green;
+                buttonpressed4.button4pressed = false;
             }
             if (Lights1[0].color  == green && Lights1[1].color == green && Lights1[2].color == green) {
                 StartCoroutine(Puzzl1LevelChange2());
@@ -87,30 +96,44 @@ public class Puzzle1 : MonoBehaviour
                     buttonpressed3.button3pressed = false;
                 }
             }
+            if (buttonpressed4.button4pressed == true) {
+                for (int i = 0; i < 3; i++) {
+                    if (Lights2[ChangeColor2[3, i]].color == green) Lights2[ChangeColor2[3, i]].color = red;
+                    else Lights2[ChangeColor2[3, i]].color = green;
+                    buttonpressed4.button4pressed = false;
+                }
+            }
             if (Lights2[0].color  == green && Lights2[1].color == green && Lights2[2].color == green && Lights2[3].color == green && Lights2[4].color == green) {
                 StartCoroutine(Puzzl1LevelChange3());
             }
         }
         if (Round == 3) {
             if (buttonpressed1.button1pressed == true) {
-                for (int i = 0; i < 4; i++) {
-                    if (Lights3[ChangeColor2[0, i]].color == green) Lights3[ChangeColor2[0, i]].color = red;
-                    else Lights3[ChangeColor2[0, i]].color = green;
-                    buttonpressed3.button3pressed = false;
+                for (int i = 0; i < 3; i++) {
+                    if (Lights3[ChangeColor3[0, i]].color == green) Lights3[ChangeColor3[0, i]].color = red;
+                    else Lights3[ChangeColor3[0, i]].color = green;
+                    buttonpressed1.button1pressed = false;
                 }
             }
             if (buttonpressed2.button2pressed == true) {
-                for (int i = 0; i < 4; i++) {
-                    if (Lights3[ChangeColor2[1, i]].color == green) Lights3[ChangeColor2[1, i]].color = red;
-                    else Lights3[ChangeColor2[1, i]].color = green;
-                    buttonpressed3.button3pressed = false;
+                for (int i = 0; i < 3; i++) {
+                    if (Lights3[ChangeColor3[1, i]].color == green) Lights3[ChangeColor3[1, i]].color = red;
+                    else Lights3[ChangeColor3[1, i]].color = green;
+                    buttonpressed2.button2pressed = false;
                 }
             }
             if (buttonpressed3.button3pressed == true) {
-                for (int i = 0; i < 4; i++) {
-                    if (Lights3[ChangeColor2[2, i]].color == green) Lights3[ChangeColor2[2, i]].color = red;
-                    else Lights3[ChangeColor2[2, i]].color = green;
+                for (int i = 0; i < 3; i++) {
+                    if (Lights3[ChangeColor3[2, i]].color == green) Lights3[ChangeColor3[2, i]].color = red;
+                    else Lights3[ChangeColor3[2, i]].color = green;
                     buttonpressed3.button3pressed = false;
+                }
+            }
+            if (buttonpressed4.button4pressed == true) {
+                for (int i = 0; i < 3; i++) {
+                    if (Lights3[ChangeColor3[3, i]].color == green) Lights3[ChangeColor3[3, i]].color = red;
+                    else Lights3[ChangeColor3[3, i]].color = green;
+                    buttonpressed4.button4pressed = false;
                 }
             }
             if (Lights3[0].color  == green && Lights3[1].color == green && Lights3[2].color == green && Lights3[3].color == green && Lights3[4].color == green&& Lights3[5].color == green && Lights3[6].color == green) {
@@ -164,7 +187,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1Clear() {
-        Round = 3;
+        Round = 0;
         PlayerCtr.Controllable = false;
         StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);

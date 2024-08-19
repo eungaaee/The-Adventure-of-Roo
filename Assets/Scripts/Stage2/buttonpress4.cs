@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Unity.Collections.Unicode;
 using static UnityEditor.ShaderData;
 
-public class buttonpress3 : MonoBehaviour
+public class buttonpress4 : MonoBehaviour 
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private LetterboxController Letterbox;
     private Puzzle1 puzzle;
     private Rigidbody2D PlayerRigid;
     private BoxCollider2D buttoncolider;
-    [SerializeField] public bool button3pressed = false;
+    [SerializeField] public bool button4pressed = false;
 
     public void Start() {
         buttoncolider = GetComponent<BoxCollider2D>();
@@ -19,8 +21,8 @@ public class buttonpress3 : MonoBehaviour
     }
 
     public void Update() {
-        if (buttoncolider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E) && puzzle.Round != 0) {
-            button3pressed = true;
+        if (buttoncolider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E)&& puzzle.Round != 0) {
+            button4pressed = true;
         }
     }
     public void OnTriggerEnter2D(Collider2D collision) {
