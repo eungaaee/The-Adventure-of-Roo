@@ -3,9 +3,32 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 public class GNPuzzle : MonoBehaviour {
-    [SerializeField] private TextMeshPro answerField;
+    [SerializeField] private TextMeshPro questionField, answerField;
+    [SerializeField] private SceneController SceneCtr;
 
-    private int playerAnswer = 0;
+    private const int QuestionAmount = 3;
+
+    private string[] question = new string[QuestionAmount] {
+        "5 + 3 = 28    9 + 1 = 810\n8 + 6 = 214    5 + 4 = 19", // 숫자 두 개 차를 앞, 합을 뒤로 한거
+        "34251 = 0      257381 = 2\n3141592 = 1    127546 = 1\n21782 = 2    473829 = 3", // 구멍
+        "6600 = 0    7050 = 5\n11300 = 0    470506 = 5\n323200 = 0  1070304 = 10" // 0 사이 숫자 더한거
+    };
+    private string[] answerFieldText = new string[QuestionAmount] {
+        "4 + 3 = _",
+        "10293847 = _",
+        "802030304 = _"
+    };
+    private int[] answer = new int[QuestionAmount] {17, 4, 8};
+
+    private int playerAnswer = -1;
+    private int questionIndex = 0;
+
+    public bool isChecking, IsFinished;
+
+    private void Start() {
+        questionField.text = question[0];
+        answerField.text = answerFieldText[0];
+    }
 
     public void IncreasePlayerAnswer() {
         if (playerAnswer > 999) return;
@@ -27,5 +50,59 @@ public class GNPuzzle : MonoBehaviour {
         }
         newText += $" {playerAnswer}";
         answerField.text = newText;
+    }
+
+    public void CorrectCheck() {
+        isChecking = true;
+        
+        if (playerAnswer == answer[questionIndex]) {
+            questionIndex++;
+
+            StartCoroutine(NextQuestion());
+        } else StartCoroutine(Retry());
+    }
+
+    private IEnumerator Retry() {
+        yield return new WaitForSeconds(0.5f);
+        answerField.text = "Wrong!";
+
+        yield return new WaitForSeconds(2);
+        questionField.text = question[questionIndex];
+        answerField.text = answerFieldText[questionIndex];
+        
+        playerAnswer = -1;
+
+        isChecking = false;
+    }
+    
+    private IEnumerator NextQuestion() {
+        yield return new WaitForSeconds(0.5f);
+        answerField.text = "Correct!";
+
+        yield return new WaitForSeconds(2);
+        if (questionIndex < QuestionAmount) {
+            questionField.text = question[questionIndex];
+            answerField.text = answerFieldText[questionIndex];
+            
+            playerAnswer = -1;
+
+            isChecking = false;
+        } else {
+            StartCoroutine(Finish());
+        }
+    }
+
+    private IEnumerator Finish() {
+        questionField.text = "";
+        yield return new WaitForSeconds(2);
+        answerField.text = "ALL SOLVED!";
+        yield return new WaitForSeconds(3);
+
+        yield return StartCoroutine(SceneCtr.FadeOut(2));
+
+        IsFinished = true;
+
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(SceneCtr.FadeIn(1));
     }
 }

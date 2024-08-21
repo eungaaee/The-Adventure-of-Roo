@@ -286,14 +286,14 @@ public class NumberPuzzle : MonoBehaviour {
     private IEnumerator Finish() {
         StartCoroutine(VeryAwesomeEpicRainbowEffect());
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         yield return StartCoroutine(SceneCtr.FadeOut(2));
 
         PeekingRoo.SetActive(false);
         Roo.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
-        yield return StartCoroutine(SceneCtr.FadeIn());
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(SceneCtr.FadeIn(1));
 
     }
 
