@@ -73,7 +73,7 @@ public class GateController : MonoBehaviour {
         
         Cam.SetBoundary(cameraBoundary[targetMap, 0], cameraBoundary[targetMap, 1]);
         // PlayerCtr.SetBoundary(playerBoundary[targetMap, 0], playerBoundary[targetMap, 1]);
-        CameraObject.orthographicSize = 6f;
+        CameraObject.orthographicSize = 6;
 
         if (useCoordinate) PlayerRigid.transform.position = targetPos;
         else Player.transform.position = targetGate.transform.position;
