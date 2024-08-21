@@ -6,7 +6,7 @@ public class ButtonPress : MonoBehaviour {
     private Image pabImage;
     private RectTransform pabTransform;
     [SerializeField] SceneController Scene;
-
+    private AudioSource Audio;
     [SerializeField] private float fadeDuration = 2.0f, blinkDuration = 1.0f;
     [SerializeField] private Vector2 targetScale = new Vector2(3000, 3000);
 
@@ -14,8 +14,11 @@ public class ButtonPress : MonoBehaviour {
     private Coroutine blinkCoroutine;
 
     private void Awake() {
-        pabImage = transform.Find("PressAnyButton").GetComponent<Image>();
+        pabImage = GameObject.Find("PressAnyButton").GetComponent<Image>();
         pabTransform = pabImage.GetComponent<RectTransform>();
+        if (Audio == null) {
+            Audio = gameObject.GetComponent<AudioSource>();
+        }
     }
 
     private void Start() {
@@ -24,6 +27,7 @@ public class ButtonPress : MonoBehaviour {
 
     private void Update() {
         if (Input.anyKeyDown && !isFading) {
+            Audio.Play();
             if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
             StartCoroutine(FadeAndGrow());
         }
@@ -48,11 +52,9 @@ public class ButtonPress : MonoBehaviour {
     }
 
     private IEnumerator FadeAndGrow() {
-        GetComponent<AudioSource>().Play();
         isFading = true;
         Vector2 initialScale = pabTransform.sizeDelta;
         const float initialAlpha = 1;
-
         for (float t = 0; t <= fadeDuration; t += Time.deltaTime) {
             float normalizedTime = t / fadeDuration;
             pabTransform.sizeDelta = Vector2.Lerp(initialScale, targetScale, normalizedTime);
@@ -62,6 +64,6 @@ public class ButtonPress : MonoBehaviour {
         pabTransform.sizeDelta = targetScale;
         pabImage.color = new Color(1, 1, 1, 0.0f);
 
-        StartCoroutine(Scene.LoadScene("Stage1"));
+        StartCoroutine(Scene.LoadScene("cutscene1"));
     }
 }

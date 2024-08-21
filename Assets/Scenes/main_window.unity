@@ -1170,7 +1170,6 @@ GameObject:
   - component: {fileID: 1867105855}
   - component: {fileID: 1867105854}
   - component: {fileID: 1867105853}
-  - component: {fileID: 1867105856}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1228,22 +1227,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1867105856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867105852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b98d4589c6f22c2419df95e061caaf68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Scene: {fileID: 66416675}
-  fadeDuration: 2
-  blinkDuration: 1
-  targetScale: {x: 3000, y: 3000}
 --- !u!1 &1922653933
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,7 +1361,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6ea937caba632a84d8dc16c5fdb908c9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.85
   m_Pitch: 1
   Loop: 0
   Mute: 0

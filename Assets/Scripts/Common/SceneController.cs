@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 
 public class SceneController : MonoBehaviour {
     [SerializeField] private Image FadeImage;
-    private const float FadeDuration = 0.8f;
+    private const float FadeDuration = 2f;
 
     private void Awake() {
         FadeImage.color = new Color(0, 0, 0, 1);
