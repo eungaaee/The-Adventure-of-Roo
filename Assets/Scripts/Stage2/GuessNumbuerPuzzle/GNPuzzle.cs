@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using TMPro;
 using UnityEngine;
 public class GNPuzzle : MonoBehaviour {
     [SerializeField] private TextMeshPro answerField;
 
     private int playerAnswer = 0;
-    
-    private void Update() {
-        Debug.Log(playerAnswer);
-    }
 
     public void IncreasePlayerAnswer() {
         if (playerAnswer > 999) return;
