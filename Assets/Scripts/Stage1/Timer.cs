@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour {
         if (isRunning) {
             remainingTime -= Time.deltaTime;
 
-            if (remainingTime <= 0) {
+            if (remainingTime < 0) {
                 remainingTime = 0;
                 StartCoroutine(TimeoutReset());
             }
@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour {
             UpdateTimerText(remainingTime);
         }
 
-        if (triggered & !isTimeout & Player.IsResetting) {
+        if (triggered & isRunning & !isTimeout & Player.IsResetting) {
             isRunning = false;
             HideTimer();
             StartCoroutine(StartTimer());
