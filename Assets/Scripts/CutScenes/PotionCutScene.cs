@@ -72,7 +72,7 @@ public class PotionCutscene : MonoBehaviour {
         Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);
         Player.SetSpeed(2);
-        StartCoroutine(Letterbox.SetBottomText("[A]/[←] 비석 살펴보기"));
+        StartCoroutine(Letterbox.SetBottomText("<sprite=28> / <sprite=49> 비석 살펴보기"));
 
         // 이동 제한 해제, 카메라에 가두기
         yield return new WaitForSeconds(1);

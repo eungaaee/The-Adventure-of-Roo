@@ -27,7 +27,7 @@ public class SignTrigger : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             Letterbox.LetterboxOn(100);
-            StartCoroutine(Letterbox.SetBottomText("[E] 자세히 보기"));
+            StartCoroutine(Letterbox.SetBottomText("<sprite=17>자세히 보기"));
             detectKey = true;
         }
     }

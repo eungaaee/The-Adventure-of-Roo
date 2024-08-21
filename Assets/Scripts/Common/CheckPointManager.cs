@@ -43,7 +43,7 @@ public class CheckpointManager : MonoBehaviour {
             InBoundary = true;
             InitIsLetterboxOn = Letterbox.IsLetterboxOn;
             if (!InitIsLetterboxOn) Letterbox.LetterboxOn();
-            StartCoroutine(Letterbox.SetBottomText("[Enter] 길게 눌러서 저장하기"));
+            StartCoroutine(Letterbox.SetBottomText("<sprite=0> 길게 눌러서 저장하기"));
             StartCoroutine(Letterbox.SetTopText(""));
         }
     }
