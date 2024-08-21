@@ -14,15 +14,16 @@ public class GNButtonController : MonoBehaviour {
     private SpriteRenderer sprRdr;
 
     private const int INF = 0x3f3f3f3f;
-    private float cooldown = 2;
-    private float lastPressed;
+    private float cooldown = 0.5f;
+    private float lastPressed = -INF;
+    private bool pressing;
 
     private void Awake() {
         sprRdr = GetComponent<SpriteRenderer>();    
     }
 
     private void Update() {
-        if (Time.time - lastPressed > cooldown) {
+        if (pressing && Time.time - lastPressed > cooldown) {
             lastPressed = Time.time;
             if (isIncreaseButton) PuzzleScript.IncreasePlayerAnswer();
             else PuzzleScript.DecreasePlayerAnswer();
@@ -31,14 +32,15 @@ public class GNButtonController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
-            lastPressed = Time.time;
+            pressing = true;
             sprRdr.sprite = ClickedSprite;
         }
     }
 
     private void OnCollisionExit2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
-            lastPressed = INF;
+            pressing = false;
+            lastPressed = -INF;
             sprRdr.sprite = NormalSprite;
         }
     }
