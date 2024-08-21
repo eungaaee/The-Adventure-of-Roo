@@ -5582,7 +5582,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 5
   m_wordSpacing: 0
-  m_lineSpacing: -15
+  m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -6439,7 +6439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7052855953729031165, guid: 727e45c42d49c2247a31b028a011b243, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7103724580119393678, guid: 727e45c42d49c2247a31b028a011b243, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33294,7 +33294,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -41224,9 +41224,7 @@ MonoBehaviour:
     11300 = 0    470506 = 5
 
     323200 = 0  1070304
-    = 10
-
-'
+    = 10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f5632b7e768c3be428374995c22e37c0, type: 2}
   m_sharedMaterial: {fileID: 2433093498433232851, guid: f5632b7e768c3be428374995c22e37c0, type: 2}
@@ -41973,6 +41971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6421267c7863a3c4d998770c05e04aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  answerField: {fileID: 342582275}
 --- !u!1 &1942525665
 GameObject:
   m_ObjectHideFlags: 0
@@ -44796,7 +44795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7052855953729031165, guid: 727e45c42d49c2247a31b028a011b243, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7103724580119393678, guid: 727e45c42d49c2247a31b028a011b243, type: 3}
       propertyPath: m_LocalPosition.x
