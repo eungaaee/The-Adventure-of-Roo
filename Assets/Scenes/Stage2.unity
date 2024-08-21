@@ -9602,6 +9602,7 @@ GameObject:
   - component: {fileID: 490438212}
   - component: {fileID: 490438213}
   - component: {fileID: 490438214}
+  - component: {fileID: 490438215}
   m_Layer: 0
   m_Name: Increase
   m_TagString: Untagged
@@ -9711,6 +9712,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.32}
   m_Size: {x: 1.5000005, y: 1.2}
   m_Direction: 1
+--- !u!114 &490438215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490438211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8c088f405e6b744b020eb51fbe9b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isIncreaseButton: 1
+  PuzzleScript: {fileID: 1942428634}
+  NormalSprite: {fileID: 21300000, guid: e720f86624644fc4f941c74c89b6e37d, type: 3}
+  ClickedSprite: {fileID: 21300000, guid: 4323a67c282ce2e419c6cf7835383c57, type: 3}
 --- !u!1 &505528625
 GameObject:
   m_ObjectHideFlags: 0
@@ -10391,6 +10408,7 @@ GameObject:
   - component: {fileID: 582447096}
   - component: {fileID: 582447098}
   - component: {fileID: 582447097}
+  - component: {fileID: 582447099}
   m_Layer: 0
   m_Name: Decrease
   m_TagString: Untagged
@@ -10500,6 +10518,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &582447099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582447095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8c088f405e6b744b020eb51fbe9b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isIncreaseButton: 0
+  PuzzleScript: {fileID: 1942428634}
+  NormalSprite: {fileID: 21300000, guid: 108572257ba709548b8ccc12b4cb67c8, type: 3}
+  ClickedSprite: {fileID: 21300000, guid: 8dd9c0a0f4b9cbb498b59971ca2a28ad, type: 3}
 --- !u!1 &584134447
 GameObject:
   m_ObjectHideFlags: 0
@@ -12894,7 +12928,6 @@ Transform:
   m_Children:
   - {fileID: 1887479701}
   - {fileID: 342582274}
-  - {fileID: 1527185121}
   m_Father: {fileID: 1942428633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &675094181
@@ -34036,8 +34069,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527185120}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -19.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34045,7 +34078,7 @@ Transform:
   - {fileID: 582447096}
   - {fileID: 393628581}
   - {fileID: 490438212}
-  m_Father: {fileID: 675094180}
+  m_Father: {fileID: 1942428633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542169372
 GameObject:
@@ -41874,6 +41907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942428633}
+  - component: {fileID: 1942428634}
   m_Layer: 0
   m_Name: Puzzle1
   m_TagString: Untagged
@@ -41896,8 +41930,21 @@ Transform:
   m_Children:
   - {fileID: 666840666}
   - {fileID: 675094180}
+  - {fileID: 1527185121}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1942428634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942428632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6421267c7863a3c4d998770c05e04aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1942525665
 GameObject:
   m_ObjectHideFlags: 0
