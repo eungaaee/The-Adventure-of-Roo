@@ -42,7 +42,7 @@ public class SignTrigger : MonoBehaviour {
 
     private IEnumerator ShowDescription() {
         yield return StartCoroutine(SceneCtr.HalfFadeOut());
-        yield return StartCoroutine(Logue.SetMonologue("루의 위치 주변의 8칸 중 한 칸을 선택해\n1부터 마지막 숫자까지 차례대로 이동하세요\n\n\n[X] 닫기"));
+        yield return StartCoroutine(Logue.SetMonologue("루의 위치 주변의 8칸 중 한 칸을 선택해\n1부터 마지막 숫자까지 차례대로 이동하세요\n\n\n[X] 닫기", 1.5f));
 
         while (!Input.GetKeyUp(KeyCode.X)) yield return null;
 
