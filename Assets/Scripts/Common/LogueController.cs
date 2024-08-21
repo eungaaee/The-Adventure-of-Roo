@@ -68,7 +68,7 @@ public class LogueController : MonoBehaviour {
         
         foreach (char letter in text) {
             MonologueTextObj.text += letter;
-            yield return new WaitForSeconds(0.05f * relativeInterval);
+            yield return new WaitForSeconds(0.07f * relativeInterval);
         }
     }
 
