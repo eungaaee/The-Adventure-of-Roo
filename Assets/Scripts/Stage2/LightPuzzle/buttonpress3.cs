@@ -7,18 +7,37 @@ public class buttonpress3 : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     [SerializeField] private LetterboxController Letterbox;
+
+    [SerializeField] private Sprite NormalSprite, ClickedSprite;
+
     private Puzzle1 puzzle;
     private Rigidbody2D PlayerRigid;
     private BoxCollider2D buttoncolider;
-    [SerializeField] public bool button3pressed = false;
+    private SpriteRenderer sprRdr;
+    
+    public bool button3pressed = false;
 
     public void Start() {
         buttoncolider = GetComponent<BoxCollider2D>();
+        sprRdr = GetComponent<SpriteRenderer>();
         PlayerRigid = Player.GetComponent<Rigidbody2D>();
-        puzzle = GameObject.Find("button").GetComponent<Puzzle1>();
+        puzzle = GameObject.Find("Buttons").GetComponent<Puzzle1>();
     }
 
-    public void Update() {
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Player")) {
+            sprRdr.sprite = ClickedSprite;
+            if (puzzle.Round > 0) button3pressed = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Player")) {
+            sprRdr.sprite = NormalSprite;
+        }
+    }
+
+    /* public void Update() {
         if (buttoncolider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E) && puzzle.Round != 0) {
             button3pressed = true;
         }
@@ -34,5 +53,5 @@ public class buttonpress3 : MonoBehaviour
             StartCoroutine(Letterbox.ClearBottomText());
             Letterbox.LetterboxOff();
         }
-    }
+    } */
 }

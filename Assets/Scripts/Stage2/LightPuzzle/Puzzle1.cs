@@ -45,11 +45,11 @@ public class Puzzle1 : MonoBehaviour
     void Start()
     {
         PlayerCtr = GameObject.Find("Roo").GetComponent<PlayerController>();
-        buttonpressed1 = GameObject.Find("button1").GetComponent<buttonpress1>();
-        buttonpressed2 = GameObject.Find("button2").GetComponent<buttonpress2>();
-        buttonpressed3 = GameObject.Find("button3").GetComponent<buttonpress3>();
-        buttonpressed4 = GameObject.Find("button4").GetComponent<buttonpress4>();
-        GateControl = GameObject.Find("FirstFloorGate").GetComponent<GateController>();
+        buttonpressed1 = GameObject.Find("Button1").GetComponent<buttonpress1>();
+        buttonpressed2 = GameObject.Find("Button2").GetComponent<buttonpress2>();
+        buttonpressed3 = GameObject.Find("Button3").GetComponent<buttonpress3>();
+        buttonpressed4 = GameObject.Find("Button4").GetComponent<buttonpress4>();
+        GateControl = GameObject.Find("Puzzle2Gate").GetComponent<GateController>();
     }
 
     // Update is called once per frame
@@ -150,13 +150,13 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1LevelChange2() {
         Round = 2;
         PlayerCtr.SwitchControllable(false);
-        StartCoroutine(PlayerCtr.CutSceneMove(-7));
+        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
         StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("�� ����� ������ ���̱� �����Ѵ�..."));
+        StartCoroutine(Letterbox.SetBottomText("�� ����� ������ ���̱� �����Ѵ�...")); */
         for (int i = 0; i < Lights1.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights1[i], 1));
         }
@@ -172,13 +172,13 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1LevelChange3() {
         Round = 3;
         PlayerCtr.SwitchControllable(false);
-        StartCoroutine(PlayerCtr.CutSceneMove(-7));
+        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
         StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("���� ����� ������ ���̱� �����Ѵ�..."));
+        StartCoroutine(Letterbox.SetBottomText("���� ����� ������ ���̱� �����Ѵ�...")); */
         for (int i = 0; i < Lights2.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights2[i], 1));
         }
@@ -194,7 +194,7 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1Clear() {
         Round = 0;
         PlayerCtr.SwitchControllable(false);
-        StartCoroutine(PlayerCtr.CutSceneMove(-7));
+        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
         StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
@@ -207,7 +207,8 @@ public class Puzzle1 : MonoBehaviour
         .Append(Rightdoor.DOMoveX(3.4f, 2).SetEase(Ease.InQuart))
         .Join(Leftdoor.DOMoveX(-3.08f, 2).SetEase(Ease.InQuart));
         yield return new WaitForSeconds(1);
-        Letterbox.LetterboxOff();
+        Letterbox.LetterboxOff(); */
+        yield return null;
         GateControl.pass = true;
         PlayerCtr.SwitchControllable(true);
     }
