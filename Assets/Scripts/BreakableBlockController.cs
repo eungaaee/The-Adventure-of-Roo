@@ -39,7 +39,7 @@ public class BreakableBlockController : MonoBehaviour {
             Malang += 1.5f;
         }
 
-        if (Player.IsResetting) ReGenerate();
+        if (Player.IsReset) ReGenerate();
     }
 
     private void OnCollisionEnter2D(Collision2D col) {

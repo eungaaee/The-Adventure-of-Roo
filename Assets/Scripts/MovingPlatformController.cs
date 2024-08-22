@@ -21,7 +21,7 @@ public class MovingPlatformController : MonoBehaviour {
     }
 
     private void Update() {
-        if (IsStyx & styxMoved & Player.IsResetting) {
+        if (IsStyx & styxMoved & Player.IsReset) {
             styxMoved = false;
             transform.position = wayPoints[0];
         }

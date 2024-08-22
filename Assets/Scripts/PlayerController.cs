@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
     private int InitLife;
     private bool Controllable = true;
     private bool IsDamaging = false;
-    public bool IsResetting = false;
+    public bool IsReset = false;
 
     public Transform[] waypoints;
     public float speed = 2f;
@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator ResetCondition() {
         Life = InitLife;
-        // Controllable = true;
+        Controllable = true;
         JumpCount = 0;
         IsDamaging = false;
 
@@ -275,15 +275,15 @@ public class PlayerController : MonoBehaviour {
         yield return StartCoroutine(SceneController.FadeOut());
 
         yield return transform.position = DefaultPos;
-        yield return IsResetting = true;
         yield return StartCoroutine(ResetCondition());
-        yield return IsResetting = false;
+        yield return IsReset = true;
 
         yield return StartCoroutine(Letterbox.ClearBottomText());
         yield return StartCoroutine(Letterbox.ClearTopText());
 
         yield return new WaitForSeconds(1.5f);
         yield return StartCoroutine(SceneController.FadeIn());
+        yield return IsReset = false;
     }
 
     public void SetDefaultPos(Vector3 pos) { DefaultPos = pos; }

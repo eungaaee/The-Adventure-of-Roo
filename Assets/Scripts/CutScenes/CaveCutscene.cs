@@ -18,7 +18,7 @@ public class CaveCutscene : MonoBehaviour {
     }
 
     private void Update() {
-        if (Player.IsResetting & CaveBorder.activeSelf) {
+        if (Player.IsReset & CaveBorder.activeSelf) {
             TriggerCollider.enabled = true;
             CaveBorder.SetActive(false);
         }

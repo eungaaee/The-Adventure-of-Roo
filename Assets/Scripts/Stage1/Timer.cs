@@ -31,7 +31,7 @@ public class Timer : MonoBehaviour {
             UpdateTimerText(remainingTime);
         }
 
-        if (triggered & isRunning & !isTimeout & Player.IsResetting) {
+        if (triggered & isRunning & !isTimeout & Player.IsReset) {
             isRunning = false;
             Player.SwitchControllable(false);
             HideTimer();
@@ -100,7 +100,7 @@ public class Timer : MonoBehaviour {
         Player.Life = 1;
         StartCoroutine(Player.Damaged(Player.transform.position));
         while (true) {
-            if (Player.IsResetting) break;
+            if (Player.IsReset) break;
             yield return null;
         }
         yield return new WaitForSeconds(2);
