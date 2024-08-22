@@ -33,6 +33,7 @@ public class Timer : MonoBehaviour {
 
         if (triggered & isRunning & !isTimeout & Player.IsResetting) {
             isRunning = false;
+            Player.SwitchControllable(false);
             HideTimer();
             StartCoroutine(StartTimer());
         }
@@ -57,7 +58,6 @@ public class Timer : MonoBehaviour {
     public void HideTimer() { TimerText.enabled = false; }
 
     public IEnumerator StartTimer() {
-        Player.SwitchControllable(false);
         ResetTimer();
 
         yield return new WaitForSeconds(2);

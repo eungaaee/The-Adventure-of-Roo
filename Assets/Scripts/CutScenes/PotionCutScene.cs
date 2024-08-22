@@ -67,7 +67,7 @@ public class PotionCutscene : MonoBehaviour {
         spriteRenderer.sortingOrder = 6;
 
         // 비석 보여주기
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         CameraController.Zoom(2, 1, new Vector2(114, -5));
         Letterbox.LetterboxOn(250);
         yield return new WaitForSeconds(1);

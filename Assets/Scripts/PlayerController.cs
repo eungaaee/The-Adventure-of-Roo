@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     private int maxJump = 1, JumpCount = 0;
     [SerializeField] public int Life = 6;
     private int InitLife;
-    public bool Controllable = true;
+    private bool Controllable = true;
     private bool IsDamaging = false;
     public bool IsResetting = false;
 
@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour {
 
     public IEnumerator ResetCondition() {
         Life = InitLife;
-        Controllable = true;
+        // Controllable = true;
         JumpCount = 0;
         IsDamaging = false;
 

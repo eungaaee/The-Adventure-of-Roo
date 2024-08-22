@@ -26,15 +26,15 @@ public class Puzzle1 : MonoBehaviour
     private Color green = Color.green;
     public int Round = 1;
 
-    private static readonly int[] ChangeColor1 = new int[3] { 0, 2, 1 };    // 3°³
-    private static readonly int[,] ChangeColor2 = new int[4, 3]             // 5°³
+    private static readonly int[] ChangeColor1 = new int[3] { 0, 2, 1 };    // 3ï¿½ï¿½
+    private static readonly int[,] ChangeColor2 = new int[4, 3]             // 5ï¿½ï¿½
     {
         {0,2,3},
         {1,2,4},
         {0,3,4},
         {0,1,3}
     };// 0 1 2 3 4
-    private static readonly int[,] ChangeColor3 = new int[4, 3]             // 7°³
+    private static readonly int[,] ChangeColor3 = new int[4, 3]             // 7ï¿½ï¿½
     {
         {0,2,5},
         {0,1,2},
@@ -149,14 +149,14 @@ public class Puzzle1 : MonoBehaviour
 
     public IEnumerator Puzzl1LevelChange2() {
         Round = 2;
-        PlayerCtr.Controllable = false;
+        PlayerCtr.SwitchControllable(false);
         StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("¸ðµç »öÀ» ÃÊ·Ï»öÀ¸·Î ¹Ù²Ù¾ú´Ù!"));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê·Ï»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ï¿½ï¿½!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("´õ ¾î·Á¿î ÆÛÁñÀÌ º¸ÀÌ±â ½ÃÀÛÇÑ´Ù..."));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½..."));
         for (int i = 0; i < Lights1.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights1[i], 1));
         }
@@ -166,19 +166,19 @@ public class Puzzle1 : MonoBehaviour
         }
         StartCoroutine(Letterbox.ClearBottomText());
         Letterbox.LetterboxOff();
-        PlayerCtr.Controllable = true;
+        PlayerCtr.SwitchControllable(true);
     }
 
     public IEnumerator Puzzl1LevelChange3() {
         Round = 3;
-        PlayerCtr.Controllable = false;
+        PlayerCtr.SwitchControllable(false);
         StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("¸ðµç »öÀ» ÃÊ·Ï»öÀ¸·Î ¹Ù²Ù¾ú´Ù!"));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê·Ï»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ï¿½ï¿½!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("Á¦ÀÏ ¾î·Á¿î ÆÛÁñÀÌ º¸ÀÌ±â ½ÃÀÛÇÑ´Ù..."));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½..."));
         for (int i = 0; i < Lights2.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights2[i], 1));
         }
@@ -188,19 +188,19 @@ public class Puzzle1 : MonoBehaviour
         }
         StartCoroutine(Letterbox.ClearBottomText());
         Letterbox.LetterboxOff();
-        PlayerCtr.Controllable = true;
+        PlayerCtr.SwitchControllable(true);
     }
 
     public IEnumerator Puzzl1Clear() {
         Round = 0;
-        PlayerCtr.Controllable = false;
+        PlayerCtr.SwitchControllable(false);
         StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("¸ðµç »öÀ» ÃÊ·Ï»öÀ¸·Î ¹Ù²Ù¾ú´Ù!"));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê·Ï»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù¾ï¿½ï¿½ï¿½!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("´ÙÀ½ ÆÛÁñ·Î ÇâÇÏ´Â ¹®ÀÌ ¿­¸°´Ù!"));
+        StartCoroutine(Letterbox.SetBottomText("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
         mySequence = DOTween.Sequence()
@@ -209,7 +209,7 @@ public class Puzzle1 : MonoBehaviour
         yield return new WaitForSeconds(1);
         Letterbox.LetterboxOff();
         GateControl.pass = true;
-        PlayerCtr.Controllable = true;
+        PlayerCtr.SwitchControllable(true);
     }
 
     public IEnumerator lightsFadeIn(SpriteRenderer lights, float Duration) {
