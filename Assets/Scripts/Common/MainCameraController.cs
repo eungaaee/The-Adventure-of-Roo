@@ -73,6 +73,9 @@ public class MainCameraController : MonoBehaviour {
 
         float Duration = (float)Variables.Object(ZoomBoundary).Get("ZoomDuration");
 
+        // for Cancel Instant Zoom
+        CurZoomAmount = 0;
+
         if (MonoScope != null) StopCoroutine(MonoScope);
         MonoScope = Scope(DefaultZoomSize, Duration);
         StartCoroutine(MonoScope);

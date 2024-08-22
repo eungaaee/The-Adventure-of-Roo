@@ -11,14 +11,22 @@ public class CaveCutscene : MonoBehaviour {
     [SerializeField] private MainCameraController Cam;
 
     [SerializeField] private GameObject CaveBorder;
+    private BoxCollider2D TriggerCollider;
+
+    private void Awake() {
+        TriggerCollider = GetComponent<BoxCollider2D>();
+    }
 
     private void Update() {
-        if (Player.IsResetting & CaveBorder.activeSelf) CaveBorder.SetActive(false);
+        if (Player.IsResetting & CaveBorder.activeSelf) {
+            TriggerCollider.enabled = true;
+            CaveBorder.SetActive(false);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
-            GetComponent<BoxCollider2D>().enabled = false;
+            TriggerCollider.enabled = false;
             StartCoroutine(StartCutscene());
         }
     }
