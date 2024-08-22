@@ -14,6 +14,8 @@ public class MainCameraController : MonoBehaviour {
     private const float ShakeAmount = 0.25f, ShakeDuration = 0.25f;
     private float DefaultZoomSize, CurZoomAmount;
 
+    [SerializeField] private float PositionMoveUp = 0;
+
     private IEnumerator MonoScope;
     private IEnumerator VibrateGenerator;
 
@@ -27,7 +29,7 @@ public class MainCameraController : MonoBehaviour {
     }
 
     private void LateUpdate() {
-        Vector3 targetPos = new Vector3(RooTransform.position.x, RooTransform.position.y, transform.position.z);
+        Vector3 targetPos = new Vector3(RooTransform.position.x, RooTransform.position.y + PositionMoveUp, transform.position.z);
         targetPos.x = Mathf.Clamp(targetPos.x, MinCameraBoundary.x, MaxCameraBoundary.x);
         targetPos.y = Mathf.Clamp(targetPos.y, MinCameraBoundary.y, MaxCameraBoundary.y);
         transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * FollowSpeed);
