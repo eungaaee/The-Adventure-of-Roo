@@ -5,6 +5,7 @@ using UnityEngine;
 public class GNPuzzle : MonoBehaviour {
     [SerializeField] private TextMeshPro questionField, answerField;
     [SerializeField] private SceneController SceneCtr;
+    [SerializeField] private GameObject Gate;
 
     private const int QuestionAmount = 3;
 
@@ -18,12 +19,12 @@ public class GNPuzzle : MonoBehaviour {
         "10293847 = _",
         "802030304 = _"
     };
-    private int[] answer = new int[QuestionAmount] {17, 4, 8};
+    private int[] answer = new int[QuestionAmount] { 17, 4, 8 };
 
     private int playerAnswer = -1;
     private int questionIndex = 0;
 
-    public bool isChecking, IsFinished;
+    public bool isChecking, isFinished;
 
     private void Start() {
         questionField.text = question[0];
@@ -54,7 +55,7 @@ public class GNPuzzle : MonoBehaviour {
 
     public void CorrectCheck() {
         isChecking = true;
-        
+
         if (playerAnswer == answer[questionIndex]) {
             questionIndex++;
 
@@ -69,12 +70,12 @@ public class GNPuzzle : MonoBehaviour {
         yield return new WaitForSeconds(2);
         questionField.text = question[questionIndex];
         answerField.text = answerFieldText[questionIndex];
-        
+
         playerAnswer = -1;
 
         isChecking = false;
     }
-    
+
     private IEnumerator NextQuestion() {
         yield return new WaitForSeconds(0.5f);
         answerField.text = "Correct!";
@@ -83,7 +84,7 @@ public class GNPuzzle : MonoBehaviour {
         if (questionIndex < QuestionAmount) {
             questionField.text = question[questionIndex];
             answerField.text = answerFieldText[questionIndex];
-            
+
             playerAnswer = -1;
 
             isChecking = false;
@@ -100,7 +101,8 @@ public class GNPuzzle : MonoBehaviour {
 
         yield return StartCoroutine(SceneCtr.FadeOut(2));
 
-        IsFinished = true;
+        isFinished = true;
+        Gate.SetActive(true);
 
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(SceneCtr.FadeIn(1));

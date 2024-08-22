@@ -27,18 +27,14 @@ public class GNButtonController : MonoBehaviour {
     }
 
     private void Update() {
-        if (pressing && Time.time - lastPressed > cooldown) {
+        if (!PuzzleScript.isChecking && pressing && Time.time - lastPressed > cooldown) {
             lastPressed = Time.time;
             if (isDecreaseButton) PuzzleScript.DecreasePlayerAnswer();
             else if (isIncreaseButton) PuzzleScript.IncreasePlayerAnswer();
-            else if (isSubmitButton) {
-                pressing = false;
-                PuzzleScript.CorrectCheck();
-            }
+            else if (isSubmitButton) PuzzleScript.CorrectCheck();
         }
 
-        if (PuzzleScript.isChecking) pressing = false;
-        if (PuzzleScript.IsFinished) {
+        if (PuzzleScript.isFinished) {
             ColliderOff();
             GetComponent<GNButtonController>().enabled = false;
         }

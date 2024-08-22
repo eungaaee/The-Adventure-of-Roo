@@ -27,7 +27,8 @@ public class GateController : MonoBehaviour {
     [SerializeField] private GameObject targetGate;
     [SerializeField] private bool useCoordinate;
     [SerializeField] private Vector2 targetPos;
-    [SerializeField] public bool pass = true;
+
+    private bool detectKey;
 
     private void Awake() {
         PlayerRigid = Player.GetComponent<Rigidbody2D>();
@@ -35,32 +36,25 @@ public class GateController : MonoBehaviour {
 
         GateCollider = GetComponent<BoxCollider2D>();
     }
-    private void Start() {
-        if(targetMap == 0) {
-            pass = true;
-        }
-        else {
-            pass = false;
-        }
-    }
-
 
     private void Update() {
-        if (GateCollider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E) && pass == true) {
-            pass = false;
+        if (detectKey && Input.GetKeyUp(KeyCode.E)) {
+            GateCollider.enabled = false;
             StartCoroutine(EnterGate());
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject == Player && pass == true) {
+        if (col.gameObject == Player) {
+            detectKey = true;
             Letterbox.LetterboxOn(100);
             StartCoroutine(Letterbox.SetBottomText("<sprite=17> 들어가기"));
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        if (col.gameObject == Player && pass == true) {
+        if (col.gameObject == Player) {
+            detectKey = false;
             StartCoroutine(Letterbox.ClearBottomText());
             Letterbox.LetterboxOff();
         }

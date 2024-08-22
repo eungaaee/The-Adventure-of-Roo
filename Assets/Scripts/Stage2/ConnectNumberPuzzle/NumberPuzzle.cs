@@ -14,6 +14,7 @@ public class NumberPuzzle : MonoBehaviour {
     [SerializeField] private GameObject SelectGlow;
     [SerializeField] private LineRenderer Line;
     [SerializeField] private SceneController SceneCtr;
+    [SerializeField] private GameObject Gate;
 
     private SpriteRenderer PeekingRooRenderer;
     private SpriteRenderer SelectGlowRenderer;
@@ -23,10 +24,11 @@ public class NumberPuzzle : MonoBehaviour {
     private bool[] isCovered = new bool[82];
     private TextMeshPro[,] board = new TextMeshPro[9, 9];
 
-    private const int INF = 0x3f3f3f3f;
     [SerializeField] private const int initRow = 8, initCol = 0;
-    private int endRow, endCol;
+    private const int INF = 0x3f3f3f3f;
     private const float cooldown = 0.25f;
+
+    private int endRow, endCol;
     private int cellNumber;
     private int curRow, curColumn, nxtRow, nxtColumn;
     private Stack<int[]> footprint = new Stack<int[]>();
@@ -291,6 +293,7 @@ public class NumberPuzzle : MonoBehaviour {
 
         PeekingRoo.SetActive(false);
         Roo.SetActive(true);
+        Gate.SetActive(true);
 
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(SceneCtr.FadeIn(1));

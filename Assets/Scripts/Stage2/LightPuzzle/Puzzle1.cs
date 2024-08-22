@@ -209,7 +209,6 @@ public class Puzzle1 : MonoBehaviour
         yield return new WaitForSeconds(1);
         Letterbox.LetterboxOff(); */
         yield return null;
-        GateControl.pass = true;
         PlayerCtr.SwitchControllable(true);
     }
 

@@ -1829,11 +1829,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 27.6
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3945,7 +3945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &188979430
 Transform:
   m_ObjectHideFlags: 0
@@ -4075,11 +4075,10 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  targetMap: 2
+  targetMap: 0
   targetGate: {fileID: 0}
   useCoordinate: 0
   targetPos: {x: 0, y: 0}
-  pass: 1
 --- !u!1 &196324020
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,6 +10348,7 @@ MonoBehaviour:
   SelectGlow: {fileID: 1835453125}
   Line: {fileID: 985150798}
   SceneCtr: {fileID: 764771627}
+  Gate: {fileID: 188979429}
 --- !u!1 &529353074
 GameObject:
   m_ObjectHideFlags: 0
@@ -10678,7 +10678,7 @@ Transform:
   m_GameObject: {fileID: 582447095}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -4.5, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11331,7 +11331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &599605444
 Transform:
   m_ObjectHideFlags: 0
@@ -11461,11 +11461,10 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  targetMap: 0
+  targetMap: 1
   targetGate: {fileID: 0}
   useCoordinate: 1
   targetPos: {x: 18, y: -24}
-  pass: 1
 --- !u!1 &603381465
 GameObject:
   m_ObjectHideFlags: 0
@@ -19907,7 +19906,6 @@ MonoBehaviour:
   targetGate: {fileID: 0}
   useCoordinate: 1
   targetPos: {x: -7, y: -24}
-  pass: 1
 --- !u!1 &812910859
 GameObject:
   m_ObjectHideFlags: 0
@@ -25393,11 +25391,10 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  targetMap: 1
+  targetMap: 2
   targetGate: {fileID: 0}
   useCoordinate: 1
   targetPos: {x: 43, y: -24}
-  pass: 1
 --- !u!1 &1273740704
 GameObject:
   m_ObjectHideFlags: 0
@@ -39914,8 +39911,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RooTransform: {fileID: 2141016326}
   Letterbox: {fileID: 1262289164}
-  MinCameraBoundary: {x: 0.25, y: 1.03}
-  MaxCameraBoundary: {x: 26.37, y: 3.95}
+  MinCameraBoundary: {x: 0.25, y: 2}
+  MaxCameraBoundary: {x: 26.37, y: 2}
   PositionMoveUp: 0
 --- !u!1 &1725260438
 GameObject:
@@ -43791,6 +43788,7 @@ MonoBehaviour:
   questionField: {fileID: 1887479702}
   answerField: {fileID: 342582275}
   SceneCtr: {fileID: 764771627}
+  Gate: {fileID: 599605443}
   isChecking: 0
   IsFinished: 0
 --- !u!1 &1942525665
