@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    [SerializeField] private float jumpForce = 8;
+    private float jumpForce = 7;
     [SerializeField] private float maxSpeed = 5.7f;
     private int maxJump = 1, JumpCount = 0;
     [SerializeField] public int Life = 6;
@@ -92,14 +92,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void FixedUpdate() {
+    private void FixedUpdate() {
         if (Controllable) Move();
         Land();
         LimitPlayerArea();
         LimitPlayerSpeed();
     }
 
-    void OnCollisionStay2D(Collision2D col) {
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (!IsDamaging && (col.gameObject.CompareTag("monster") || col.gameObject.CompareTag("obstacle"))) {
+            StartCoroutine(Damaged(col.transform.position));
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D col) {
         if (!IsDamaging && (col.gameObject.CompareTag("monster") || col.gameObject.CompareTag("obstacle"))) {
             StartCoroutine(Damaged(col.transform.position));
         }
