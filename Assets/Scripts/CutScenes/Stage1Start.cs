@@ -53,7 +53,7 @@ public class Stage1Start : MonoBehaviour {
         StartCoroutine(Logue.ClearMonologue());
 
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Logue.SetMonologue("데미지는 6번이상 받으면...안될거 같아..."));
+        yield return StartCoroutine(Logue.SetMonologue("데미지는 5번이상 받으면...안될거 같아..."));
         yield return new WaitForSeconds(0.85f);
         yield return StartCoroutine(Logue.DialogueBoxOn());
         yield return StartCoroutine(Logue.SetDialogue("Roo", "보기만 해도 많이 아파보여"));
