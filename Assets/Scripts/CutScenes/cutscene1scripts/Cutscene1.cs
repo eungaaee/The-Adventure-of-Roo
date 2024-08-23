@@ -29,6 +29,7 @@ public class CutScene1 : MonoBehaviour
     }
 
     private IEnumerator StartCutscene1() {
+        Player.SwitchControllable(false);
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(Logue.BlackBoxOn());
         yield return new WaitForSeconds(1);
