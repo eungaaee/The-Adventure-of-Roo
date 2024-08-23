@@ -10,6 +10,9 @@ public class LogueController : MonoBehaviour {
     [SerializeField] private CanvasGroup DialogueBox;
 
     [SerializeField] private Sprite Roo_Idle, ElderBunny;
+    [SerializeField] private AudioSource textAudio;
+
+    [SerializeField] private Image BlackBox;
 
     private void SetTalker(string name) {
         Talker.sprite = name switch {
@@ -18,6 +21,24 @@ public class LogueController : MonoBehaviour {
             "null" => null,
             _ => null,
         };
+    }
+
+    public IEnumerator BlackBoxOn() {
+        const float duration = 1f;
+        for (float t = 0; t <= duration; t += Time.deltaTime) {
+            BlackBox.color = new Color(1, 1, 1, Mathf.Sin(0.5f*Mathf.PI * t/duration));
+            yield return null;
+        }
+        BlackBox.color = new Color(1, 1, 1, 1);
+    }
+
+    public IEnumerator BlackBoxOff() {
+        const float duration = 1f;
+        for (float t = duration; t >= 0; t -= Time.deltaTime) {
+            BlackBox.color = new Color(1, 1, 1, Mathf.Sin(0.5f*Mathf.PI * t/duration));
+            yield return null;
+        }
+        BlackBox.color = new Color(1, 1, 1, 0);
     }
 
     public IEnumerator DialogueBoxOn() {
@@ -45,6 +66,7 @@ public class LogueController : MonoBehaviour {
         DialogueTextObj.color = new Color(95/255f, 14/255f, 49/255f, 1);
         SetTalker(name);
         foreach (char letter in text) {
+            
             DialogueTextObj.text += letter;
             yield return new WaitForSeconds(0.05f * relativeInterval);
         }
@@ -67,6 +89,9 @@ public class LogueController : MonoBehaviour {
         yield return new WaitForFixedUpdate();
         
         foreach (char letter in text) {
+            if(textAudio != null){
+                textAudio.Play();
+            }
             MonologueTextObj.text += letter;
             yield return new WaitForSeconds(0.05f * relativeInterval);
         }
