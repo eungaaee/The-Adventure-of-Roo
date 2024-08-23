@@ -94,14 +94,14 @@ public class CutScene1 : MonoBehaviour
         Letterbox.LetterboxOff();
         Cam.enabled = true;
         CameraObject.orthographicSize = 6f;
-        Player.Controllable = true;
+        Player.SwitchControllable(true);
         Letterbox.LetterboxOn(80, 1.5f);
         StartCoroutine(Letterbox.SetTopText("'A/D' 또는 '←/→'로 좌우 이동 '스페이스 바'로 점프"));
         StartCoroutine(Letterbox.SetBottomText("왼쪽으로 이동해 장로토끼를 만나자"));
     }
     private IEnumerator MoveCutscene1(){
         Cam.enabled = false;
-        Player.Controllable = false;
+        Player.SwitchControllable(false);
         yield return CameraObject.transform.DOMove(new Vector3(-26.16f,-3.38f, -10),1).SetEase(Ease.Linear);
         yield return StartCoroutine(Letterbox.ClearBottomText());
         yield return StartCoroutine(Letterbox.ClearTopText());
