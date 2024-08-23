@@ -26,6 +26,7 @@ public class GateController : MonoBehaviour {
     [SerializeField] private int targetMap = 0;
     [SerializeField] private GameObject targetGate;
     [SerializeField] private bool useCoordinate;
+    [SerializeField] public bool PassedThisGate = false;
     [SerializeField] private Vector2 targetPos;
 
     private bool detectKey;
@@ -40,6 +41,7 @@ public class GateController : MonoBehaviour {
     private void Update() {
         if (detectKey && Input.GetKeyUp(KeyCode.E)) {
             GateCollider.enabled = false;
+            PassedThisGate = true;
             StartCoroutine(EnterGate());
         }
     }
