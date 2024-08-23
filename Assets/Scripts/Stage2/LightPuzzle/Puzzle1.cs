@@ -150,13 +150,12 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1LevelChange2() {
         Round = 2;
         PlayerCtr.SwitchControllable(false);
-        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
+        StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("�� ����� ������ ���̱� �����Ѵ�...")); */
+        StartCoroutine(Letterbox.SetBottomText("더 어려운 문제가 보이기 시작한다..."));
         for (int i = 0; i < Lights1.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights1[i], 1));
         }
@@ -172,13 +171,12 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1LevelChange3() {
         Round = 3;
         PlayerCtr.SwitchControllable(false);
-        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
+        StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("���� ����� ������ ���̱� �����Ѵ�...")); */
+        StartCoroutine(Letterbox.SetBottomText("가장 어려운 문제가 보이기 시작한다..."));
         for (int i = 0; i < Lights2.Length; i++) {
             StartCoroutine(lightsFadeIn(Lights2[i], 1));
         }
@@ -194,20 +192,19 @@ public class Puzzle1 : MonoBehaviour
     public IEnumerator Puzzl1Clear() {
         Round = 0;
         PlayerCtr.SwitchControllable(false);
-        /* StartCoroutine(PlayerCtr.CutSceneMove(-7));
         yield return new WaitForSeconds(2);
         Letterbox.LetterboxOn(150);
-        StartCoroutine(Letterbox.SetBottomText("��� ���� �ʷϻ����� �ٲپ���!"));
+        StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        StartCoroutine(Letterbox.SetBottomText("���� ����� ���ϴ� ���� ������!"));
+        StartCoroutine(Letterbox.SetBottomText("다음 퍼즐로 가는 문이 열린다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
         mySequence = DOTween.Sequence()
-        .Append(Rightdoor.DOMoveX(3.4f, 2).SetEase(Ease.InQuart))
-        .Join(Leftdoor.DOMoveX(-3.08f, 2).SetEase(Ease.InQuart));
+        .Append(Rightdoor.DOMoveX(3.28f, 2).SetEase(Ease.InQuart))
+        .Join(Leftdoor.DOMoveX(-2.87f, 2).SetEase(Ease.InQuart));
         yield return new WaitForSeconds(1);
-        Letterbox.LetterboxOff(); */
+        Letterbox.LetterboxOff();
         yield return null;
         PlayerCtr.SwitchControllable(true);
     }

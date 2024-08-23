@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 public class GNPuzzle : MonoBehaviour {
     [SerializeField] private TextMeshPro questionField, answerField;
     [SerializeField] private SceneController SceneCtr;
     [SerializeField] private GameObject Gate;
+    [SerializeField] private Transform Rightdoor;
+    [SerializeField] private Transform Leftdoor;
+    [SerializeField] private LetterboxController Letterbox;
 
+    [SerializeField] private GameObject Player;
+
+    private PlayerController PlayerCtr;
+    private Sequence mySequence;
     private const int QuestionAmount = 3;
 
     private string[] question = new string[QuestionAmount] {
@@ -27,6 +35,7 @@ public class GNPuzzle : MonoBehaviour {
     public bool isChecking, isFinished;
 
     private void Start() {
+        PlayerCtr = GameObject.Find("Roo").GetComponent<PlayerController>();
         questionField.text = question[0];
         answerField.text = answerFieldText[0];
     }
@@ -97,14 +106,15 @@ public class GNPuzzle : MonoBehaviour {
         questionField.text = "";
         yield return new WaitForSeconds(2);
         answerField.text = "ALL SOLVED!";
-        yield return new WaitForSeconds(3);
-
-        yield return StartCoroutine(SceneCtr.FadeOut(2));
-
+        yield return new WaitForSeconds(2);
+        PlayerCtr.SwitchControllable(false);
+        Letterbox.LetterboxOn(100);
+        mySequence = DOTween.Sequence()
+        .Append(Rightdoor.DOMoveX(1.49f, 2).SetEase(Ease.InQuart))
+        .Join(Leftdoor.DOMoveX(-0.57f, 2).SetEase(Ease.InQuart));
+        yield return new WaitForSeconds(1);
         isFinished = true;
         Gate.SetActive(true);
-
-        yield return new WaitForSeconds(1);
-        yield return StartCoroutine(SceneCtr.FadeIn(1));
+        PlayerCtr.SwitchControllable(true);
     }
 }
