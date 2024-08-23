@@ -15871,7 +15871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: -24}
+  m_AnchoredPosition: {x: -4.5, y: -24}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &624412117
@@ -18643,6 +18643,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 981d0f74dc773294eace35c618f4693d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &742709835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5476158806930639460, guid: efcdb88d0e4ee3041a433489e8e50c69, type: 3}
+  m_PrefabInstance: {fileID: 4155804961289813312}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0883ad17a9498d48b88195519bc601e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &743090436
@@ -31729,6 +31740,7 @@ MonoBehaviour:
   Gate3: {fileID: 1269079503}
   Gate4: {fileID: 188979434}
   CarrotScr: {fileID: 742709834}
+  CarrotPos: {fileID: 742709835}
   CarrotSpr: {fileID: 742709833}
   StuckedCarrot: {fileID: 415348025}
   PlayerSpr: {fileID: 2141016330}

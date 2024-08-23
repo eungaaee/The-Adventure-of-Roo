@@ -5,7 +5,7 @@ public class Floating : MonoBehaviour
     public float Bounciness = 0.2f;
     public float Frequency = 1f; 
 
-    private Vector3 posOffset = new Vector3(); 
+    public Vector3 posOffset = new Vector3(); 
     private Vector3 tempPos = new Vector3(); 
 
     void Start()

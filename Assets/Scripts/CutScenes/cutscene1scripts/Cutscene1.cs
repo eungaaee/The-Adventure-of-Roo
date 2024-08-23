@@ -112,7 +112,7 @@ public class CutScene1 : MonoBehaviour
         Letterbox.LetterboxOn(100, 1.5f);
         yield return StartCoroutine(Logue.DialogueBoxOn());
         yield return new WaitForSeconds(1);
-        yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "지금부터 토끼마을 월말 발표를 하도록 하겠네."));
+        yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "지금부터 토끼마을 월말 브리핑을 하도록 하겠네."));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "대부분의 마을 지표들은 동일한 수준을 보이고 있고.."));
         yield return new WaitForSeconds(2);
