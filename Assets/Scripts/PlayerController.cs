@@ -14,11 +14,6 @@ public class PlayerController : MonoBehaviour {
     private bool IsDamaging = false;
     public bool IsReset = false;
 
-    public Transform[] waypoints;
-    public float speed = 2f;
-    private int currentWaypointIndex = 0;
-    private bool shouldMove = false;
-
     [SerializeField] private Vector2 MinPlayerBoundary, MaxPlayerBoundary;
     private Vector2 InitMinPlayerBoundary, InitMaxPlayerBoundary;
     public Vector3 DefaultPos;
@@ -53,42 +48,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Controllable) {
             Jump();
-            if (!shouldMove &&  Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-            if (shouldMove && waypoints.Length > 0) {
-                MoveAlongPath();
-            }
-        }
-    }
-
-    private void MoveAlongPath() {
-        if (currentWaypointIndex >= waypoints.Length) {
-            shouldMove = false;
-            rigid.gravityScale = 1.5f;
-            return;
-        }
-
-        Transform targetWaypoint = waypoints[currentWaypointIndex];
-        Vector3 direction = targetWaypoint.position - transform.position;
-        transform.position += direction.normalized * speed * Time.deltaTime;
-
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f) {
-            currentWaypointIndex++;
-        }
-    }
-
-    public void StartMoving(Transform[] path) {
-        waypoints = path;
-        currentWaypointIndex = 0;
-        shouldMove = true;
-        rigid.gravityScale = 0;
-        rigid.velocity = Vector2.zero;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (JumpCount == 1 && collision.gameObject.CompareTag("Path")) {
-            JumpCount = 0;
-            rigid.gravityScale = 1.5f;
-            StartMoving(waypoints);
+            if (Input.GetButtonUp("Horizontal")) rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         }
     }
 
@@ -125,7 +85,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Move() {
         float h = Input.GetAxisRaw("Horizontal");
-        /* if (!shouldMove)  */
         rigid.AddForce(Vector2.right*h, ForceMode2D.Impulse);
     }
 
