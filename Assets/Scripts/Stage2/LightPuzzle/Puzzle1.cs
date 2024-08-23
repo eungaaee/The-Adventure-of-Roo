@@ -21,7 +21,7 @@ public class Puzzle1 : MonoBehaviour
     [SerializeField] private MainCameraController MainCamera;
     private PlayerController PlayerCtr;
     private GateController GateControl;
-    private Sequence mySequence;
+    private Sequence my1Sequence;
     private Color red = Color.red;
     private Color green = Color.green;
     public int Round = 1;
@@ -200,10 +200,10 @@ public class Puzzle1 : MonoBehaviour
         StartCoroutine(Letterbox.SetBottomText("다음 퍼즐로 가는 문이 열린다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
-        mySequence = DOTween.Sequence()
-        .Append(Rightdoor.DOMoveX(3.28f, 2).SetEase(Ease.InQuart))
-        .Join(Leftdoor.DOMoveX(-2.87f, 2).SetEase(Ease.InQuart));
-        yield return new WaitForSeconds(1);
+        my1Sequence = DOTween.Sequence()
+        .Append(Rightdoor.DOMoveX(28.16f, 2).SetEase(Ease.InQuart))
+        .Join(Leftdoor.DOMoveX(22.15f, 2).SetEase(Ease.InQuart));  
+        yield return new WaitForSeconds(1); 
         Letterbox.LetterboxOff();
         yield return null;
         PlayerCtr.SwitchControllable(true);

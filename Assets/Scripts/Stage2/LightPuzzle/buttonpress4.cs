@@ -12,7 +12,7 @@ public class buttonpress4 : MonoBehaviour
 
     [SerializeField] private Sprite NormalSprite, ClickedSprite;
 
-    private Puzzle1 puzzle;
+    [SerializeField] private Puzzle1 puzzle;
     private Rigidbody2D PlayerRigid;
     private BoxCollider2D buttoncolider;
     private SpriteRenderer sprRdr;
@@ -23,7 +23,7 @@ public class buttonpress4 : MonoBehaviour
         buttoncolider = GetComponent<BoxCollider2D>();
         sprRdr = GetComponent<SpriteRenderer>();
         PlayerRigid = Player.GetComponent<Rigidbody2D>();
-        puzzle = GameObject.Find("Buttons").GetComponent<Puzzle1>();
+
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
