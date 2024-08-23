@@ -1212,7 +1212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &95186098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1462,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 122049401}
     - target: {fileID: 3113492035575525132, guid: 932d0c84c88628c46aeaf04cd31e4836, type: 3}
       propertyPath: DropSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5727574248673116278, guid: 932d0c84c88628c46aeaf04cd31e4836, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1812,7 +1812,7 @@ PrefabInstance:
       objectReference: {fileID: 122049401}
     - target: {fileID: 3113492035575525132, guid: 932d0c84c88628c46aeaf04cd31e4836, type: 3}
       propertyPath: DropSpeed
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5727574248673116278, guid: 932d0c84c88628c46aeaf04cd31e4836, type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,6 +12,8 @@ public class FallingBlockController : MonoBehaviour {
     private Rigidbody2D rigid;
     private SpriteRenderer sprRdr;
 
+    private bool isGenerated;
+
     private void Awake() {
         rigid = GetComponent<Rigidbody2D>();
         sprRdr = GetComponent<SpriteRenderer>();
@@ -24,7 +26,10 @@ public class FallingBlockController : MonoBehaviour {
     }
 
     private void Update() {
-        if (Player.IsReset) ReGenerate();
+        if (!isGenerated && Player.IsReset) {
+            isGenerated = true;
+            ReGenerate();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
@@ -36,10 +41,11 @@ public class FallingBlockController : MonoBehaviour {
     private void Hide() {
         sprRdr.color = new Color(1, 1, 1, 0);
         rigid.velocity = Vector2.zero;
-        rigid.position = InitPos;
+        rigid.position = new Vector3(InitPos.x, -1000);
     }
 
     private void ReGenerate() {
+        rigid.position = InitPos;
         sprRdr.color = new Color(1, 1, 1, 1);
         StartCoroutine(RayCheck());
     }
