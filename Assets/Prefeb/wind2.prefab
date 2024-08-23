@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038864c352d70724e988c0265db59ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 2
+  IsRightToLeft: 0
+  PlayerRigid: {fileID: 5682625462206277391, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
 --- !u!61 &8648167107583196644
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -49,6 +49,6 @@ public class Stage1End : MonoBehaviour {
         yield return StartCoroutine(Dialogue.ClearDialogue());
         yield return StartCoroutine(Dialogue.DialogueBoxOff());
         StartCoroutine(Scene.FadeOut(1));
-        StartCoroutine(Scene.LoadScene("Stage2"));
+        StartCoroutine(Scene.LoadScene("cutscene2"));
     }
 }
