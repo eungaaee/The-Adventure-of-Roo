@@ -22,8 +22,6 @@ public class CaveCutscene : MonoBehaviour {
             TriggerCollider.enabled = true;
             CaveBorder.SetActive(false);
         }
-
-        Debug.Log(TriggerCollider.enabled);
     }
 
     private void OnCollisionEnter2D(Collision2D col) {

@@ -86,6 +86,8 @@ public class Timer : MonoBehaviour {
     public IEnumerator TimeoutReset() {
         isRunning = false;
         isTimeout = true;
+        Player.SwitchControllable(false);
+        Player.Freeze();
         if (!Letterbox.IsLetterboxOn) Letterbox.LetterboxOn(200);
 
         yield return new WaitForSeconds(1);
@@ -96,7 +98,6 @@ public class Timer : MonoBehaviour {
         HideTimer();
 
         yield return new WaitForSeconds(1.5f);
-        Player.SwitchControllable(false);
         Player.Life = 1;
         StartCoroutine(Player.Damaged(Player.transform.position));
         while (true) {

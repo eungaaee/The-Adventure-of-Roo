@@ -183,6 +183,7 @@ public class PlayerController : MonoBehaviour {
 
     public void SetSpeed(float speed) { maxSpeed = speed; }
     public void ResetSpeed() { maxSpeed = DefaultMaxSpeed; }
+    public void Freeze() { rigid.velocity = new Vector2(0, rigid.velocity.y); }
 
     public void SwitchControllable(bool _bool) { Controllable = _bool; }
 
