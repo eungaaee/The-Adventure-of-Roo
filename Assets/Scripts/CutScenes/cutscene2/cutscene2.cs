@@ -36,7 +36,7 @@ public class cutscene2 : MonoBehaviour
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Logue.SetDialogue("Roo", "오..다행이다..."));
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "다들 안심하고 역병에 대해 "));
+        yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "다들 안심하고 역병에 대해 걱정하지 말게"));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(Logue.SetDialogue("ElderBunny", "Roo는 나중에 나를 잠깐 보게\n긴급발표는 여기서 마치겠네"));
         yield return new WaitForSeconds(2);
