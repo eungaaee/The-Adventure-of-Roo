@@ -21,6 +21,8 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private SpriteRenderer CarrotSpr;
     [SerializeField] private SpriteRenderer StuckedCarrot;
     [SerializeField] private SpriteRenderer PlayerSpr;
+
+    [SerializeField] private Transform medal;
     void Start(){
         Cam.enabled = false;
         StartCoroutine(Stage2Start());
@@ -230,15 +232,16 @@ public class StartCutscene : MonoBehaviour
         Letterbox.LetterboxOn(100, 1.5f);
         yield return new WaitForSeconds(2f);
         yield return CarrotScr.Carrot.sprite = CarrotScr.conceit;
-        yield return Letterbox.SetTopText("카로타 : 좋았어 첫번째 시련 클리어!");
+        yield return Letterbox.SetTopText("카로타 : 좋았어 첫번째 시련 클리어! 잘했어!");
         yield return new WaitForSeconds(2f);
         yield return CarrotScr.Carrot.sprite = CarrotScr.normal;
         yield return Letterbox.SetTopText("카로타 : 두 번째 시련은 간단해");
         yield return new WaitForSeconds(2f);
-        yield return Letterbox.SetTopText("카로타 : 버튼을 눌러가면서 모든 불이 초록불로 바꾸면 성공이야!");
+        yield return Letterbox.SetTopText("카로타 : 버튼을 눌러가면서 모든 불을 초록불로 바꾸면 성공이야!");
         yield return new WaitForSeconds(2f);
         yield return Letterbox.SetTopText("카로타 : 화이팅!");
         yield return new WaitForSeconds(2f);
+        yield return Letterbox.ClearTopText();
         CameraObject.gameObject.transform.position = new Vector3(25.5f, -20f, -10);
         CameraObject.orthographicSize = 6;
         yield return new WaitForSeconds(1f);
@@ -265,6 +268,8 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(2f);
         yield return Letterbox.SetTopText("카로타 : 파트너가 좋아했던 퍼즐인데");
         yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetTopText("카로타 : 너무 어려워서 토끼들이 여기서 많이 탈락했어...");
+        yield return new WaitForSeconds(2f);
         yield return CarrotScr.Carrot.sprite = CarrotScr.hurt;
         yield return Letterbox.SetTopText("카로타 : 내 머리로는 설명하기 너무 어려워...");
         yield return new WaitForSeconds(2f);
@@ -273,6 +278,7 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(2f);
         yield return Letterbox.SetTopText("카로타 : 그걸 읽고 퍼즐을 클리어 해봐!");
         yield return new WaitForSeconds(2f);
+        yield return Letterbox.ClearTopText();
         CameraObject.gameObject.transform.position = new Vector3(50.5f, -20f, -10);
         CameraObject.orthographicSize = 6;
         yield return new WaitForSeconds(1f);
@@ -286,5 +292,44 @@ public class StartCutscene : MonoBehaviour
         yield return CarrotPos.posOffset = new Vector3(78.27f,-22.95f,0);
         yield return new WaitForSeconds(2f);
         Cam.enabled = false;
+        yield return StartCoroutine(Player.CutSceneMove(73.6f));
+        CameraObject.gameObject.transform.position = new Vector3(75.8f, -22.74f, -10);
+        CameraObject.orthographicSize = 4;
+        Letterbox.LetterboxOn(100, 1.5f);
+        yield return new WaitForSeconds(2f);
+        yield return CarrotScr.Carrot.sprite = CarrotScr.conceit;
+        yield return Letterbox.SetTopText("카로타 : 이야 진짜 클리어 했네?");
+        yield return new WaitForSeconds(2f);
+        yield return CarrotScr.Carrot.sprite = CarrotScr.happy;
+        yield return Letterbox.SetTopText("카로타 : 40년 동안 기다리고 드디어");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetTopText("카로타 : 자유가 되는구나~");
+        yield return new WaitForSeconds(2f);
+        yield return CarrotScr.Carrot.sprite = CarrotScr.normal;
+        yield return Letterbox.SetTopText("카로타 : ....");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetTopText("카로타 : 사실 자유가 되도 갈 곳이 없는데...");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetTopText("카로타 : 너의 옆에서 파트너로 남아도 될까...?");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.ClearTopText();
+        yield return Letterbox.SetBottomText("오! 당연하지");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetBottomText("초대 리더의 파트너로서");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.SetBottomText("그에 대한 이야기를 들어보고 싶어!");
+        yield return new WaitForSeconds(2f);
+        yield return Letterbox.ClearBottomText();
+        yield return CarrotScr.Carrot.sprite = CarrotScr.conceit;
+        yield return Letterbox.SetTopText("카로타 : 그래! 여기 나가고 나서 많이 얘기해줄게!");
+        yield return new WaitForSeconds(2f);
+        yield return medal.DOMove(new Vector3(73.62f,-23.09f, 0),3);
+        CameraObject.gameObject.transform.position = new Vector3(73.57f, -23.7f, -10);
+        CameraObject.orthographicSize = 2.5f;
+        yield return new WaitForSeconds(1f);
+        yield return Letterbox.ClearTopText();
+        yield return Letterbox.SetBottomText("-리더의 증표를 획득했다!-");
+        yield return new WaitForSeconds(1f);
+        yield return Scene.LoadScene("endcutscene");
     }
 }
