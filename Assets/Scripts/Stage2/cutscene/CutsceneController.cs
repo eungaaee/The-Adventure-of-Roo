@@ -25,7 +25,7 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private Transform medal;
     void Start(){
         Cam.enabled = false;
-        // StartCoroutine(Stage2Start());
+        StartCoroutine(Stage2Start());
     }
     void Update(){
         if(Gate1.PassedThisGate == true){

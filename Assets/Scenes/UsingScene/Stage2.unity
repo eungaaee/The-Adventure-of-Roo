@@ -1680,11 +1680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.91
+      value: -6.2
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.44
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6650789345200487897, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -49533,13 +49533,13 @@ MonoBehaviour:
   questionField: {fileID: 1887479702}
   answerField: {fileID: 342582275}
   SceneCtr: {fileID: 764771627}
-  Gate: {fileID: 599605443}
-  Rightdoor: {fileID: 1337366043}
-  Leftdoor: {fileID: 1852020333}
   Letterbox: {fileID: 1262289164}
   Player: {fileID: 1770462863}
   WrongAudio: {fileID: 8300000, guid: 3e9dfedb08a09184e8476778068a4b17, type: 3}
   CorrectAudio: {fileID: 8300000, guid: dd01dcfc4d8aad6448d1a2adedf610a9, type: 3}
+  Gate: {fileID: 599605443}
+  Rightdoor: {fileID: 1337366043}
+  Leftdoor: {fileID: 1852020333}
   isChecking: 0
   isFinished: 0
 --- !u!82 &1942428635
