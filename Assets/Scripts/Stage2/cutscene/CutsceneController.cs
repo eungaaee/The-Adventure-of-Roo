@@ -111,9 +111,7 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         yield return PlayerSpr.flipX = true;
         yield return new WaitForSeconds(1f);
-        Cam.enabled = false;
-        CameraObject.orthographicSize = 2;
-        yield return CameraObject.gameObject.transform.DOMove(new Vector3(-7.68f, -24.47f, -10), 1);
+        Cam.Zoom(2, 1, new Vector3(-7.68f, -24.47f, -10), false);
         Letterbox.LetterboxOn(100, 1.5f);
         yield return Letterbox.SetBottomText("이건 뭐지?");
         yield return new WaitForSeconds(1f);
@@ -121,8 +119,8 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return StuckedCarrot.DOFade(0,1);
         yield return new WaitForSeconds(1f);
-        CameraObject.gameObject.transform.position = new Vector3(-4.88f, -22.69f, -10);
-        CameraObject.orthographicSize = 4;
+        yield return Letterbox.ClearBottomText();
+        Cam.Zoom(4, 1, new Vector3(-4.88f, -22.69f, -10), false);
         yield return new WaitForSeconds(1f);
         yield return CarrotSpr.DOFade(1,1);
         yield return Letterbox.SetTopText("??? : 어후 썩는줄 알았네...");
@@ -212,11 +210,9 @@ public class StartCutscene : MonoBehaviour
         yield return Letterbox.SetTopText("카로타 : 이후 정답을 제출하면 돼!");
         yield return new WaitForSeconds(2f);
         yield return Letterbox.ClearTopText();
-        CameraObject.gameObject.transform.position = new Vector3(0.5f, -20f, -10);
-        CameraObject.orthographicSize = 6;
+        Cam.Zoom(6, 1, new Vector3(0.5f, -20f, -10), false);
         yield return new WaitForSeconds(1f);
         Letterbox.LetterboxOff();
-        Cam.enabled = true;
         Player.SwitchControllable(true);
     }
 
@@ -225,9 +221,7 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return CarrotPos.posOffset = new Vector3(17.1f,-22.34f,0);
         yield return new WaitForSeconds(2f);
-        Cam.enabled = false;
-        CameraObject.gameObject.transform.position = new Vector3(21.88f, -22.69f, -10);
-        CameraObject.orthographicSize = 4;
+        Cam.Zoom(4, 1, new Vector3(21.88f, -22.69f, -10), false);
         yield return new WaitForSeconds(0.5f);
         Letterbox.LetterboxOn(100, 1.5f);
         yield return new WaitForSeconds(2f);
@@ -244,11 +238,9 @@ public class StartCutscene : MonoBehaviour
         yield return Letterbox.SetTopText("카로타 : 화이팅!");
         yield return new WaitForSeconds(2f);
         yield return Letterbox.ClearTopText();
-        CameraObject.gameObject.transform.position = new Vector3(25.5f, -20f, -10);
-        CameraObject.orthographicSize = 6;
+        Cam.Zoom(6, 1, new Vector3(25.5f, -20f, -10), false);
         yield return new WaitForSeconds(1f);
         Letterbox.LetterboxOff();
-        Cam.enabled = true;
         Player.SwitchControllable(true);
     }
     private IEnumerator EnterThirdPuzzleScene(){
@@ -256,9 +248,7 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return CarrotPos.posOffset = new Vector3(42f,-23.39f,0);
         yield return new WaitForSeconds(2f);
-        Cam.enabled = false;
-        CameraObject.gameObject.transform.position = new Vector3(46f, -22.69f, -10);
-        CameraObject.orthographicSize = 4;
+        Cam.Zoom(4, 1, new Vector3(46f, -22.69f, -10), false);
         yield return new WaitForSeconds(0.5f);
         Letterbox.LetterboxOn(100, 1.5f);
         yield return new WaitForSeconds(2f);
@@ -281,11 +271,9 @@ public class StartCutscene : MonoBehaviour
         yield return Letterbox.SetTopText("카로타 : 그걸 읽고 퍼즐을 클리어 해봐!");
         yield return new WaitForSeconds(2f);
         yield return Letterbox.ClearTopText();
-        CameraObject.gameObject.transform.position = new Vector3(50.5f, -20f, -10);
-        CameraObject.orthographicSize = 6;
+        Cam.Zoom(6, 1, new Vector3(50.5f, -20f, -10), false);
         yield return new WaitForSeconds(1f);
         Letterbox.LetterboxOff();
-        Cam.enabled = true;
         Player.SwitchControllable(true);
     }
     private IEnumerator EnterForthPuzzleScene(){
@@ -293,10 +281,8 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return CarrotPos.posOffset = new Vector3(78.27f,-22.95f,0);
         yield return new WaitForSeconds(2f);
-        Cam.enabled = false;
         yield return StartCoroutine(Player.CutSceneMove(73.6f));
-        CameraObject.gameObject.transform.position = new Vector3(75.8f, -22.74f, -10);
-        CameraObject.orthographicSize = 4;
+        Cam.Zoom(4, 1, new Vector3(75.8f, -22.74f, -10), false);
         Letterbox.LetterboxOn(100, 1.5f);
         yield return new WaitForSeconds(2f);
         yield return CarrotScr.Carrot.sprite = CarrotScr.conceit;
@@ -326,8 +312,7 @@ public class StartCutscene : MonoBehaviour
         yield return Letterbox.SetTopText("카로타 : 응!여기 나가고 나서 많이 얘기해줄게!");
         yield return new WaitForSeconds(2f);
         yield return medal.DOMove(new Vector3(73.62f,-23.09f, 0),3);
-        CameraObject.gameObject.transform.position = new Vector3(73.57f, -23.7f, -10);
-        CameraObject.orthographicSize = 2.5f;
+        Cam.Zoom(2.5f, 1, new Vector3(73.57f, -23.7f, -10), false);
         yield return new WaitForSeconds(1f);
         yield return Letterbox.ClearTopText();
         yield return Letterbox.SetBottomText("-리더의 증표를 획득했다!-");

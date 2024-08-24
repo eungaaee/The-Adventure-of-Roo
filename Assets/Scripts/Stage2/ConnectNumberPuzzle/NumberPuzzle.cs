@@ -20,7 +20,7 @@ public class NumberPuzzle : MonoBehaviour {
     private SpriteRenderer SelectGlowRenderer;
 
     private AudioSource Audio;
-    [SerializeField] AudioClip SelectAudio, ConfirmAudio, UndoAudio, ResetAudio, PuzzleClearAudio;
+    [SerializeField] private AudioClip SelectAudio, ConfirmAudio, UndoAudio, ResetAudio, PuzzleClearAudio;
 
     private int[,] grid = new int[9, 9];
     private int[,] coveredGrid = new int[9, 9];

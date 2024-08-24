@@ -61,11 +61,12 @@ public class MainCameraController : MonoBehaviour {
     }
 
     // Instant Zoom with CameraPosition
-    public void Zoom(float Amount, float Duration, Vector2 CameraPosition) {
+    public void Zoom(float Amount, float Duration, Vector2 CameraPosition, bool useRelativeAmount = true) {
         SetBoundary(CameraPosition, CameraPosition);
 
         if (MonoScope != null) StopCoroutine(MonoScope);
-        MonoScope = Scope(DefaultZoomSize-CurZoomAmount-Amount, Duration);
+        if (useRelativeAmount) MonoScope = Scope(DefaultZoomSize-CurZoomAmount-Amount, Duration);
+        else MonoScope = Scope(Amount, Duration);
         StartCoroutine(MonoScope);
     }
 

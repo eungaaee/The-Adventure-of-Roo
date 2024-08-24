@@ -27,7 +27,7 @@ public class Puzzle1 : MonoBehaviour
     public int Round = 1;
 
     private AudioSource Audio;
-    [SerializeField] AudioClip ClearAudio;
+    [SerializeField] private AudioClip ClearAudio;
 
     private static readonly int[] ChangeColor1 = new int[3] { 0, 2, 1 };    // 3��
     private static readonly int[,] ChangeColor2 = new int[4, 3]             // 5��
@@ -157,7 +157,7 @@ public class Puzzle1 : MonoBehaviour
         Round = 2;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
-        Letterbox.LetterboxOn(150);
+        Letterbox.LetterboxOn(100);
         StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
@@ -179,7 +179,7 @@ public class Puzzle1 : MonoBehaviour
         Round = 3;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
-        Letterbox.LetterboxOn(150);
+        Letterbox.LetterboxOn(100);
         StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
@@ -201,7 +201,7 @@ public class Puzzle1 : MonoBehaviour
         Round = 0;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
-        Letterbox.LetterboxOn(150);
+        Letterbox.LetterboxOn(100);
         StartCoroutine(Letterbox.SetBottomText("모든 불이 초록색이 되었다!"));
         yield return new WaitForSeconds(2);
         StartCoroutine(Letterbox.ClearBottomText());
