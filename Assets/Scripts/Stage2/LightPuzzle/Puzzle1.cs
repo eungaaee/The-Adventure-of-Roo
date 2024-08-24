@@ -26,6 +26,9 @@ public class Puzzle1 : MonoBehaviour
     private Color green = Color.green;
     public int Round = 1;
 
+    private AudioSource Audio;
+    [SerializeField] AudioClip ClearAudio;
+
     private static readonly int[] ChangeColor1 = new int[3] { 0, 2, 1 };    // 3��
     private static readonly int[,] ChangeColor2 = new int[4, 3]             // 5��
     {
@@ -50,6 +53,8 @@ public class Puzzle1 : MonoBehaviour
         buttonpressed3 = GameObject.Find("Button3").GetComponent<buttonpress3>();
         buttonpressed4 = GameObject.Find("Button4").GetComponent<buttonpress4>();
         GateControl = GameObject.Find("Puzzle2Gate").GetComponent<GateController>();
+
+        Audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -148,6 +153,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1LevelChange2() {
+        Audio.PlayOneShot(ClearAudio, 0.75f);
         Round = 2;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
@@ -169,6 +175,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1LevelChange3() {
+        Audio.PlayOneShot(ClearAudio, 0.75f);
         Round = 3;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
@@ -190,6 +197,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1Clear() {
+        Audio.PlayOneShot(ClearAudio, 0.75f);
         Round = 0;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);

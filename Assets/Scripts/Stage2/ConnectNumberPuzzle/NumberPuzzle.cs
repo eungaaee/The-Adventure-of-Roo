@@ -19,6 +19,9 @@ public class NumberPuzzle : MonoBehaviour {
     private SpriteRenderer PeekingRooRenderer;
     private SpriteRenderer SelectGlowRenderer;
 
+    private AudioSource Audio;
+    [SerializeField] AudioClip SelectAudio, ConfirmAudio, UndoAudio, ResetAudio, PuzzleClearAudio;
+
     private int[,] grid = new int[9, 9];
     private int[,] coveredGrid = new int[9, 9];
     private bool[] isCovered = new bool[82];
@@ -45,6 +48,8 @@ public class NumberPuzzle : MonoBehaviour {
 
         Line.startWidth = Line.endWidth = 0.1f;
         Line.SetPosition(0, board[initRow, initCol].transform.parent.transform.localPosition);
+
+        Audio = GetComponent<AudioSource>();
     }
 
     private void Start() { // 스크립트 인스턴스 활성화 이후 첫 프레임을 업데이트하기 전에 실행됨
@@ -73,6 +78,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtRow--;
                 MoveGlowEffect();
+                Audio.PlayOneShot(SelectAudio);
             }
         } else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             if (nxtRow < 8 && nxtRow-curRow < 1) {
@@ -80,6 +86,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtRow++;
                 MoveGlowEffect();
+                Audio.PlayOneShot(SelectAudio);
             }
         } else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             if (nxtColumn > 0 && curColumn-nxtColumn < 1) {
@@ -87,6 +94,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtColumn--;
                 MoveGlowEffect();
+                Audio.PlayOneShot(SelectAudio);
             }
         } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             if (nxtColumn < 8 && nxtColumn-curColumn < 1) {
@@ -94,6 +102,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtColumn++;
                 MoveGlowEffect();
+                Audio.PlayOneShot(SelectAudio);
             }
         } else if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) {
             pressedTime = -INF;
@@ -128,6 +137,8 @@ public class NumberPuzzle : MonoBehaviour {
             pressedTime = INF;
             StartCoroutine(Finish());
         }
+
+        Audio.PlayOneShot(ConfirmAudio);
     }
 
     private void Undo() {
@@ -143,6 +154,8 @@ public class NumberPuzzle : MonoBehaviour {
         MovePeekingRoo();
         MoveGlowEffect();
         Line.positionCount--;
+
+        Audio.PlayOneShot(UndoAudio);
     }
 
     private void Reset() {
@@ -156,6 +169,8 @@ public class NumberPuzzle : MonoBehaviour {
         Line.positionCount = 1;
 
         DrawBoard();
+
+        Audio.PlayOneShot(ResetAudio);
     }
 
 
@@ -287,6 +302,7 @@ public class NumberPuzzle : MonoBehaviour {
 
     private IEnumerator Finish() {
         StartCoroutine(VeryAwesomeEpicRainbowEffect());
+        Audio.PlayOneShot(PuzzleClearAudio, 0.75f);
 
         yield return new WaitForSeconds(3);
         yield return StartCoroutine(SceneCtr.FadeOut(2));
@@ -297,7 +313,6 @@ public class NumberPuzzle : MonoBehaviour {
 
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(SceneCtr.FadeIn(1));
-
     }
 
     private IEnumerator VeryAwesomeEpicRainbowEffect() {

@@ -6,17 +6,21 @@ using DG.Tweening;
 public class GNPuzzle : MonoBehaviour {
     [SerializeField] private TextMeshPro questionField, answerField;
     [SerializeField] private SceneController SceneCtr;
+
+    [SerializeField] private LetterboxController Letterbox;
+    [SerializeField] private GameObject Player;
+    private PlayerController PlayerCtr;
+
+    private AudioSource Audio;
+    [SerializeField] private AudioClip WrongAudio, CorrectAudio;
+
+    private Sequence mySequence;
     [SerializeField] private GameObject Gate;
     [SerializeField] private Transform Rightdoor;
     [SerializeField] private Transform Leftdoor;
-    [SerializeField] private LetterboxController Letterbox;
 
-    [SerializeField] private GameObject Player;
-
-    private PlayerController PlayerCtr;
-    private Sequence mySequence;
     private const int QuestionAmount = 3;
-
+    
     private string[] question = new string[QuestionAmount] {
         "5 + 3 = 28    9 + 1 = 810\n8 + 6 = 214    5 + 4 = 19", // 숫자 두 개 차를 앞, 합을 뒤로 한거
         "34251 = 0      257381 = 2\n3141592 = 1    127546 = 1\n21782 = 2    473829 = 3", // 구멍
@@ -34,8 +38,12 @@ public class GNPuzzle : MonoBehaviour {
 
     public bool isChecking, isFinished;
 
+    private void Awake() {
+        PlayerCtr = Player.GetComponent<PlayerController>();
+        Audio = GetComponent<AudioSource>();
+    }
+
     private void Start() {
-        PlayerCtr = GameObject.Find("Roo").GetComponent<PlayerController>();
         questionField.text = question[0];
         answerField.text = answerFieldText[0];
     }
@@ -67,7 +75,6 @@ public class GNPuzzle : MonoBehaviour {
 
         if (playerAnswer == answer[questionIndex]) {
             questionIndex++;
-
             StartCoroutine(NextQuestion());
         } else StartCoroutine(Retry());
     }
@@ -75,6 +82,7 @@ public class GNPuzzle : MonoBehaviour {
     private IEnumerator Retry() {
         yield return new WaitForSeconds(0.5f);
         answerField.text = "Wrong!";
+        Audio.PlayOneShot(WrongAudio, 0.75f);
 
         yield return new WaitForSeconds(2);
         questionField.text = question[questionIndex];
@@ -88,6 +96,7 @@ public class GNPuzzle : MonoBehaviour {
     private IEnumerator NextQuestion() {
         yield return new WaitForSeconds(0.5f);
         answerField.text = "Correct!";
+        Audio.PlayOneShot(CorrectAudio, 0.75f);
 
         yield return new WaitForSeconds(2);
         if (questionIndex < QuestionAmount) {

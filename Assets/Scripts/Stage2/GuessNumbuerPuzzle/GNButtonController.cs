@@ -12,8 +12,11 @@ public class GNButtonController : MonoBehaviour {
 
     [SerializeField] private GNPuzzle PuzzleScript;
     [SerializeField] private Sprite NormalSprite, ClickedSprite;
+
     private SpriteRenderer sprRdr;
     private BoxCollider2D buttonCollider, baseCollider;
+    private AudioSource Audio;
+    [SerializeField] AudioClip PressAudio;
 
     private const int INF = 0x3f3f3f3f;
     private float cooldown = 0.25f;
@@ -24,6 +27,7 @@ public class GNButtonController : MonoBehaviour {
         sprRdr = GetComponent<SpriteRenderer>();
         buttonCollider = GetComponent<BoxCollider2D>();
         baseCollider = transform.Find("Base").GetComponent<BoxCollider2D>();
+        Audio = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -32,6 +36,8 @@ public class GNButtonController : MonoBehaviour {
             if (isDecreaseButton) PuzzleScript.DecreasePlayerAnswer();
             else if (isIncreaseButton) PuzzleScript.IncreasePlayerAnswer();
             else if (isSubmitButton) PuzzleScript.CorrectCheck();
+            
+            Audio.PlayOneShot(PressAudio);
         }
 
         if (PuzzleScript.isFinished) {

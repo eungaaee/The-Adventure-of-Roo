@@ -13,22 +13,24 @@ public class buttonpress4 : MonoBehaviour
     [SerializeField] private Sprite NormalSprite, ClickedSprite;
 
     [SerializeField] private Puzzle1 puzzle;
-    private Rigidbody2D PlayerRigid;
-    private BoxCollider2D buttoncolider;
+
+    private AudioSource Audio;
+    [SerializeField] private AudioClip PressAudio;
+
     private SpriteRenderer sprRdr;
 
     public bool button4pressed = false;
 
     public void Start() {
-        buttoncolider = GetComponent<BoxCollider2D>();
         sprRdr = GetComponent<SpriteRenderer>();
-        PlayerRigid = Player.GetComponent<Rigidbody2D>();
-
+        Audio = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
             sprRdr.sprite = ClickedSprite;
+            Audio.PlayOneShot(PressAudio);
+
             if (puzzle.Round > 0) button4pressed = true;
         }
     }
@@ -38,22 +40,4 @@ public class buttonpress4 : MonoBehaviour
             sprRdr.sprite = NormalSprite;
         }
     }
-
-    /* public void Update() {
-        if (buttoncolider.bounds.Contains(PlayerRigid.position) && Input.GetKeyDown(KeyCode.E)&& puzzle.Round != 0) {
-            button4pressed = true;
-        }
-    }
-    public void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == Player && puzzle.Round != 0) {
-            Letterbox.LetterboxOn(100);
-            StartCoroutine(Letterbox.SetBottomText("��ư ������[E]"));
-        }
-    }
-    public void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject == Player && puzzle.Round != 0) {
-            StartCoroutine(Letterbox.ClearBottomText());
-            Letterbox.LetterboxOff();
-        }
-    } */
 }

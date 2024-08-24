@@ -22,7 +22,6 @@ public class GateController : MonoBehaviour {
     [SerializeField] private SceneController SceneCtr;
     private BoxCollider2D GateCollider;
     private Rigidbody2D PlayerRigid;
-    private PlayerController PlayerCtr;
 
     [SerializeField] private int targetMap = 0;
     [SerializeField] private GameObject targetGate;
@@ -34,8 +33,6 @@ public class GateController : MonoBehaviour {
 
     private void Awake() {
         PlayerRigid = Player.GetComponent<Rigidbody2D>();
-        PlayerCtr = Player.GetComponent<PlayerController>();
-
         GateCollider = GetComponent<BoxCollider2D>();
     }
 

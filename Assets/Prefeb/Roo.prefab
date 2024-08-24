@@ -127,7 +127,7 @@ MonoBehaviour:
   MinPlayerBoundary: {x: -88.5, y: -8}
   MaxPlayerBoundary: {x: 124, y: 8}
   DefaultPos: {x: 0, y: 0, z: 0}
-  JumpAudio: {fileID: 8300000, guid: 7a7ee96758da08141ba34bf70b40f71b, type: 3}
+  JumpAudio: {fileID: 8300000, guid: 2e1ef6e73c261434bbc543e04339fb74, type: 3}
   HurtAudio: {fileID: 8300000, guid: e552396212e2a224184e89e1718bb5eb, type: 3}
   DieAudio: {fileID: 8300000, guid: f37c2944cd3d8bd48bf04be1455c7d0d, type: 3}
   ReviveAudio: {fileID: 8300000, guid: facba14ee2a368e4393923da51052a17, type: 3}
