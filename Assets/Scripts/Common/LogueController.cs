@@ -8,11 +8,16 @@ public class LogueController : MonoBehaviour {
     [SerializeField] private Image Talker;
     [SerializeField] private TextMeshProUGUI DialogueTextObj, MonologueTextObj;
     [SerializeField] private CanvasGroup DialogueBox;
+    [SerializeField] private Image BlackBox;
 
     [SerializeField] private Sprite Roo_Idle, ElderBunny;
-    [SerializeField] private AudioSource textAudio;
+    
+    private AudioSource Audio;
+    [SerializeField] private AudioClip MonologueAudio;
 
-    [SerializeField] private Image BlackBox;
+    private void Awake() {
+        Audio = GetComponent<AudioSource>();
+    }
 
     private void SetTalker(string name) {
         Talker.sprite = name switch {
@@ -66,7 +71,6 @@ public class LogueController : MonoBehaviour {
         DialogueTextObj.color = new Color(95/255f, 14/255f, 49/255f, 1);
         SetTalker(name);
         foreach (char letter in text) {
-            
             DialogueTextObj.text += letter;
             yield return new WaitForSeconds(0.05f * relativeInterval);
         }
@@ -89,10 +93,8 @@ public class LogueController : MonoBehaviour {
         yield return new WaitForFixedUpdate();
         
         foreach (char letter in text) {
-            if(textAudio != null){
-                textAudio.Play();
-            }
             MonologueTextObj.text += letter;
+            Audio.PlayOneShot(MonologueAudio);
             yield return new WaitForSeconds(0.05f * relativeInterval);
         }
     }

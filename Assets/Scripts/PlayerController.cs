@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     private float jumpForce = 7;
-    [SerializeField] private float maxSpeed = 5.7f;
+    private float maxSpeed = 5.7f;
     private int maxJump = 1, JumpCount = 0;
-    [SerializeField] public int Life = 6;
+    [SerializeField] public int Life = 5;
     private int InitLife;
     private bool Controllable = true;
     private bool IsDamaging = false;
@@ -19,9 +19,12 @@ public class PlayerController : MonoBehaviour {
     public Vector3 DefaultPos;
     private float DefaultMaxSpeed;
 
+    [SerializeField] AudioClip JumpAudio, HurtAudio, DieAudio, ReviveAudio;
+
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private AudioSource Audio;
     private MainCameraController CameraController;
     private SceneController SceneController;
     private LetterboxController Letterbox;
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        Audio = GetComponent<AudioSource>();
         CameraController = GameObject.Find("Main Camera").GetComponent<MainCameraController>();
         SceneController = GameObject.Find("SceneControlObject").GetComponent<SceneController>();
         Letterbox = GameObject.Find("Letterbox").GetComponent<LetterboxController>();
@@ -94,6 +98,7 @@ public class PlayerController : MonoBehaviour {
             rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
+            Audio.PlayOneShot(JumpAudio);
         }
     }
 
@@ -184,6 +189,7 @@ public class PlayerController : MonoBehaviour {
             yield return StartCoroutine(UnTransparent(2));
         } else {
             animator.SetBool("IsDead", true);
+            Audio.PlayOneShot(DieAudio);
             yield return StartCoroutine(Transparent(0));
             yield return new WaitForSeconds(1.5f);
             yield return StartCoroutine(Revive());
@@ -199,6 +205,7 @@ public class PlayerController : MonoBehaviour {
 
         Controllable = false;
         animator.SetBool("IsDamaged", true);
+        Audio.PlayOneShot(HurtAudio);
 
         CameraController.Shake();
 
@@ -248,6 +255,7 @@ public class PlayerController : MonoBehaviour {
         yield return StartCoroutine(Letterbox.ClearTopText());
 
         yield return new WaitForSeconds(1.5f);
+        Audio.PlayOneShot(ReviveAudio, 0.75f);
         yield return StartCoroutine(SceneController.FadeIn());
         yield return IsReset = false;
     }

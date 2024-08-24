@@ -26501,8 +26501,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1330148206}
   - component: {fileID: 1330148205}
-  - component: {fileID: 1330148204}
   - component: {fileID: 1330148207}
+  - component: {fileID: 1330148204}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -47203,10 +47203,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 975197017164558650, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
-      propertyPath: Life
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 975197017164558650, guid: 6372a679bf9f8b143b3318a24af2aaa0, type: 3}
       propertyPath: timer
       value: 
       objectReference: {fileID: 298928305}
@@ -47355,9 +47351,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1330148205}
     - target: {fileID: 2608558819975515636, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
-      propertyPath: ElderBunny
+      propertyPath: MonologueAudio
       value: 
-      objectReference: {fileID: 21300000, guid: 4a3bd378f8dc4e84ba38ec8b628268c6, type: 3}
+      objectReference: {fileID: 8300000, guid: d301ee0cf9219d348ab1e619cd0d9853, type: 3}
     - target: {fileID: 2887290953541158966, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: m_LocalPosition.x
       value: -76.2
@@ -47401,6 +47397,10 @@ PrefabInstance:
     - target: {fileID: 6051387859171969661, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: m_Name
       value: Logue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8022261661493421259, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8095019741388052589, guid: 8d83a3c85d5b8d743ba8aaa560473880, type: 3}
       propertyPath: m_IsActive

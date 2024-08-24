@@ -736,10 +736,10 @@ MonoBehaviour:
   DialogueTextObj: {fileID: 6138382651231778907}
   MonologueTextObj: {fileID: 6870929835562180168}
   DialogueBox: {fileID: 6467946092122478857}
+  BlackBox: {fileID: 906303456775792656}
   Roo_Idle: {fileID: -922487517, guid: 2b8abb8091a58d642a86a398fbdd7381, type: 3}
   ElderBunny: {fileID: 21300000, guid: 4a3bd378f8dc4e84ba38ec8b628268c6, type: 3}
-  textAudio: {fileID: 8022261661493421259}
-  BlackBox: {fileID: 906303456775792656}
+  MonologueAudio: {fileID: 8300000, guid: d301ee0cf9219d348ab1e619cd0d9853, type: 3}
 --- !u!82 &8022261661493421259
 AudioSource:
   m_ObjectHideFlags: 0
@@ -750,7 +750,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d301ee0cf9219d348ab1e619cd0d9853, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
