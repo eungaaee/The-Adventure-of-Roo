@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GateController : MonoBehaviour {
-    private static readonly Vector2[,] cameraBoundary = new Vector2[3, 2] {
+    private static readonly Vector2[,] cameraBoundary = new Vector2[4, 2] {
         {new Vector2(0.5f, -20f), new Vector2(0.5f, -20f)},
         {new Vector2(25.5f, -20f), new Vector2(25.5f, -20f)},
-        {new Vector2(50.5f, -20f), new Vector2(50.5f, -20f)}
+        {new Vector2(50.5f, -20f), new Vector2(50.5f, -20f)},
+        {new Vector2(75.5f, -20f), new Vector2(75.5f, -20f)}
     };
     /* private static readonly Vector2[,] playerBoundary = new Vector2[3, 2] {
         {new Vector2(-10, -25), new Vector2(10, -14)},
