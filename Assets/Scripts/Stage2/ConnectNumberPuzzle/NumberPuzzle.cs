@@ -78,7 +78,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtRow--;
                 MoveGlowEffect();
-                Audio.PlayOneShot(SelectAudio);
+                Audio.PlayOneShot(SelectAudio, 0.5f);
             }
         } else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             if (nxtRow < 8 && nxtRow-curRow < 1) {
@@ -86,7 +86,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtRow++;
                 MoveGlowEffect();
-                Audio.PlayOneShot(SelectAudio);
+                Audio.PlayOneShot(SelectAudio, 0.5f);
             }
         } else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
             if (nxtColumn > 0 && curColumn-nxtColumn < 1) {
@@ -94,7 +94,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtColumn--;
                 MoveGlowEffect();
-                Audio.PlayOneShot(SelectAudio);
+                Audio.PlayOneShot(SelectAudio, 0.5f);
             }
         } else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             if (nxtColumn < 8 && nxtColumn-curColumn < 1) {
@@ -102,7 +102,7 @@ public class NumberPuzzle : MonoBehaviour {
 
                 nxtColumn++;
                 MoveGlowEffect();
-                Audio.PlayOneShot(SelectAudio);
+                Audio.PlayOneShot(SelectAudio, 0.5f);
             }
         } else if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Return)) {
             pressedTime = -INF;
@@ -138,7 +138,7 @@ public class NumberPuzzle : MonoBehaviour {
             StartCoroutine(Finish());
         }
 
-        Audio.PlayOneShot(ConfirmAudio);
+        Audio.PlayOneShot(ConfirmAudio, 0.5f);
     }
 
     private void Undo() {
@@ -155,7 +155,7 @@ public class NumberPuzzle : MonoBehaviour {
         MoveGlowEffect();
         Line.positionCount--;
 
-        Audio.PlayOneShot(UndoAudio);
+        Audio.PlayOneShot(UndoAudio, 0.5f);
     }
 
     private void Reset() {
@@ -170,7 +170,7 @@ public class NumberPuzzle : MonoBehaviour {
 
         DrawBoard();
 
-        Audio.PlayOneShot(ResetAudio);
+        Audio.PlayOneShot(ResetAudio, 0.5f);
     }
 
 
@@ -302,7 +302,7 @@ public class NumberPuzzle : MonoBehaviour {
 
     private IEnumerator Finish() {
         StartCoroutine(VeryAwesomeEpicRainbowEffect());
-        Audio.PlayOneShot(PuzzleClearAudio, 0.75f);
+        Audio.PlayOneShot(PuzzleClearAudio, 0.5f);
 
         yield return new WaitForSeconds(3);
         yield return StartCoroutine(SceneCtr.FadeOut(2));

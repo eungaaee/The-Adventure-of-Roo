@@ -29,7 +29,7 @@ public class buttonpress4 : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
             sprRdr.sprite = ClickedSprite;
-            Audio.PlayOneShot(PressAudio);
+            Audio.PlayOneShot(PressAudio, 0.5f);
 
             if (puzzle.Round > 0) button4pressed = true;
         }

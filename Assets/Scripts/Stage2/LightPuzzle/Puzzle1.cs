@@ -153,7 +153,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1LevelChange2() {
-        Audio.PlayOneShot(ClearAudio, 0.75f);
+        Audio.PlayOneShot(ClearAudio, 0.5f);
         Round = 2;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
@@ -175,7 +175,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1LevelChange3() {
-        Audio.PlayOneShot(ClearAudio, 0.75f);
+        Audio.PlayOneShot(ClearAudio, 0.5f);
         Round = 3;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);
@@ -197,7 +197,7 @@ public class Puzzle1 : MonoBehaviour
     }
 
     public IEnumerator Puzzl1Clear() {
-        Audio.PlayOneShot(ClearAudio, 0.75f);
+        Audio.PlayOneShot(ClearAudio, 0.5f);
         Round = 0;
         PlayerCtr.SwitchControllable(false);
         yield return new WaitForSeconds(2);

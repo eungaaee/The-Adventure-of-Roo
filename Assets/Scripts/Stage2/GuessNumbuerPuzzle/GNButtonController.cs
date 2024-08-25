@@ -37,7 +37,7 @@ public class GNButtonController : MonoBehaviour {
             else if (isIncreaseButton) PuzzleScript.IncreasePlayerAnswer();
             else if (isSubmitButton) PuzzleScript.CorrectCheck();
             
-            Audio.PlayOneShot(PressAudio);
+            Audio.PlayOneShot(PressAudio, 0.5f);
         }
 
         if (PuzzleScript.isFinished) {

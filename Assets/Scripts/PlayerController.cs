@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour {
             rigid.gravityScale = 1.5f;
             rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetBool("IsJumping", true);
-            Audio.PlayOneShot(JumpAudio);
+            Audio.PlayOneShot(JumpAudio, 0.5f);
         }
     }
 
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour {
             yield return StartCoroutine(UnTransparent(2));
         } else {
             animator.SetBool("IsDead", true);
-            Audio.PlayOneShot(DieAudio);
+            Audio.PlayOneShot(DieAudio, 0.5f);
             yield return StartCoroutine(Transparent(0));
             yield return new WaitForSeconds(1.5f);
             yield return StartCoroutine(Revive());
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour {
 
         Controllable = false;
         animator.SetBool("IsDamaged", true);
-        Audio.PlayOneShot(HurtAudio);
+        Audio.PlayOneShot(HurtAudio, 0.5f);
 
         CameraController.Shake();
 
@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour {
         yield return StartCoroutine(Letterbox.ClearTopText());
 
         yield return new WaitForSeconds(1.5f);
-        Audio.PlayOneShot(ReviveAudio, 0.75f);
+        Audio.PlayOneShot(ReviveAudio, 0.5f);
         yield return StartCoroutine(SceneController.FadeIn());
         yield return IsReset = false;
     }

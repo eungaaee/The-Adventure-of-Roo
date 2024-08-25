@@ -82,7 +82,7 @@ public class GNPuzzle : MonoBehaviour {
     private IEnumerator Retry() {
         yield return new WaitForSeconds(0.5f);
         answerField.text = "Wrong!";
-        Audio.PlayOneShot(WrongAudio, 0.75f);
+        Audio.PlayOneShot(WrongAudio, 0.5f);
 
         yield return new WaitForSeconds(2);
         questionField.text = question[questionIndex];
@@ -96,7 +96,7 @@ public class GNPuzzle : MonoBehaviour {
     private IEnumerator NextQuestion() {
         yield return new WaitForSeconds(0.5f);
         answerField.text = "Correct!";
-        Audio.PlayOneShot(CorrectAudio, 0.75f);
+        Audio.PlayOneShot(CorrectAudio, 0.5f);
 
         yield return new WaitForSeconds(2);
         if (questionIndex < QuestionAmount) {
