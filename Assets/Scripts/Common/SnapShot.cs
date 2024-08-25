@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using System;
 using System.IO;
@@ -9,18 +8,18 @@ public class ScreenCaptureImages : MonoBehaviour {
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.P)) {
-            // µð·ºÅä¸® »ý¼º
+            // ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½
             if (!Directory.Exists(m_Path)) {
                 Directory.CreateDirectory(m_Path);
             }
 
-            // ÇöÀç ½Ã°£À» ÀÌ¿ëÇÏ¿© °íÀ¯ÇÑ ÆÄÀÏ¸í »ý¼º
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
             m_FilePath = m_Path + "Screenshot_" + timestamp + ".png";
 
-            // ½ºÅ©¸°¼¦ Ä¸Ã³ ¹× ÀúÀå
+            // ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ Ä¸Ã³ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             ScreenCapture.CaptureScreenshot(m_FilePath);
-            Debug.Log("½ºÅ©¸°¼¦ ÀúÀåµÊ: " + m_FilePath);
+            Debug.Log("ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½: " + m_FilePath);
         }
     }
 }

@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.Collections.Unicode;
-using static UnityEditor.ShaderData;
 
 public class buttonpress4 : MonoBehaviour 
 {

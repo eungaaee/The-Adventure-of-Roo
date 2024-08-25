@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class BreakableBlockController : MonoBehaviour {
     [SerializeField] private float DdakDdak = 0f;

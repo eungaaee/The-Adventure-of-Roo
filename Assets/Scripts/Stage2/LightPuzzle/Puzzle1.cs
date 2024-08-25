@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.ShaderData;
 using DG.Tweening;
 
 public class Puzzle1 : MonoBehaviour

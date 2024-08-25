@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Analytics;
-using System.Data;
-using Unity.VisualScripting.FullSerializer;
-using UnityEngine.AI;
-using UnityEditor.ProjectWindowCallback;
 
 public class NumberPuzzle : MonoBehaviour {
     [SerializeField] private GameObject Roo;

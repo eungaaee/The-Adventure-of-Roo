@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.ShortcutManagement;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class GNButtonController : MonoBehaviour {
     [SerializeField] private bool isDecreaseButton, isIncreaseButton, isSubmitButton;

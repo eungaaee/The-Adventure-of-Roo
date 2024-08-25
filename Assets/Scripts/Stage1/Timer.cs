@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using System.Threading;
 using System.Collections;
 
 public class Timer : MonoBehaviour {
