@@ -26,7 +26,7 @@ public class FallingBlockController : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isGenerated && Player.IsReset) {
+        if (!IsLoop && !isGenerated && Player.IsReset) {
             isGenerated = true;
             ReGenerate();
         }
@@ -39,6 +39,7 @@ public class FallingBlockController : MonoBehaviour {
     }
 
     private void Hide() {
+        isGenerated = false;
         sprRdr.color = new Color(1, 1, 1, 0);
         rigid.velocity = Vector2.zero;
         rigid.position = new Vector3(InitPos.x, -1000);
