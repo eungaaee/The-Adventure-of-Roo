@@ -3889,7 +3889,7 @@ Transform:
   m_GameObject: {fileID: 165452564}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: -23.7, z: 0}
+  m_LocalPosition: {x: -7.13, y: -23.7, z: 0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4333,8 +4333,8 @@ MonoBehaviour:
   Player: {fileID: 1770462863}
   CameraObject: {fileID: 1716611881}
   SceneCtr: {fileID: 764771627}
-  targetMap: 0
-  targetGate: {fileID: 0}
+  targetMap: 3
+  targetGate: {fileID: 165452564}
   useCoordinate: 0
   PassedThisGate: 0
   targetPos: {x: 0, y: 0}
@@ -18189,7 +18189,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300086, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -33138,7 +33138,7 @@ MonoBehaviour:
   CarrotSpr: {fileID: 742709833}
   StuckedCarrot: {fileID: 415348025}
   PlayerSpr: {fileID: 2141016330}
-  medal: {fileID: 0}
+  medal: {fileID: 616800324}
 --- !u!4 &1279843855
 Transform:
   m_ObjectHideFlags: 0

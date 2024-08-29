@@ -72,6 +72,20 @@ public class Stage1Start : MonoBehaviour {
         yield return StartCoroutine(Logue.DialogueBoxOff());
         StartCoroutine(Logue.ClearMonologue());
 
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(Logue.SetMonologue("바람을 타고다니거나 바람의 테두리에서 점프 할 수 있어"));
+        yield return new WaitForSeconds(0.85f);
+        yield return StartCoroutine(Logue.DialogueBoxOn());
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "바람을 타고 먼 거리를 이동할 수 있을거 같은데"));
+        yield return new WaitForSeconds(0.85f);
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "바람이 사나워 보여"));
+        yield return new WaitForSeconds(0.85f);
+        yield return StartCoroutine(Logue.SetDialogue("Roo", "내가 컨트롤 해서 잘 이동해야 될것 같아..."));
+        yield return new WaitForSeconds(0.85f);
+        yield return StartCoroutine(Logue.ClearDialogue());
+        yield return StartCoroutine(Logue.DialogueBoxOff());
+        StartCoroutine(Logue.ClearMonologue());
+
         yield return StartCoroutine(Scene.FadeIn());
         yield return StartCoroutine(Logue.DialogueBoxOn());
         yield return StartCoroutine(Logue.SetDialogue("Roo", "지금도 마을의 토끼들은 역병으로 고통받고 있을거야..."));
